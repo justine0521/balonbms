@@ -2,6 +2,10 @@
   clip-path: polygon(0 0, 100% 0, 100% 50%, 0 100%);
 }
 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 .top40{
   top: 40%;
 }

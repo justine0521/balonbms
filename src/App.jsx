@@ -22,6 +22,7 @@ import Services from './Pages/Services';
 import TrackRequest from './Pages/TrackRequest';
 import Faq from './Pages/Faq';
 import Location from './Pages/Location';
+import Announcement from './Pages/Announcement';
 
 
 function App() {
@@ -47,8 +48,9 @@ function App() {
             <Route path='/pages/home' element={<Home />} />
             <Route path='/pages/about' element={<About />} />
             <Route path='/pages/services' element={<Services />} />
-            <Route path='/pages/track-request' element={<TrackRequest />} />
+            <Route path='/pages/news' element={<Announcement />} />
             <Route path='/pages/faq' element={<Faq />} />
+            <Route path='/pages/track-request' element={<TrackRequest />} />
 
           </Routes>
           <Footer />
