@@ -1,7 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import Hero from "../Components/Hero";
 import About from "../Pages/About";
-import Services from "./Services";
 import Location from "./Location";
 import TrackRequest from "./TrackRequest";
 import { ActiveSectionContext } from '../Components/ActiveSectionContext';
