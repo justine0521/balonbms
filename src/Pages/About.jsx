@@ -68,7 +68,7 @@ function About() {
                 </div>
 
                 <div className='w-full lg:w-1/2 lg:mt-5 ml-0 lg:-ml-10 mt-7 border-r-2 margin-right border-green-500 bg-white p-3 z-10 shadow-xl drop-shadow-xl'>
-                    <div className='flex gap-5'>
+                    <div className='flex gap-2'>
                         <button className={`${ActiveAboutTab === 'Mission' ? 'bg-green-500 text-white' : 'hover:text-green-500 hover:border-b-green-500 border-b-2'} p-2 mb-5`} onClick={() => setActiveAboutTab('Mission')}>
                             Mission
                         </button>
