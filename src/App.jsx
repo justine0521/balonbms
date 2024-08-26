@@ -47,8 +47,9 @@ function App() {
             <Route path='/pages/home' element={<Home />} />
             <Route path='/pages/about' element={<About />} />
             <Route path='/pages/service' element={<Service />} />
-            <Route path='/pages/track-request' element={<TrackRequest />} />
+            <Route path='/pages/news' element={<Announcement />} />
             <Route path='/pages/faq' element={<Faq />} />
+            <Route path='/pages/track-request' element={<TrackRequest />} />
 
           </Routes>
           <Footer />
