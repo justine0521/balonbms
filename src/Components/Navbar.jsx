@@ -37,7 +37,7 @@ const Navbar = ({ containerStyles }) => {
       ))} */}
 
       <NavLink to={'/pages/home'}>
-        {({isActive}) => (
+        {({ isActive }) => (
           <button className={`${isActive ? 'text-green-400 text-sm font-semibold flex-1 border-b-2 border-b-green-400' : 'hover:text-green-500'} p-2`}>
             Home
           </button>
@@ -45,7 +45,7 @@ const Navbar = ({ containerStyles }) => {
       </NavLink>
 
       <NavLink to={'/pages/about'}>
-        {({isActive}) => (
+        {({ isActive }) => (
           <button className={`${isActive ? 'text-green-400 text-sm font-semibold flex-1 border-b-2 border-b-green-400' : 'hover:text-green-500'} p-2`}>
             About
           </button>
@@ -53,7 +53,7 @@ const Navbar = ({ containerStyles }) => {
       </NavLink>
 
       <NavLink to={'/pages/service'}>
-        {({isActive}) => (
+        {({ isActive }) => (
           <button className={`${isActive ? 'text-green-400 text-sm font-semibold flex-1 border-b-2 border-b-green-400' : 'hover:text-green-500'} p-2`}>
             Services
           </button>
@@ -61,7 +61,7 @@ const Navbar = ({ containerStyles }) => {
       </NavLink>
 
       <NavLink to={'/pages/news'}>
-        {({isActive}) => (
+        {({ isActive }) => (
           <button className={`${isActive ? 'text-green-400 text-sm font-semibold flex-1 border-b-2 border-b-green-400' : 'hover:text-green-500'} p-2`}>
             News
           </button>
@@ -69,7 +69,7 @@ const Navbar = ({ containerStyles }) => {
       </NavLink>
 
       <NavLink to={'/pages/faq'}>
-        {({isActive}) => (
+        {({ isActive }) => (
           <button className={`${isActive ? 'text-green-400 text-sm font-semibold flex-1 border-b-2 border-b-green-400' : 'hover:text-green-500'} p-2`}>
             FAQ
           </button>
@@ -77,7 +77,7 @@ const Navbar = ({ containerStyles }) => {
       </NavLink>
 
       <NavLink to={'/pages/track-request'}>
-        {({isActive}) => (
+        {({ isActive }) => (
           <button className={`${isActive ? 'text-green-400 text-sm font-semibold flex-1 border-b-2 border-b-green-400' : 'hover:text-green-500'} p-2`}>
             Track Request
           </button>
