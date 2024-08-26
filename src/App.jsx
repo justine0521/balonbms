@@ -22,6 +22,7 @@ import Service from './Pages/Service';
 import TrackRequest from './Pages/TrackRequest';
 import Faq from './Pages/Faq';
 import Location from './Pages/Location';
+import Announcement from './Pages/Announcement';
 
 
 function App() {
