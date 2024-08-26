@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 
 const Service = () => {
     return (
-        <section className='w-full flex flex-col justify-center bg-green-100'>
+        <section className='w-full flex flex-col justify-center bg-slate-50'>
             <div className='mt-8 text-center'>
                 <p className='mt-16 text-xl text-green-500'>Services</p>
                 {/* <br /> Note that the cash on delivery will may vary on type of certificate you're requesting because some certificate need a documents requirements. */}
