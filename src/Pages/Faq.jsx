@@ -21,7 +21,7 @@ const Faq = () => {
 
                 <div className='w-full md:w-1/2'>
                     <div className='faq-container'>
-                        <hr className='-mt-2 border-t border-gray-500' />
+                        <hr className='-mt-2 border-t border-gray-300' />
                         <div className='faq-box mb-6 '>
                             <h3
                                 className={`flex items-center text-2xl font-semibold text-gray-800 cursor-pointer ${activeIndex === 0 ? 'active' : ''}`}
@@ -37,7 +37,7 @@ const Faq = () => {
                             )}
                         </div>
 
-                        <hr className='-mt-2 border-t border-gray-500' />
+                        <hr className='-mt-2 border-t border-gray-300' />
                         <div className='faq-box mb-6'>
                             <h3
                                 className={`flex items-center text-2xl font-semibold text-gray-800 cursor-pointer ${activeIndex === 1 ? 'active' : ''}`}
@@ -53,7 +53,7 @@ const Faq = () => {
                             )}
                         </div>
 
-                        <hr className='-mt-2 border-t border-gray-500' />
+                        <hr className='-mt-2 border-t border-gray-300' />
                         <div className='faq-box mb-6'>
                             <h3
                                 className={`flex items-center text-2xl font-semibold text-gray-800 cursor-pointer ${activeIndex === 2 ? 'active' : ''}`}
@@ -69,7 +69,7 @@ const Faq = () => {
                             )}
                         </div>
 
-                        <hr className='-mt-2 border-t border-gray-500' />
+                        <hr className='-mt-2 border-t border-gray-300' />
                         <div className='faq-box mb-6'>
                             <h3
                                 className={`flex items-center text-2xl font-semibold text-gray-800 cursor-pointer ${activeIndex === 3 ? 'active' : ''}`}
@@ -85,7 +85,7 @@ const Faq = () => {
                             )}
                         </div>
 
-                        <hr className='-mt-2 border-t border-gray-500' />
+                        <hr className='-mt-2 border-t border-gray-300' />
                         <div className='faq-box mb-6'>
                             <h3
                                 className={`flex items-center text-2xl font-semibold text-gray-800 cursor-pointer ${activeIndex === 4 ? 'active' : ''}`}
@@ -100,7 +100,7 @@ const Faq = () => {
                                 </p>
                             )}
                         </div>
-                        <hr className='-mt-2 border-t border-gray-500' />
+                        <hr className='-mt-2 border-t border-gray-300' />
                     </div>
                 </div>
             </div>
