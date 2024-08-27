@@ -4,6 +4,8 @@ import About from "../Pages/About";
 import Location from "./Location";
 import TrackRequest from "./TrackRequest";
 import { ActiveSectionContext } from '../Components/ActiveSectionContext';
+import Captain from './Captain';
+import Officials from './Officials';
 
 function Home() {
   const { setActiveSection } = useContext(ActiveSectionContext);
@@ -40,9 +42,12 @@ function Home() {
   return (
     <main>
       <section id="home"><Hero /></section>
+      <section id="captain"><Captain /></section>
+      <section id="officials"><Officials /></section>
       {/* <section id="about"><About /></section>
       <section id="services"><Services /></section>
       <section id="track-request"><TrackRequest /></section> */}
+
       <section id="location"><Location /></section>
     </main>
   );
