@@ -8,7 +8,7 @@ const Service = () => {
             <div className='mt-8 text-center'>
                 <p className='mt-16 text-xl text-green-500'>Services</p>
                 {/* <br /> Note that the cash on delivery will may vary on type of certificate you're requesting because some certificate need a documents requirements. */}
-                <p className='py-5 mb-10 px-10 text-4xl font-bold'>We now offer online certificate. <br /> Thru online you may now request a certificate and deliver it to your home safely and faster. </p>
+                <p className='py-5 mb-10 px-10 md:px-32 text-4xl font-bold text-green-500'>We now offer online certificate. <br /> Thru online you may now request a certificate and deliver it to your home safely and faster. </p>
             </div>
 
             <div className='flex flex-col md:flex-row flex-wrap justify-center gap-5 mb-10'>
