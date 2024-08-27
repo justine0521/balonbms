@@ -11,7 +11,8 @@ const Faq = () => {
 
     return (
         <div className='max-w-5xl mx-auto p-6 mt-5'>
-            <p className='text-4xl mt-16 text-green-500 font-semibold text-center'>FAQ</p>
+            <p className='mt-16 text-l text-green-500 text-center'>Barangay Balon Common FAQS</p>
+            <p className='text-5xl mt-2 text-green-500 font-semibold text-center'>Frequently Asked Question</p>
 
             <div className='mt-12 flex flex-col md:flex-row gap-8'>
                 <div className='w-full md:w-1/2'>
@@ -20,7 +21,8 @@ const Faq = () => {
 
                 <div className='w-full md:w-1/2'>
                     <div className='faq-container'>
-                        <div className='faq-box mb-6'>
+                        <hr className='-mt-2 border-t border-gray-500' />
+                        <div className='faq-box mb-6 '>
                             <h3
                                 className={`flex items-center text-2xl font-semibold text-gray-800 cursor-pointer ${activeIndex === 0 ? 'active' : ''}`}
                                 onClick={() => toggleAccordion(0)}
@@ -30,11 +32,12 @@ const Faq = () => {
                             </h3>
                             {activeIndex === 0 && (
                                 <p className='text-gray-600 mt-2'>
-                                    Puwede kang mag-request ng certification sa aming website. Pindutin lamang ang "Services" sa navigation bar ng website, piliin kung anong uri ng certificate ang iyong kailangan, punan ang kinakailangang impormasyon, at i-submit ang iyong request.
+                                    Pwede kang mag-request ng certification sa aming website. Pindutin lamang ang "Services" sa navigation bar ng website, piliin kung anong uri ng certificate ang iyong kailangan, punan ang kinakailangang impormasyon, at i-submit ang iyong request.
                                 </p>
                             )}
                         </div>
 
+                        <hr className='-mt-2 border-t border-gray-500' />
                         <div className='faq-box mb-6'>
                             <h3
                                 className={`flex items-center text-2xl font-semibold text-gray-800 cursor-pointer ${activeIndex === 1 ? 'active' : ''}`}
@@ -45,11 +48,12 @@ const Faq = () => {
                             </h3>
                             {activeIndex === 1 && (
                                 <p className='text-gray-600 mt-2'>
-                                    Ang mga residente ay maaaring mag-request ng Barangay Clearance, Certificate of Residency, Indigency Certificate, at iba pang sertipikasyong inaalok ng barangay.
+                                    Ang mga residente ay maaaring mag-request ng Barangay Clearance, Certificate of Residency, Indigency Certificate, at iba pang certification na inaalok ng barangay.
                                 </p>
                             )}
                         </div>
 
+                        <hr className='-mt-2 border-t border-gray-500' />
                         <div className='faq-box mb-6'>
                             <h3
                                 className={`flex items-center text-2xl font-semibold text-gray-800 cursor-pointer ${activeIndex === 2 ? 'active' : ''}`}
@@ -65,6 +69,7 @@ const Faq = () => {
                             )}
                         </div>
 
+                        <hr className='-mt-2 border-t border-gray-500' />
                         <div className='faq-box mb-6'>
                             <h3
                                 className={`flex items-center text-2xl font-semibold text-gray-800 cursor-pointer ${activeIndex === 3 ? 'active' : ''}`}
@@ -80,6 +85,7 @@ const Faq = () => {
                             )}
                         </div>
 
+                        <hr className='-mt-2 border-t border-gray-500' />
                         <div className='faq-box mb-6'>
                             <h3
                                 className={`flex items-center text-2xl font-semibold text-gray-800 cursor-pointer ${activeIndex === 4 ? 'active' : ''}`}
@@ -94,7 +100,7 @@ const Faq = () => {
                                 </p>
                             )}
                         </div>
-                        
+                        <hr className='-mt-2 border-t border-gray-500' />
                     </div>
                 </div>
             </div>
