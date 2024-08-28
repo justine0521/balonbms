@@ -32,7 +32,7 @@ function App() {
         <ActiveSectionProvider>
           <Header />
           <Routes>
-            {/* <Route path="/pages/home" element={<Home />} /> */}
+            <Route path="/pages/home" element={<Home />}
 
             <Route path="/barangay-clearance-form" element={<BarangayClearance />} />
             <Route path='/certificate-of-residency-form' element={<CertificateOfResidency />} />
