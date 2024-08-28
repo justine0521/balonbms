@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Logo from '../Images/Logo.png';
+import BarangayClearance from '../Images/Certificate-Picture/Barangay Clearance.jpg'
 import '../App.css';
 
-function RequestForm() {
+import { MdOutlineContentCopy } from "react-icons/md";
+
+function CertificateOfResidency() {
   const [fullName, setFullName] = useState('');
   const [contactNumber, setContactNumber] = useState('');
   const [pickUp, setPickUp] = useState(false);
@@ -11,18 +14,20 @@ function RequestForm() {
   const [selectedPurpose, setSelectedPurpose] = useState('');
   const [selectType, setSelectType] = useState('');
   const [trackingCode, setTrackingCode] = useState('');
-  // const [deliveryNoteVisible, setDeliveryNoteVisible] = useState(false);
+  const [isImageEnlarged, setIsImageEnlarged] = useState(false);
+
+  const handleImageClick = () => {
+    setIsImageEnlarged(!isImageEnlarged);
+  };
 
   useEffect(() => {
-    // Simulate fetching data or any logic that sets tracking code after form submission
     const fetchTrackingCode = () => {
-      // Replace with actual logic to fetch or generate tracking code
       const generatedCode = generateTrackingCode();
       setTrackingCode(generatedCode);
     };
 
     fetchTrackingCode();
-  }, []); // Empty dependency array ensures this effect runs only once after initial render
+  }, []);
 
   const generateTrackingCode = () => {
     const chars = '0123456789';
@@ -34,6 +39,14 @@ function RequestForm() {
       code += chars.charAt(Math.floor(Math.random() * chars.length));
     }
     return code;
+  };
+
+  const handleCopyTracking = () => {
+    navigator.clipboard.writeText(trackingCode).then(() => {
+      alert('Tracking code copied to clipboard!');
+    }).catch(err => {
+      console.error('Failed to copy: ', err);
+    });
   };
 
   const handleFullName = (event) => {
@@ -80,8 +93,6 @@ function RequestForm() {
     setTrackingCode(newTrackingCode);
   };
 
-  
-
   const hasSpecialCharacters = /[!@#$%^&*(),.?":{}|<>]/;
 
   const handleSubmit = (event) => {
@@ -92,9 +103,9 @@ function RequestForm() {
     } else if (!isNaN(fullName)) {
       alert('Please enter a valid name');
     } else if (isNaN(contactNumber)) {
-      alert ('Please enter a valid contact number')
+      alert('Please enter a valid contact number');
     } else if (contactNumber.length <= 10 || contactNumber.length > 12) {
-      alert ('Please enter exact 11 numbers')
+      alert('Please enter exact 11 numbers');
     } else if (hasSpecialCharacters.test(fullName)) {
       alert('Please enter a name without special characters');
     } else if (selectType === '') {
@@ -108,52 +119,59 @@ function RequestForm() {
     } else if (selectedPurpose === '') {
       alert('Please enter on what purpose you need the certificate');
     } else {
-      // Generate tracking code
       const newTrackingCode = generateTrackingCode();
       setTrackingCode(newTrackingCode);
 
       console.log('Form submitted');
-      // Reset the form or navigate to another page upon successful submission
       resetForm();
     }
   };
 
   return (
-    <section className='bg-green-500'>
-      <div className='py-16 pt-24 px-5 h-fit flex justify-evenly flex-wrap'>
-        <div className='bg-white text-green-500 h-fit w-full md:w-60 flex flex-col justify-center py-7 px-5 mt-5 rounded'>
-          <div className='flex flex-col justify-center items-center gap-y-2 mb-3'>
-            <img src={Logo} alt="Logo" className='h-28'/>
+    <section className='mt-16'>
+      <div className='px-5 h-fit flex justify-center flex-wrap gap-10'>
+        <div className='w-96 h-fit mt-5 p-5 shadow-lg '>
+          <div className='w-full h-96 bg-white '>
+            <img src={BarangayClearance} alt="Barangay Clearance" onClick={handleImageClick} className='cursor-pointer w-full h-full object-fit'/>
           </div>
-          <div>
-            <p>Fees: 100 Pesos</p>
-            <p>Delivery Fee: 10 Pesos (for delivery only)</p>
-            <p>Gcash: 09090909090</p>
+
+          <p className='text-sm flex justify-end font-semibold text-gray-500 italic'>1 to 2 Days Processing</p>
+
+          <div className='my-3 text-gray-600'>
+            <p>Certificate of Residence means a certificate of registered address or address of residence for tax purposes issued by the competent tax authority of the country.</p>
           </div>
+
+          {isImageEnlarged && (
+            <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-10 z-50" onClick={handleImageClick}>
+              <img src={BarangayClearance} alt="Barangay Clearance" className="w-auto h-auto max-h-full max-w-full "/>
+            </div>
+          )}
         </div>
 
-        <form action="" className='w-full md:w-3/5 h-fit pb-5 bg-white mt-5 rounded' onSubmit={handleSubmit}>
-            <p className='text-green-500 bg-gray-100 font-semibold p-3 border'>CERTIFICATE OF RESIDENCY</p>
-          
-          <div className='flex flex-col gap-3'>
-            <div className='w-full flex flex-col gap-y-1 px-3 py-3'>
-              <label className='text-green-500'>Tracking Code (Copy your tracking code)</label>
-              {trackingCode && <input type="text" disabled className='p-1 bg-gray-200' value={trackingCode} />}
+        <form className="w-full md:w-1/2 h-fit pb-5 bg-white mt-5 rounded" onSubmit={handleSubmit}>
+          <p className="text-green-500 bg-gray-100 font-semibold p-3 border">Certificate Of Residency</p>
+
+          <div className="flex flex-col gap-3">
+            <div className="w-full flex flex-col gap-y-1 px-3 py-3">
+              <label className="text-green-500 font-semibold">Tracking Code <span className='text-gray-600 font-normal'>(Copy your tracking code)</span></label>
+              
+              <div className='relative'>
+                {trackingCode && <input type="text" disabled className="p-2 bg-gray-200 w-full" value={trackingCode} />}
+                
+                <MdOutlineContentCopy onClick={handleCopyTracking} className='absolute top-3 right-3 text-lg cursor-pointer text-green-500'/>
+              </div>
             </div>
 
-            <div className='w-full flex flex-col px-3'>
-              <label className='text-green-500'>Full Name</label>
-              <input type="text" placeholder='Enter your name' className='p-1 border' value={fullName} onChange={handleFullName} />
+            <div className="w-full flex flex-col px-3">
+              <input type="text" placeholder="Enter Full Name" className="p-2 border border-black outline-green-500 w-full" value={fullName} onChange={handleFullName} />
             </div>
 
-            <div className='w-full flex flex-col px-3'>
-              <label className='text-green-500'>Contact Number</label>
-              <input type="text" placeholder='Enter your contact number' className='p-1 border' value={contactNumber} onChange={handleContactNumber} />
+            <div className="w-full flex flex-col px-3">
+              <input type="text" placeholder="Enter Contact Number" className="p-2 border border-black outline-green-500 w-full" value={contactNumber} onChange={handleContactNumber} />
             </div>
 
-            <div className='w-full flex flex-col gap-y-1 px-3'>
-              <label className='text-green-500'>Type</label>
-              <select name="" id="" className='p-1 border' value={selectType} onChange={handleSelectType}>
+            <div className="w-full flex flex-col gap-y-1 px-3">
+              <select name="" id="" className="p-2 border border-black outline-green-500 w-full" value={selectType} onChange={handleSelectType}>
                 <option value="">Select Type</option>
                 <option value="For-Delivery">For Delivery</option>
                 <option value="For-Pickup">For Pickup (in Barangay)</option>
@@ -161,20 +179,19 @@ function RequestForm() {
             </div>
 
             {selectType === 'For-Pickup' && (
-              <div className='w-full flex flex-col gap-y-1 px-3'>
-                <label className='text-green-500'>Pickup Date</label>
-                <input type="date" name="pickupDate" className='p-1 border'/>
+              <div className="w-full flex flex-col gap-y-1 px-3">
+                <label className="text-green-500">Pickup Date</label>
+                <input type="date" name="pickupDate" className="p-2 border border-black outline-green-500 w-full" />
               </div>
             )}
 
-            <div className='w-full flex flex-col gap-y-1 px-3'>
-              <label className='text-green-500'>Payment Method</label>
-              <select name="" id="" className='p-1 border' value={paymentMethod} onChange={handlePaymentMethod}>
+            <div className="w-full flex flex-col gap-y-1 px-3">
+              <select name="" id="" className="p-2 border border-black outline-green-500 w-full" value={paymentMethod} onChange={handlePaymentMethod}>
                 <option value="">Select Payment Method</option>
                 {selectType === 'For-Pickup' ? (
                   <>
-                  <option value="G-Cash">Pay Online (G-Cash)</option>
-                  <option value="COD">Cash on Pickup</option>
+                    <option value="G-Cash">Pay Online (G-Cash)</option>
+                    <option value="COD">Cash on Pickup</option>
                   </>
                 ) : (
                   <>
@@ -186,19 +203,18 @@ function RequestForm() {
             </div>
 
             {paymentMethod === 'G-Cash' && (
-              <div className='w-full flex flex-col gap-y-1 px-3'>
-              <label className='text-green-500'>Reference No. (Please enter a valid reference number)</label>
-              <input type="text" name='reference' placeholder='Enter Gcash Reference No.' className='p-1 border' value={referenceNo} onChange={handleReferenceNoChange} />
+              <div className="w-full flex flex-col gap-y-1 px-3">
+                <label className="text-green-500">Reference No. (Please enter a valid reference number)</label>
+                <input type="text" name="reference" placeholder="Enter Gcash Reference No." className="p-2 border w-full" value={referenceNo} onChange={handleReferenceNoChange} />
               </div>
             )}
 
-            <div className='w-full flex flex-col gap-y-1 px-3'>
-              <label className='text-green-500'>Purpose</label>
-              <textarea name="" id="" rows={3} placeholder='Ex. For Scholarship' className='noResize border p-1' style={{resize: 'none'}} value={selectedPurpose} onChange={handlePurposeChange}></textarea>
+            <div className="w-full flex flex-col gap-y-1 px-3">
+              <textarea name="" id="" rows={6} placeholder="Please state the purpose on what purpose you need the certificate." className="noResize border border-black p-2 outline-green-500 w-full" style={{ resize: 'none' }} value={selectedPurpose} onChange={handlePurposeChange}></textarea>
             </div>
 
-            <div className='px-10 w-full'>
-              <button className='bg-green-500 text-white w-full p-1 rounded font-semibold hover:bg-green-400'>Submit</button>
+            <div className="px-3 w-full">
+              <button className="bg-green-500 text-white w-full p-1 font-semibold hover:bg-green-400">Submit</button>
             </div>
           </div>
         </form>
@@ -207,4 +223,4 @@ function RequestForm() {
   );
 }
 
-export default RequestForm;
+export default CertificateOfResidency;

@@ -1,68 +1,70 @@
-import { Link } from "react-router-dom";
-import { HashLink } from 'react-router-hash-link';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import Logo from '../Images/Logo2.png'
 
-import { FaFacebookSquare, FaInstagramSquare, FaTwitterSquare, FaYoutubeSquare } from "react-icons/fa";
+import { FaFacebookF, FaPhoneAlt } from 'react-icons/fa';
+import { FaLocationDot } from "react-icons/fa6";
 import { SiGmail } from "react-icons/si";
 
-export default function Footer() {
-  return (
-    <footer className=" text-black py-6 bg-green-100">
-      <div className="container mx-auto w-full px-2">
-        <div>
+function Footer() {
+    return (
+        <footer className="bg-green-100 text-gray-600 py-10">
+            <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-5">
+                {/* Logo Section */}
+                <div className="flex flex-col space-y-4">
+                    <div className='flex items-center gap-1'>
+                      <img src={Logo} alt="" className='h-20'/>
+                      <h2 className="text-xl text-green-500 font-semibold">Barangay <br /> Balon Anito</h2>
+                    </div>
 
-          <div className="flex justify-center gap-[5%] mt-3 flex-wrap basis-52 grow">
+                    <p className='font-dancing text-xl'>
+                      Maayos na Serbisyo Publiko, Susi sa Progresibong Balon Anito
+                    </p>
+                </div>
 
-            <div className="w-52 text-center">
-              <p className="mb-3 mt-5 font-bold text-xl text-green-500">Quick Links</p>
+                {/* Links Section */}
+                <div>
+                    <h3 className="text-xl text-green-500 font-semibold mb-4">Quick Links</h3>
+                    <div className='flex space-x-10'>
+                      <ul className="space-y-2">
+                        <li className="hover:underline"><NavLink to={"/pages/home"}>Home</NavLink></li>
+                        <li className="hover:underline"><NavLink to={"/pages/about"}>About</NavLink></li>
+                        <li className="hover:underline"><NavLink to={"/pages/service"}>Service</NavLink></li>
+                        <li className="hover:underline"><NavLink to={"/pages/news"}>News</NavLink></li>
+                      </ul>
 
-              <ul className="text-gray-600">
-                <li><HashLink to={"/#about"}>About</HashLink></li>
-                <li><HashLink to={"/#services"}>Services</HashLink></li>
-                <li><HashLink to={"/#track-request"}>Track Request</HashLink></li>
-                <li><HashLink to={"/#location"}>Location</HashLink></li>
-              </ul>
+                      <ul className='space-y-2'>
+                        <li className="hover:underline"><NavLink to={"/pages/faq"}>FAQ</NavLink></li>
+                        <li className="hover:underline"><NavLink to={"/pages/track-request"}>Track Request</NavLink></li>
+                      </ul>
+                    </div>
+                </div>
+
+                {/* Community Section */}
+                <div>
+                    <h3 className="text-xl text-green-500 font-semibold mb-4">Community</h3>
+                    <ul className="space-y-2">
+                        <li className='flex gap-2'><FaLocationDot className='text-green-500 text-xl'/>National Road, Barangay Hall, Balon Anito, Mariveles Bataan</li>
+                    </ul>
+                </div>
+
+                {/* Contact Section */}
+                <div>
+                    <h3 className="text-xl text-green-500 font-semibold mb-4">Contact Us</h3>
+                    <ul className="space-y-2">
+                        <li className='flex items-center gap-2'><FaPhoneAlt className='text-green-500 text-xl'/>(047) 240-5500</li>
+                        <li><a href="https://www.facebook.com/profile.php?id=100092042062918" className='flex items-center gap-2 hover:underline'><FaFacebookF className='text-green-500 text-xl'/>Better Balon Anito</a></li>
+                        <li><a href="mailto:betterbalonanito@gmail.com" className='flex items-center gap-2 hover:underline'><SiGmail className='text-green-500 text-xl'/>betterbalonanito@gmail.com</a></li>
+                    </ul>
+                </div>
             </div>
 
-            <div className="w-52 text-center">
-              <p className="mb-3 mt-5 font-bold text-xl text-green-500">Our Community</p>
-
-              <ul className="text-gray-600">
-                <li>
-                  <Link to={"https://www.google.com/maps/place/Balon+Anito+Barangay+Hall,+National+Rd,+Mariveles,+Bataan/@14.4363712,120.4696933,17z/data=!3m1!4b1!4m6!3m5!1s0x3396192d3c682871:0x801a23e613c67725!8m2!3d14.4363745!4d120.4722831!16s%2Fg%2F11bvt9xf0y?authuser=0&entry=ttu"}>
-                    Location - Barangay Balon, Anito, Mariveles, Bataan
-                  </Link>
-                </li>
-
-              </ul>
+            {/* Footer Bottom */}
+            <div className="border-t border-gray-700 mt-8 pt-8 text-center">
+            <p><strong>&copy;</strong>2024 <strong className="text-green-500">Balon Anito</strong> || All rights reserved.</p>
             </div>
-
-            <div className="w-52 text-center">
-              <p className="mb-3 mt-5 font-bold text-xl text-green-500">Contact Us</p>
-
-              <ul className="text-gray-600">
-                <li>No: 09101010101</li>
-                <li><Link to={"/"}>Email Address: brgybalonanito@gmail.com</Link></li>
-              </ul>
-            </div>
-
-            <div className="w-52 text-center">
-              <p className="mb-3 mt-5 font-bold text-xl text-green-500">Social Media Links</p>
-
-              <ul className="text-2xl flex justify-evenly">
-                <li><Link to={"https://www.facebook.com/kabataanngBalonAnito"}><FaFacebookSquare /></Link></li>
-                <li><Link to={"/"}><SiGmail /></Link></li>
-                <li><Link to={"/"}><FaInstagramSquare /></Link></li>
-                <li><Link to={"/"}><FaTwitterSquare /></Link></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <div className="text-center text-lg flex justify-center items-center py-3 w-full mt-10">
-        <p><strong>&copy;</strong>2024 <strong>Balon Anito</strong> | All rights reserved.</p>
-      </div>
-    </footer>
-  )
+        </footer>
+    );
 }
+
+export default Footer;
