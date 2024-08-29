@@ -17,7 +17,7 @@ const Captain = () => {
         <img
           src={kap_image}
           alt="Jeffrey P. Campaña"
-          className="w-64 h-64 relative" // Increased size and removed rounded-full and shadow
+          className="w-64 h-64 relative" 
         />
         <div className="text-center">
           <img

@@ -2,7 +2,6 @@ import React from 'react';
 import Slider from 'react-slick';
 import officials_img from '../Images/officials_image.jpg';
 
-
 const officials = [
   {
     id: 1,
@@ -43,6 +42,7 @@ const officials = [
 ];
 
 const settings = {
+  arrows: false,
   dots: true,
   infinite: true,
   speed: 800,
@@ -56,7 +56,7 @@ const settings = {
     {
       breakpoint: 1024,
       settings: {
-        slidesToShow: 2, // Display 2 slides of barangay officials at a time on medium screens
+        slidesToShow: 2,
       }
     },
     {
