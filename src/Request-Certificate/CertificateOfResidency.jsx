@@ -16,6 +16,9 @@ function CertificateOfResidency() {
   const [selectType, setSelectType] = useState('');
   const [trackingCode, setTrackingCode] = useState('');
   const [isImageEnlarged, setIsImageEnlarged] = useState(false);
+  const [showSubmitModal, setShowSubmitModal] = useState(false);
+  const [showCopyTrackingModal, setShowCopyTrackingModal] = useState(false);
+  const [timer, setTimer] = useState(3);
 
   const handleImageClick = () => {
     setIsImageEnlarged(!isImageEnlarged);
@@ -29,6 +32,20 @@ function CertificateOfResidency() {
 
     fetchTrackingCode();
   }, []);
+
+  useEffect(() => {
+    let countdown;
+    if ((showCopyTrackingModal || showSubmitModal) && timer > 0) {
+      countdown = setInterval(() => {
+        setTimer((prev) => prev - 1);
+      }, 1000);
+    } else if (timer === 0) {
+      setShowCopyTrackingModal(false);
+      setShowSubmitModal(false);
+      setTimer(3);
+    }
+    return () => clearInterval(countdown);
+  }, [showCopyTrackingModal, showSubmitModal, timer]);
 
   const generateTrackingCode = () => {
     const chars = '0123456789';
@@ -44,7 +61,7 @@ function CertificateOfResidency() {
 
   const handleCopyTracking = () => {
     navigator.clipboard.writeText(trackingCode).then(() => {
-      alert('Tracking code copied to clipboard!');
+      setShowCopyTrackingModal(true);
     }).catch(err => {
       console.error('Failed to copy: ', err);
     });
@@ -129,6 +146,7 @@ function CertificateOfResidency() {
       const newTrackingCode = generateTrackingCode();
       setTrackingCode(newTrackingCode);
 
+<<<<<<< HEAD
       // Include pickupDate in formData
       const formData = {
         certificateType: 'Certificate of Residency',
@@ -155,6 +173,11 @@ function CertificateOfResidency() {
         alert('There was an error submitting the form.');
       }
 
+=======
+      console.log('Form submitted');
+      resetForm();
+      setShowSubmitModal(true);
+>>>>>>> 16b1097b25de6a75b5be83cc5ab09f5abe3b20f1
     }
   };
 
@@ -250,6 +273,24 @@ function CertificateOfResidency() {
           </div>
         </form>
       </div>
+
+      {showCopyTrackingModal && (
+        <div className="fixed right-5 top-5 flex items-center justify-center z-50">
+          <div className="bg-green-100 p-5 rounded shadow-lg w-80">
+            <p className="text-center text-gray-600 mb-4">Tracking Code copied successfully!</p>
+            <div className="h-1 bg-green-500" style={{ width: `${(timer / 3) * 100}%` }}></div>
+          </div>
+        </div>
+      )}
+
+      {showSubmitModal && (
+        <div className="fixed right-5 top-5 flex items-center justify-center z-50">
+          <div className="bg-green-100 p-5 rounded shadow-lg w-80">
+            <p className="text-center text-gray-600 mb-4">Form Submitted Successfully!</p>
+            <div className="h-1 bg-green-500" style={{ width: `${(timer / 3) * 100}%` }}></div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
