@@ -35,7 +35,7 @@ function Hero() {
 
             <HashLink to={'/pages/service'}>
               <button className='ml-4 border border-white text-white px-5 py-2 rounded-lg bg-transparent hover:bg-white hover:text-green-500'>Services</button>
-            </Haslink>
+            </Hashlink>
           </div>
         </div>
 
