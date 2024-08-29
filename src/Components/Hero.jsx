@@ -23,10 +23,6 @@ function Hero() {
           <p className='mt-5 text-white text-xl'>Reliable Public Service, Strengthening Our Community's Foundation </p>
 
           <div className='mt-5'>
-            {/* <NavLink to='#captain'>
-              <button className='bg-white text-green-500 px-5 py-2 rounded-lg hover:bg-green-100'>Learn More</button>
-            </NavLink> */}
-
             <HashLink
               smooth
               to={`#captain`} >
@@ -35,7 +31,7 @@ function Hero() {
 
             <HashLink to={'/pages/service'}>
               <button className='ml-4 border border-white text-white px-5 py-2 rounded-lg bg-transparent hover:bg-white hover:text-green-500'>Services</button>
-            </Hashlink>
+            </HashLink>
           </div>
         </div>
 
