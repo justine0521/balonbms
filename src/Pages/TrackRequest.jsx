@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { IoMdSearch } from "react-icons/io";
 import { FaRegCalendarAlt, FaRegClock, FaRegListAlt, FaCertificate } from "react-icons/fa";
 import axios from 'axios';
+import { format } from 'date-fns';
 
 function TrackRequest() {
   // State for tracking input and request details
@@ -72,16 +73,17 @@ function TrackRequest() {
             </div>
             <div className='flex items-center mb-3'>
               <FaRegCalendarAlt className='text-green-500 mr-2' />
-              <p className='text-gray-700 font-medium'>Date Requested: <span className='font-normal'>{new Date(requestDetails.dateRequested).toLocaleDateString()}</span></p>
+              <p className='text-gray-700 font-medium'>Date Requested: <span className='font-normal'>{format(new Date(requestDetails.dateRequested), 'Pp')}</span></p>
+            </div>
+            <div className='flex items-center mb-3'>
+              <FaRegCalendarAlt className='text-green-500 mr-2' />
+              <p className='text-gray-700 font-medium'>Last Update: <span className='font-normal'>{format(new Date(requestDetails.lastUpdate), 'Pp')}</span></p>
             </div>
             <div className='flex items-center mb-3'>
               <FaRegClock className='text-green-500 mr-2' />
               <p className='text-gray-700 font-medium'>Current Status: <span className={`font-normal ${requestDetails.currentStatus === 'Completed' ? 'text-green-500' : 'text-yellow-500'}`}>{requestDetails.currentStatus}</span></p>
             </div>
-            <div className='flex items-center'>
-              <FaRegClock className='text-green-500 mr-2' />
-              <p className='text-gray-700 font-medium'>Last Update: <span className='font-normal'>{new Date(requestDetails.lastUpdate).toLocaleDateString()}</span></p>
-            </div>
+
           </div>
         )}
       </div>

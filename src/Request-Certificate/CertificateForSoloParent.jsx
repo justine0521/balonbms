@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Logo from '../Images/Logo.png';
 import BarangayClearance from '../Images/Certificate-Picture/Barangay Clearance.jpg'
 import '../App.css';
+import axios from 'axios';
 
 import { MdOutlineContentCopy } from "react-icons/md";
 
@@ -9,6 +10,7 @@ function CertificateForSoloParent() {
   const [fullName, setFullName] = useState('');
   const [contactNumber, setContactNumber] = useState('');
   const [pickUp, setPickUp] = useState(false);
+  const [pickUpDate, setPickupDate] = useState('');  // State for Pickup Date
   const [paymentMethod, setPaymentMethod] = useState('');
   const [referenceNo, setReferenceNo] = useState('');
   const [selectedPurpose, setSelectedPurpose] = useState('');
@@ -66,6 +68,11 @@ function CertificateForSoloParent() {
     setPaymentMethod('');
   };
 
+  const handlePickupDateChange = (event) => {
+    setPickupDate(event.target.value);  // Bind input to state
+    console.log(event.target.value);
+  };
+
   const handlePaymentMethod = (event) => {
     const value = event.target.value;
     setPaymentMethod(value);
@@ -85,6 +92,7 @@ function CertificateForSoloParent() {
     setFullName('');
     setContactNumber('');
     setPickUp(false);
+    setPickupDate('');  // Reset pickup date
     setPaymentMethod('');
     setReferenceNo('');
     setSelectedPurpose('');
@@ -95,7 +103,7 @@ function CertificateForSoloParent() {
 
   const hasSpecialCharacters = /[!@#$%^&*(),.?":{}|<>]/;
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (fullName === '') {
@@ -122,17 +130,40 @@ function CertificateForSoloParent() {
       const newTrackingCode = generateTrackingCode();
       setTrackingCode(newTrackingCode);
 
-      console.log('Form submitted');
-      resetForm();
+      // Include pickupDate in formData
+      const formData = {
+        certificateType: 'Certificate For Solo Parent',
+        certId: '10',
+        fullName,
+        contactNumber,
+        pickUp,
+        pickUpDate,  // Add pickup date to form data
+        paymentMethod,
+        referenceNo,
+        selectedPurpose,
+        selectType,
+        trackingCode: newTrackingCode,
+      };
+
+      try {
+        const response = await axios.post('http://localhost:5000/submit-request', formData);
+        alert(response.data);
+
+        console.log('Form submitted');
+        resetForm();  // Reset form after successful submission
+      } catch (error) {
+        console.error('Error submitting the form:', error);
+        alert('There was an error submitting the form.');
+      }
     }
   };
 
   return (
-    <section className='mt-16'>
+    <section className='mt-24 mb-10'>
       <div className='px-5 h-fit flex justify-center flex-wrap gap-10'>
         <div className='w-96 h-fit mt-5 p-5 shadow-lg '>
           <div className='w-full h-96 bg-white '>
-            <img src={BarangayClearance} alt="Barangay Clearance" onClick={handleImageClick} className='cursor-pointer w-full h-full object-fit'/>
+            <img src={BarangayClearance} alt="Barangay Clearance" onClick={handleImageClick} className='cursor-pointer w-full h-full object-fit' />
           </div>
 
           <p className='text-sm flex justify-end font-semibold text-gray-500 italic'>1 to 2 Days Processing</p>
@@ -143,7 +174,7 @@ function CertificateForSoloParent() {
 
           {isImageEnlarged && (
             <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-10 z-50" onClick={handleImageClick}>
-              <img src={BarangayClearance} alt="Barangay Clearance" className="w-auto h-auto max-h-full max-w-full "/>
+              <img src={BarangayClearance} alt="Barangay Clearance" className="w-auto h-auto max-h-full max-w-full " />
             </div>
           )}
         </div>
@@ -154,11 +185,11 @@ function CertificateForSoloParent() {
           <div className="flex flex-col gap-3">
             <div className="w-full flex flex-col gap-y-1 px-3 py-3">
               <label className="text-green-500 font-semibold">Tracking Code <span className='text-gray-600 font-normal'>(Copy your tracking code)</span></label>
-              
+
               <div className='relative'>
                 {trackingCode && <input type="text" disabled className="p-2 bg-gray-200 w-full" value={trackingCode} />}
-                
-                <MdOutlineContentCopy onClick={handleCopyTracking} className='absolute top-3 right-3 text-lg cursor-pointer text-green-500'/>
+
+                <MdOutlineContentCopy onClick={handleCopyTracking} className='absolute top-3 right-3 text-lg cursor-pointer text-green-500' />
               </div>
             </div>
 
@@ -181,7 +212,7 @@ function CertificateForSoloParent() {
             {selectType === 'For-Pickup' && (
               <div className="w-full flex flex-col gap-y-1 px-3">
                 <label className="text-green-500">Pickup Date</label>
-                <input type="date" name="pickupDate" className="p-2 border border-black outline-green-500 w-full" />
+                <input type="date" name="pickupDate" className="p-2 border border-black outline-green-500 w-full" value={pickUpDate} onChange={handlePickupDateChange} />
               </div>
             )}
 
@@ -191,7 +222,7 @@ function CertificateForSoloParent() {
                 {selectType === 'For-Pickup' ? (
                   <>
                     <option value="G-Cash">Pay Online (G-Cash)</option>
-                    <option value="COD">Cash on Pickup</option>
+                    <option value="COP">Cash on Pickup</option>
                   </>
                 ) : (
                   <>
