@@ -172,12 +172,9 @@ function CertificateOfIndigency() {
         alert('There was an error submitting the form.');
       }
 
-<<<<<<< HEAD
-=======
       console.log('Form submitted');
       resetForm();
       setShowSubmitModal(true);
->>>>>>> 16b1097b25de6a75b5be83cc5ab09f5abe3b20f1
     }
   };
 

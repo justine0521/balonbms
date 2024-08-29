@@ -147,7 +147,6 @@ function CertificateForSoloParent() {
       const newTrackingCode = generateTrackingCode();
       setTrackingCode(newTrackingCode);
 
-<<<<<<< HEAD
       // Include pickupDate in formData
       const formData = {
         certificateType: 'Certificate For Solo Parent',
@@ -173,11 +172,9 @@ function CertificateForSoloParent() {
         console.error('Error submitting the form:', error);
         alert('There was an error submitting the form.');
       }
-=======
       console.log('Form submitted');
       resetForm();
       setShowSubmitModal(true);
->>>>>>> 16b1097b25de6a75b5be83cc5ab09f5abe3b20f1
     }
   };
 
