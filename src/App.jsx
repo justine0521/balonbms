@@ -23,6 +23,7 @@ import TrackRequest from './Pages/TrackRequest';
 import Faq from './Pages/Faq';
 import Location from './Pages/Location';
 import Announcement from './Pages/Announcement';
+import Captain from './Pages/Captain';
 
 
 function App() {
