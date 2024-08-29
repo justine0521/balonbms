@@ -27,9 +27,9 @@ function Hero() {
               <button className='bg-white text-green-500 px-5 py-2 rounded-lg hover:bg-green-100'>Learn More</button>
             </NavLink>
 
-            <HashLink to={'/#services'}>
+            <NavLink to={'/pages/service'}>
               <button className='ml-4 border border-white text-white px-5 py-2 rounded-lg bg-transparent hover:bg-white hover:text-green-500'>Services</button>
-            </HashLink>
+            </NavLink>
           </div>
         </div>
 
