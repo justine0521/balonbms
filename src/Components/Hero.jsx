@@ -23,11 +23,17 @@ function Hero() {
           <p className='mt-5 text-white text-xl'>Reliable Public Service, Strengthening Our Community's Foundation </p>
 
           <div className='mt-5'>
-            <NavLink to={'/#learn-more'}>
+            {/* <NavLink to='#captain'>
               <button className='bg-white text-green-500 px-5 py-2 rounded-lg hover:bg-green-100'>Learn More</button>
-            </NavLink>
+            </NavLink> */}
 
-            <NavLink to={'/pages/service'}>
+            <HashLink
+              smooth
+              to={`#captain`} >
+              <button className='bg-white text-green-500 px-5 py-2 rounded-lg hover:bg-green-100'>Learn More</button>
+            </HashLink>
+
+            <HashLink to={'/pages/service'}>
               <button className='ml-4 border border-white text-white px-5 py-2 rounded-lg bg-transparent hover:bg-white hover:text-green-500'>Services</button>
             </NavLink>
           </div>
@@ -53,7 +59,7 @@ function Hero() {
         </div>
 
       </div>
-    </section>
+    </section >
   );
 }
 
