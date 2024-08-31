@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import RequestForm from './Components/RequestForm';
-import { ActiveSectionProvider } from './Components/ActiveSectionContext';
+// import { ActiveSectionProvider } from './Components/ActiveSectionContext';
 
 import BarangayClearance from './Request-Certificate/BaragayClearance'
 import CertificateOfResidency from './Request-Certificate/CertificateOfResidency'
@@ -30,7 +30,7 @@ function App() {
   return (
     <main>
       <BrowserRouter>
-        <ActiveSectionProvider>
+        {/* <ActiveSectionProvider> */}
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />
@@ -55,7 +55,7 @@ function App() {
 
           </Routes>
           <Footer />
-        </ActiveSectionProvider>
+        {/* </ActiveSectionProvider> */}
       </BrowserRouter>
     </main>
   );

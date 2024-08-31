@@ -6,6 +6,15 @@
   display: none;
 }
 
+@keyframes shrink {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
 .top40{
   top: 40%;
 }

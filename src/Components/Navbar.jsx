@@ -1,23 +1,23 @@
 import { HashLink } from 'react-router-hash-link';
 import { useContext, useEffect, useState } from 'react';
-import { ActiveSectionContext } from './ActiveSectionContext';
+// import { ActiveSectionContext } from './ActiveSectionContext';
 import { NavLink } from 'react-router-dom';
 
 const Navbar = ({ containerStyles }) => {
-  const [ActiveTab, setActiveTab] = useState();
+  // const [ActiveTab, setActiveTab] = useState();
 
-  const { activeSection, setActiveSection } = useContext(ActiveSectionContext);
+  // const { activeSection, setActiveSection } = useContext(ActiveSectionContext);
 
-  const isActive = (hash) => activeSection === hash;
+  // const isActive = (hash) => activeSection === hash;
 
-  useEffect(() => {
-    const handleHashChange = () => {
-      setActiveSection(window.location.hash || '#home');
-    };
+  // useEffect(() => {
+  //   const handleHashChange = () => {
+  //     setActiveSection(window.location.hash || '#home');
+  //   };
 
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
-  }, [setActiveSection]);
+  //   window.addEventListener('hashchange', handleHashChange);
+  //   return () => window.removeEventListener('hashchange', handleHashChange);
+  // }, [setActiveSection]);
 
   return (
     <nav className={containerStyles}>
