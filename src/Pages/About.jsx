@@ -27,7 +27,7 @@ function About() {
     };
 
     return (
-        <section className='mb-10 h-fit mx-20'>
+        <section className='mb-10 h-fit mx-10 lg:mx-20 mt-10 lg:mt-0'>
             <div className="relative w-full h-72 bg-cover bg-center">
                 <div className="absolute inset-0 flex items-center justify-center">
                     <div className="text-center text-white px-10 pt-10 mt-48 lg:mt-0">
