@@ -36,7 +36,7 @@ const Navbar = ({ containerStyles }) => {
 
       ))} */}
 
-      <NavLink to={'/pages/home'}>
+      <NavLink to={'/'}>
         {({ isActive }) => (
           <button className={`${isActive ? 'text-green-400 text-sm font-semibold flex-1 border-b-2 border-b-green-400' : 'hover:text-green-500'} p-2`}>
             Home

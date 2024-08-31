@@ -33,7 +33,13 @@ function App() {
         {/* <ActiveSectionProvider> */}
           <Header />
           <Routes>
+            {/* Navbar */}
             <Route path="/" element={<Home />} />
+            <Route path='/pages/about' element={<About />} />
+            <Route path='/pages/service' element={<Service />} />
+            <Route path='/pages/news' element={<Announcement />} />
+            <Route path='/pages/faq' element={<Faq />} />
+            <Route path='/pages/track-request' element={<TrackRequest />} />
 
             <Route path="/barangay-clearance-form" element={<BarangayClearance />} />
             <Route path='/certificate-of-residency-form' element={<CertificateOfResidency />} />
@@ -45,14 +51,7 @@ function App() {
             <Route path='/certificate-of-good-moral-form' element={<CertificateOfGoodMoral />} />
             <Route path='/certificate-for-new-residents-form' element={<CertificateForNewResidents />} />
             <Route path='/certificate-for-solo-parent-form' element={<CertificateForSoloParent />} />
-
-            <Route path='/pages/home' element={<Home />} />
-            <Route path='/pages/about' element={<About />} />
-            <Route path='/pages/service' element={<Service />} />
-            <Route path='/pages/news' element={<Announcement />} />
-            <Route path='/pages/faq' element={<Faq />} />
-            <Route path='/pages/track-request' element={<TrackRequest />} />
-
+           
           </Routes>
           <Footer />
         {/* </ActiveSectionProvider> */}
