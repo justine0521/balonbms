@@ -1,45 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
-import officials_img from '../Images/officials_image.jpg';
-
-const officials = [
-  {
-    id: 1,
-    name: 'Pardo, Sofia M.',
-    role: 'Brgy. Secretary',
-    image: officials_img,
-  },
-  {
-    id: 2,
-    name: 'Mondidu, Dante A.',
-    role: 'Brgy. Treasurer',
-    image: officials_img,
-  },
-  {
-    id: 3,
-    name: 'Jeffrey P. Campaña',
-    role: 'Brgy. Captain',
-    image: officials_img,
-  },
-  {
-    id: 4,
-    name: 'Another Official',
-    role: 'Brgy. Councilor',
-    image: officials_img,
-  },
-  {
-    id: 5,
-    name: 'One More Official',
-    role: 'Brgy. Councilor',
-    image: officials_img,
-  },
-  {
-    id: 6,
-    name: 'Last Official',
-    role: 'Brgy. Councilor',
-    image: officials_img,
-  },
-];
+import axios from 'axios';
 
 const settings = {
   arrows: false,
@@ -62,13 +23,31 @@ const settings = {
     {
       breakpoint: 600,
       settings: {
-        slidesToShow: 1, // Display 1 slide at a time on small screens
+        slidesToShow: 1,
       }
     }
   ]
 };
 
 const Officials = () => {
+  const [officials, setOfficials] = useState([]);
+
+  useEffect(() => {
+    const fetchOfficials = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/officials");
+        console.log(response.data); // Inspect the response
+        setOfficials(response.data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOfficials();
+  }, []);
+
   return (
     <section className="flex flex-col items-center mb-5">
       <div className="relative w-full bg-cover bg-center">
@@ -83,14 +62,14 @@ const Officials = () => {
       <div className="w-full px-4 sm:px-8 md:px-16 lg:px-24 pb-12">
         <Slider {...settings}>
           {officials.map((data) => (
-            <div key={data.id} className="justify-center">
+            <div key={data._id} className="justify-center">
               <div className="bg-white shadow-2xl p-10 text-center">
                 <div className="overflow-hidden rounded-full w-40 h-40 mx-auto mb-10">
-                  <img src={data.image} alt={data.name} className="w-full h-full object-cover"/>
+                  <img src={data.imageUrl} alt={data.fullname} className="w-full h-full object-cover" />
                 </div>
                 <div className="space-y-2">
-                  <p className="font-bold">{data.name}</p>
-                  <p className="text-sm text-blue-500">{data.role}</p>
+                  <p className="font-bold">{data.fullname}</p>
+                  <p className="text-sm text-blue-500">{data.position}</p>
                 </div>
               </div>
             </div>
