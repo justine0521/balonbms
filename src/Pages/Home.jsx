@@ -42,7 +42,7 @@ function Home() {
   return (
     <main>
       <section ><Hero /></section>
-      <section ><Captain /></section>
+      <section id="captain" ><Captain /></section>
       <section ><Officials /></section>
       <section ><Location /></section>
     </main>

@@ -17,7 +17,7 @@ function Hero() {
 
       <div className='relative flex flex-col md:flex-row-reverse justify-between items-center max-w-screen-xl mx-auto z-10'>
 
-        <div className='flex flex-col justify-center items-center md:items-start text-center md:text-left w-full md:w-auto order-1 md:order-2 mt-20'>
+        <div className='flex flex-col justify-center items-center md:items-start text-center md:text-left w-full md:w-auto order-1 md:order-2 mt-36 md:mt-12 lg:mt-20'>
           <p className='text-4xl font-semibold text-white'>Dedicated to Serving You</p>
           <p className='text-6xl font-semibold text-white mt-4'>BARANGAY <br />BALON ANITO</p>
           <p className='mt-5 text-white text-xl'>Reliable Public Service, Strengthening Our Community's Foundation </p>
