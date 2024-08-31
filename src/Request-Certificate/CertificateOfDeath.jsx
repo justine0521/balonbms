@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Logo from '../Images/Logo.png';
 import BarangayClearance from '../Images/Certificate-Picture/Barangay Clearance.jpg'
 import '../App.css';
@@ -20,6 +20,7 @@ function CertificateOfDeath() {
   const [showSubmitModal, setShowSubmitModal] = useState(false);
   const [showCopyTrackingModal, setShowCopyTrackingModal] = useState(false);
   const [timer, setTimer] = useState(3);
+  const progressBarRef = useRef(null);
 
   const handleImageClick = () => {
     setIsImageEnlarged(!isImageEnlarged);
@@ -35,17 +36,14 @@ function CertificateOfDeath() {
   }, []);
 
   useEffect(() => {
-    let countdown;
-    if ((showCopyTrackingModal || showSubmitModal) && timer > 0) {
-      countdown = setInterval(() => {
-        setTimer((prev) => prev - 1);
-      }, 1000);
-    } else if (timer === 0) {
-      setShowCopyTrackingModal(false);
-      setShowSubmitModal(false);
-      setTimer(3);
+    if (showCopyTrackingModal || showSubmitModal) {
+      progressBarRef.current.style.animation = `shrink ${timer}s linear forwards`;
+  
+      setTimeout(() => {
+        setShowCopyTrackingModal(false);
+        setShowSubmitModal(false);
+      }, timer * 1000);
     }
-    return () => clearInterval(countdown);
   }, [showCopyTrackingModal, showSubmitModal, timer]);
 
   const generateTrackingCode = () => {
@@ -164,7 +162,7 @@ function CertificateOfDeath() {
 
       try {
         const response = await axios.post('http://localhost:5000/submit-request', formData);
-        alert(response.data);
+        // alert(response.data);
 
         console.log('Form submitted');
         resetForm();  // Reset form after successful submission
@@ -276,7 +274,7 @@ function CertificateOfDeath() {
         <div className="fixed right-5 top-5 flex items-center justify-center z-50">
           <div className="bg-green-100 p-5 rounded shadow-lg w-80">
             <p className="text-center text-gray-600 mb-4">Tracking Code copied successfully!</p>
-            <div className="h-1 bg-green-500" style={{ width: `${(timer / 3) * 100}%` }}></div>
+            <div ref={progressBarRef} className="h-1 bg-green-500"></div>
           </div>
         </div>
       )}
@@ -285,7 +283,7 @@ function CertificateOfDeath() {
         <div className="fixed right-5 top-5 flex items-center justify-center z-50">
           <div className="bg-green-100 p-5 rounded shadow-lg w-80">
             <p className="text-center text-gray-600 mb-4">Form Submitted Successfully!</p>
-            <div className="h-1 bg-green-500" style={{ width: `${(timer / 3) * 100}%` }}></div>
+            <div ref={progressBarRef} className="h-1 bg-green-500"></div>
           </div>
         </div>
       )}

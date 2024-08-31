@@ -1,13 +1,13 @@
-import React, { createContext, useState } from 'react';
+// import React, { createContext, useState } from 'react';
 
-export const ActiveSectionContext = createContext();
+// export const ActiveSectionContext = createContext();
 
-export const ActiveSectionProvider = ({ children }) => {
-  const [activeSection, setActiveSection] = useState('#home');
+// export const ActiveSectionProvider = ({ children }) => {
+//   const [activeSection, setActiveSection] = useState('#home');
 
-  return (
-    <ActiveSectionContext.Provider value={{ activeSection, setActiveSection }}>
-      {children}
-    </ActiveSectionContext.Provider>
-  );
-};
+//   return (
+//     <ActiveSectionContext.Provider value={{ activeSection, setActiveSection }}>
+//       {children}
+//     </ActiveSectionContext.Provider>
+//   );
+// };
