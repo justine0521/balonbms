@@ -1,9 +1,33 @@
-import React from 'react';
-import kap_image from '../Images/kap_image.png';
-import kap_image2 from '../Images/kap_image2.png';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import kap_image2 from '../Images/kap_image2.png'; // Still using local image for secondary display
 import map from '../Images/PHMap.png';
 
 const Captain = () => {
+  const [captain, setCaptain] = useState(null);
+
+  useEffect(() => {
+    const fetchCaptain = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/officials");
+        // Filter the official who is the Barangay Captain
+        const barangayCaptain = response.data.find(
+          official => official.position.toLowerCase() === 'barangay captain' || official.position.toLowerCase() === 'punong barangay'
+        );
+        setCaptain(barangayCaptain);
+      } catch (error) {
+        console.error("Error fetching the barangay captain data:", error);
+      }
+    };
+
+    fetchCaptain();
+  }, []);
+
+  // Display a loading message while the data is being fetched
+  if (!captain) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <section className="relative flex flex-col lg:flex-row items-center bg-white p-8">
       <div className="lg:w-1/3 w-full flex flex-col items-center">
@@ -15,9 +39,9 @@ const Captain = () => {
           />
         </div>
         <img
-          src={kap_image}
-          alt="Jeffrey P. Campaña"
-          className="w-64 h-64 relative" 
+          src={captain.imageUrl} // Use the S3 image URL
+          alt={captain.fullname}
+          className="w-64 h-64 relative object-cover"
         />
         <div className="text-center">
           <img
@@ -28,13 +52,13 @@ const Captain = () => {
         </div>
       </div>
       <div className="lg:w-2/3 w-full mt-8 lg:mt-0 lg:pr-8 relative z-10 lg:ml-[-1rem]">
-        <h2 className="text-2xl font-bold">Celso M. Solano</h2>
+        <h2 className="text-2xl font-bold">{captain.fullname}</h2>
         <p className="text-xl italic mt-4">
           "A true leader does not create separation, A true leader brings people together." - Tendai Ruben Mbofana
         </p>
         <p className="mt-6 text-gray-700">
-          Barangay Captain Celso M. Solano, an accomplished advocate for working people and a proud product of the District.
-          Barangay Captain Celso M. Solano started serving since 2013. Learn more about Barangay Captain Celso M. Solano and read his blog.
+          {`Barangay Captain ${captain.fullname}, an accomplished advocate for working people and a proud product of the District.
+          Barangay Captain ${captain.fullname} started serving since ${captain.startYear}. Learn more about Barangay Captain ${captain.fullname} and read his blog.`}
         </p>
         <button className="mt-8 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 transition duration-200">
           Contact Us
@@ -42,6 +66,6 @@ const Captain = () => {
       </div>
     </section>
   );
-}
+};
 
 export default Captain;
