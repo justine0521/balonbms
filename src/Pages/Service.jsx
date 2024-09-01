@@ -22,7 +22,7 @@ const Service = () => {
 
                 <NavLink
                     to={'/barangay-clearance-form'}
-                    className=' bg-white flex flex-col md:flex-row w-full lg:w-2/6 h-fit justify-center md:justify-start items-center md:items-start py-5 px-5 rounded-md shadow-md transition-transform duration-200 transform hover:scale-105'>
+                    className=' bg-white flex flex-col scale-95 lg:transform-none md:flex-row w-full lg:w-2/6 h-fit justify-center md:justify-start items-center md:items-start py-5 px-5 rounded-md shadow-md transition-transform duration-200 transform hover:scale-105'>
                     <div className='flex flex-col md:flex-row w-full h-fit justify-center md:justify-start items-center md:items-start'>
                         <img src={Logo} alt='' className='h-24 mb-4 md:mb-0 md:mr-4' />
                         <div className='flex flex-col items-center md:items-start text-center md:text-left'>
@@ -34,7 +34,7 @@ const Service = () => {
 
                 <NavLink
                     to={'/certificate-of-residency-form'}
-                    className=' bg-white flex flex-col md:flex-row w-full lg:w-2/6 h-fit justify-center md:justify-start items-center md:items-start py-5 px-5 rounded-md shadow-md transition-transform duration-200 transform hover:scale-105'>
+                    className=' bg-white flex flex-col scale-95 lg:transform-none md:flex-row w-full lg:w-2/6 h-fit justify-center md:justify-start items-center md:items-start py-5 px-5 rounded-md shadow-md transition-transform duration-200 transform hover:scale-105'>
                     <div className='flex flex-col md:flex-row w-full h-fit justify-center md:justify-start items-center md:items-start'>
                         <img src={Logo} alt='' className='h-24 mb-4 md:mb-0 md:mr-4' />
                         <div className='flex flex-col items-center md:items-start text-center md:text-left'>
@@ -45,7 +45,7 @@ const Service = () => {
                 </NavLink>
                 <NavLink
                     to={'/certificate-of-indigency-form'}
-                    className=' bg-white flex flex-col md:flex-row w-full lg:w-2/6 h-fit justify-center md:justify-start items-center md:items-start py-5 px-5 rounded-md shadow-md transition-transform duration-200 transform hover:scale-105'>
+                    className=' bg-white flex flex-col scale-95 lg:transform-none md:flex-row w-full lg:w-2/6 h-fit justify-center md:justify-start items-center md:items-start py-5 px-5 rounded-md shadow-md transition-transform duration-200 transform hover:scale-105'>
                     <div className='flex flex-col md:flex-row w-full h-fit justify-center md:justify-start items-center md:items-start'>
                         <img src={Logo} alt='' className='h-24 mb-4 md:mb-0 md:mr-4' />
                         <div className='flex flex-col items-center md:items-start text-center md:text-left'>
@@ -56,7 +56,7 @@ const Service = () => {
                 </NavLink>
                 <NavLink
                     to={'/certificate-of-low-income-form'}
-                    className=' bg-white flex flex-col md:flex-row w-full lg:w-2/6 h-fit justify-center md:justify-start items-center md:items-start py-5 px-5 rounded-md shadow-md transition-transform duration-200 transform hover:scale-105'>
+                    className=' bg-white flex flex-col scale-95 lg:transform-none md:flex-row w-full lg:w-2/6 h-fit justify-center md:justify-start items-center md:items-start py-5 px-5 rounded-md shadow-md transition-transform duration-200 transform hover:scale-105'>
                     <div className='flex flex-col md:flex-row w-full h-fit justify-center md:justify-start items-center md:items-start'>
                         <img src={Logo} alt='' className='h-24 mb-4 md:mb-0 md:mr-4' />
                         <div className='flex flex-col items-center md:items-start text-center md:text-left'>
@@ -67,7 +67,7 @@ const Service = () => {
                 </NavLink>
                 <NavLink
                     to={'/business-clearance-form'}
-                    className=' bg-white flex flex-col md:flex-row w-full lg:w-2/6 h-fit justify-center md:justify-start items-center md:items-start py-5 px-5 rounded-md shadow-md transition-transform duration-200 transform hover:scale-105'>
+                    className=' bg-white flex flex-col scale-95 lg:transform-none md:flex-row w-full lg:w-2/6 h-fit justify-center md:justify-start items-center md:items-start py-5 px-5 rounded-md shadow-md transition-transform duration-200 transform hover:scale-105'>
                     <div className='flex flex-col md:flex-row w-full h-fit justify-center md:justify-start items-center md:items-start'>
                         <img src={Logo} alt='' className='h-24 mb-4 md:mb-0 md:mr-4' />
                         <div className='flex flex-col items-center md:items-start text-center md:text-left'>
@@ -78,7 +78,7 @@ const Service = () => {
                 </NavLink>
                 <NavLink
                     to={'/certificate-of-death-form'}
-                    className=' bg-white flex flex-col md:flex-row w-full lg:w-2/6 h-fit justify-center md:justify-start items-center md:items-start py-5 px-5 rounded-md shadow-md transition-transform duration-200 transform hover:scale-105'>
+                    className=' bg-white flex flex-col scale-95 lg:transform-none md:flex-row w-full lg:w-2/6 h-fit justify-center md:justify-start items-center md:items-start py-5 px-5 rounded-md shadow-md transition-transform duration-200 transform hover:scale-105'>
                     <div className='flex flex-col md:flex-row w-full h-fit justify-center md:justify-start items-center md:items-start'>
                         <img src={Logo} alt='' className='h-24 mb-4 md:mb-0 md:mr-4' />
                         <div className='flex flex-col items-center md:items-start text-center md:text-left'>
@@ -89,7 +89,7 @@ const Service = () => {
                 </NavLink>
                 <NavLink
                     to={'/certificate-of-no-property-form'}
-                    className=' bg-white flex flex-col md:flex-row w-full lg:w-2/6 h-fit justify-center md:justify-start items-center md:items-start py-5 px-5 rounded-md shadow-md transition-transform duration-200 transform hover:scale-105'>
+                    className=' bg-white flex flex-col scale-95 lg:transform-none md:flex-row w-full lg:w-2/6 h-fit justify-center md:justify-start items-center md:items-start py-5 px-5 rounded-md shadow-md transition-transform duration-200 transform hover:scale-105'>
                     <div className='flex flex-col md:flex-row w-full h-fit justify-center md:justify-start items-center md:items-start'>
                         <img src={Logo} alt='' className='h-24 mb-4 md:mb-0 md:mr-4' />
                         <div className='flex flex-col items-center md:items-start text-center md:text-left'>
@@ -100,7 +100,7 @@ const Service = () => {
                 </NavLink>
                 <NavLink
                     to={'/certificate-of-good-moral-form'}
-                    className=' bg-white flex flex-col md:flex-row w-full lg:w-2/6 h-fit justify-center md:justify-start items-center md:items-start py-5 px-5 rounded-md shadow-md transition-transform duration-200 transform hover:scale-105'>
+                    className=' bg-white flex flex-col scale-95 lg:transform-none md:flex-row w-full lg:w-2/6 h-fit justify-center md:justify-start items-center md:items-start py-5 px-5 rounded-md shadow-md transition-transform duration-200 transform hover:scale-105'>
                     <div className='flex flex-col md:flex-row w-full h-fit justify-center md:justify-start items-center md:items-start'>
                         <img src={Logo} alt='' className='h-24 mb-4 md:mb-0 md:mr-4' />
                         <div className='flex flex-col items-center md:items-start text-center md:text-left'>
@@ -111,7 +111,7 @@ const Service = () => {
                 </NavLink>
                 <NavLink
                     to={'/certificate-for-new-residents-form'}
-                    className=' bg-white flex flex-col md:flex-row w-full lg:w-2/6 h-fit justify-center md:justify-start items-center md:items-start py-5 px-5 rounded-md shadow-md transition-transform duration-200 transform hover:scale-105'>
+                    className=' bg-white flex flex-col scale-95 lg:transform-none md:flex-row w-full lg:w-2/6 h-fit justify-center md:justify-start items-center md:items-start py-5 px-5 rounded-md shadow-md transition-transform duration-200 transform hover:scale-105'>
                     <div className='flex flex-col md:flex-row w-full h-fit justify-center md:justify-start items-center md:items-start'>
                         <img src={Logo} alt='' className='h-24 mb-4 md:mb-0 md:mr-4' />
                         <div className='flex flex-col items-center md:items-start text-center md:text-left'>
@@ -122,7 +122,7 @@ const Service = () => {
                 </NavLink>
                 <NavLink
                     to={'/certificate-for-solo-parent-form'}
-                    className=' bg-white flex flex-col md:flex-row w-full lg:w-2/6 h-fit justify-center md:justify-start items-center md:items-start py-5 px-5 rounded-md shadow-md transition-transform duration-200 transform hover:scale-105'>
+                    className=' bg-white flex flex-col scale-95 lg:transform-none md:flex-row w-full lg:w-2/6 h-fit justify-center md:justify-start items-center md:items-start py-5 px-5 rounded-md shadow-md transition-transform duration-200 transform hover:scale-105'>
                     <div className='flex flex-col md:flex-row w-full h-fit justify-center md:justify-start items-center md:items-start'>
                         <img src={Logo} alt='' className='h-24 mb-4 md:mb-0 md:mr-4' />
                         <div className='flex flex-col items-center md:items-start text-center md:text-left'>
