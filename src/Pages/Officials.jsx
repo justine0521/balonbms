@@ -2,17 +2,63 @@ import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import axios from 'axios';
 
+// Custom Previous Arrow Component
+const CustomPrevArrow = (props) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={`${className} text-gray-400`} // Tailwind class for light gray color
+      style={{ ...style, display: 'block' }}
+      onClick={onClick}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="currentColor"
+        className="w-6 h-6"
+        viewBox="0 0 24 24"
+      >
+        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+      </svg>
+    </div>
+  );
+};
+
+// Custom Next Arrow Component
+const CustomNextArrow = (props) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={`${className} text-gray-400`} // Tailwind class for light gray color
+      style={{ ...style, display: 'block' }}
+      onClick={onClick}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="currentColor"
+        className="w-6 h-6"
+        viewBox="0 0 24 24"
+      >
+        <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L12.17 12z" />
+      </svg>
+    </div>
+  );
+};
+
 const settings = {
-  arrows: false,
+  arrows: true,
   dots: true,
   infinite: true,
   speed: 800,
+  swipe: true,
+  swipeToSlide: true,
   slidesToShow: 3,
   slidesToScroll: 1,
-  autoplay: false,
-  autoplaySpeed: 4000,
+  autoplay: true,
+  autoplaySpeed: 3000,
   cssEase: "ease-in-out",
   pauseOnHover: true,
+  nextArrow: <CustomNextArrow />,
+  prevArrow: <CustomPrevArrow />,
   responsive: [
     {
       breakpoint: 1024,
