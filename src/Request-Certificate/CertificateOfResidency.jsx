@@ -153,7 +153,7 @@ function CertificateOfResidency() {
         referenceNo,
         selectedPurpose,
         selectType,
-        trackingCode: newTrackingCode,
+        trackingCode,
       };
 
       try {
