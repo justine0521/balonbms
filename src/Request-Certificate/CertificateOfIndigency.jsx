@@ -38,7 +38,7 @@ function CertificateOfIndigency() {
   useEffect(() => {
     if (showCopyTrackingModal || showSubmitModal) {
       progressBarRef.current.style.animation = `shrink ${timer}s linear forwards`;
-  
+
       setTimeout(() => {
         setShowCopyTrackingModal(false);
         setShowSubmitModal(false);
@@ -142,8 +142,6 @@ function CertificateOfIndigency() {
     } else if (selectedPurpose === '') {
       alert('Please enter on what purpose you need the certificate');
     } else {
-      const newTrackingCode = generateTrackingCode();
-      setTrackingCode(newTrackingCode);
       // Include pickupDate in formData
       const formData = {
         certificateType: 'Certificate of Indigency',
@@ -156,20 +154,16 @@ function CertificateOfIndigency() {
         referenceNo,
         selectedPurpose,
         selectType,
-        trackingCode: newTrackingCode,
+        trackingCode,
       };
 
       try {
         const response = await axios.post('http://localhost:5000/submit-request', formData);
         // alert(response.data);
-
-        console.log('Form submitted');
-        resetForm();  // Reset form after successful submission
       } catch (error) {
         console.error('Error submitting the form:', error);
         alert('There was an error submitting the form.');
       }
-
       console.log('Form submitted');
       resetForm();
       setShowSubmitModal(true);

@@ -10,7 +10,7 @@ function BarangayClearance() {
   const [fullName, setFullName] = useState('');
   const [contactNumber, setContactNumber] = useState('');
   const [pickUp, setPickUp] = useState(false);
-  const [pickUpDate, setPickupDate] = useState(''); 
+  const [pickUpDate, setPickupDate] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('');
   const [referenceNo, setReferenceNo] = useState('');
   const [selectedPurpose, setSelectedPurpose] = useState('');
@@ -38,7 +38,7 @@ function BarangayClearance() {
   useEffect(() => {
     if (showCopyTrackingModal || showSubmitModal) {
       progressBarRef.current.style.animation = `shrink ${timer}s linear forwards`;
-  
+
       setTimeout(() => {
         setShowCopyTrackingModal(false);
         setShowSubmitModal(false);
@@ -142,8 +142,6 @@ function BarangayClearance() {
     } else if (selectedPurpose === '') {
       alert('Please enter on what purpose you need the certificate');
     } else {
-      const newTrackingCode = generateTrackingCode();
-      setTrackingCode(newTrackingCode);
 
       // Include pickupDate in formData
       const formData = {
@@ -157,16 +155,12 @@ function BarangayClearance() {
         referenceNo,
         selectedPurpose,
         selectType,
-        trackingCode: newTrackingCode,
+        trackingCode,
       };
 
       try {
         const response = await axios.post('http://localhost:5000/submit-request', formData);
         // alert(response.data);
-
-        console.log('Form submitted');
-        console.log('Form data:', formData);
-        resetForm();  // Reset form after successful submission
       } catch (error) {
         console.error('Error submitting the form:', error);
         alert('There was an error submitting the form.');
