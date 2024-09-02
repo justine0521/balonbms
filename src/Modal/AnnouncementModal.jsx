@@ -32,7 +32,8 @@ function AnnouncementModal({ isOpen, onClose, announcement }) {
                 <div className="w-full p-6">
                     <h1 className="text-2xl text-green-600 font-bold">{announcement.title}</h1>
                     <p className='text-xs text-gray-400 mb-4'>Posted on: {format(new Date(announcement.createdAt), 'Pp')}</p>
-
+                    <hr />
+                    <br />
                     {/* Render formatted text safely */}
                     <div
                         className="text-sm text-gray-600 leading-relaxed mb-4"

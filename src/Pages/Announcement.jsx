@@ -81,7 +81,8 @@ function Announcement() {
               <div className='flex flex-col justify-between p-4'>
                 <div>
                   <h2 className='text-md font-semibold text-green-500'>{announcement.title}</h2>
-                  <p className='text-xs text-gray-400'>Posted on: {format(new Date(announcement.createdAt), 'Pp')}</p>
+                  <p className='text-xs text-gray-400 mb-2'>Posted on: {format(new Date(announcement.createdAt), 'Pp')}</p>
+                  <hr />
                 </div>
                 {/* Render formatted text safely */}
                 <div
