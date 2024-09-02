@@ -1,61 +1,54 @@
 import React, { useState, useRef, useEffect } from 'react';
 import AnnouncementModal from '../Modal/AnnouncementModal';
+import axios from 'axios';
+import { format } from 'date-fns';
 
 import DefaultPicture from '../Images/Logo.png';
-import Hotspring from '../Images/Hotspring.jpg';
 import Picture from '../Images/About-Picture/bg-Picture.jpg';
 
 function Announcement() {
-  const [isAnnouncement, SetIsAnnouncement] = useState(true);
+  const [isAnnouncement, setIsAnnouncement] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isOverflowing, setIsOverflowing] = useState(false);
-  const textRef = useRef(null);
+  const [overflowingAnnouncements, setOverflowingAnnouncements] = useState({});
+  const [announcements, setAnnouncements] = useState([]);
+  const [selectedAnnouncement, setSelectedAnnouncement] = useState(null);
+
+  // Refs for dynamically checking overflow
+  const textRefs = useRef([]);
+
+  useEffect(() => {
+    // Fetch announcements from backend
+    const fetchAnnouncements = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/announcements');
+        setAnnouncements(response.data);
+        setIsAnnouncement(response.data.length > 0);
+      } catch (error) {
+        console.error('Error fetching announcements:', error);
+        setIsAnnouncement(false);
+      }
+    };
+
+    fetchAnnouncements();
+  }, []);
 
   useEffect(() => {
     const checkOverflow = () => {
-      if (textRef.current) {
-        const { scrollHeight, clientHeight } = textRef.current;
-        setIsOverflowing(scrollHeight > clientHeight);
-      }
+      const newOverflowingAnnouncements = {};
+      textRefs.current.forEach((ref, index) => {
+        if (ref) {
+          const { scrollHeight, clientHeight } = ref;
+          newOverflowingAnnouncements[index] = scrollHeight > clientHeight;
+        }
+      });
+      setOverflowingAnnouncements(newOverflowingAnnouncements);
     };
 
     checkOverflow();
     window.addEventListener('resize', checkOverflow);
 
     return () => window.removeEventListener('resize', checkOverflow);
-  }, []);
-
-  // Sample announcement data
-  const announcements = [
-    {
-      title: 'Bigayan ng ayuda',
-      content:
-        'Bukas po ay bigayan ng ayuda simula 9AM to 12PM. Maaring dalhin po ang mga sumusunod na requirements 1 valid ID, limang manok, limang baka at limang kambing at sabay sabay natin lutuin. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, maxime! Nobis modi accusamus veniam beatae ex consectetur voluptatibus laboriosam libero assumenda id, quo sed, vitae, laborum optio hic cum voluptatem! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Pariatur tempore autem sint. Assumenda autem dolore totam sequi voluptas voluptates consectetur laudantium unde laborum, fuga dolores temporibus beatae quo ipsum quia?',
-      date: 'September 2, 2024',
-      image: Hotspring,
-    },
-    {
-      title: 'Road Repair Advisory',
-      content:
-        'Bukas po ay bigayan ng ayuda simula 9AM to 12PM. Maaring dalhin po ang mga sumusunod na requirements 1 valid ID, limang manok, limang baka at limang kambing at sabay sabay natin lutuin. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, maxime! Nobis modi accusamus veniam beatae ex consectetur voluptatibus laboriosam libero assumenda id, quo sed, vitae, laborum optio hic cum voluptatem! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Pariatur tempore autem sint. Assumenda autem dolore totam sequi voluptas voluptates consectetur laudantium unde laborum, fuga dolores temporibus beatae quo ipsum quia?',
-      date: 'September 1, 2024',
-      image: Hotspring,
-    },
-    {
-      title: 'Road Repair Advisory',
-      content:
-        'Bukas po ay bigayan ng ayuda simula 9AM to 12PM. Maaring dalhin po ang mga sumusunod na requirements 1 valid ID, limang manok, limang baka at limang kambing at sabay sabay natin lutuin. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, maxime! Nobis modi accusamus veniam beatae ex consectetur voluptatibus laboriosam libero assumenda id, quo sed, vitae, laborum optio hic cum voluptatem! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Pariatur tempore autem sint. Assumenda autem dolore totam sequi voluptas voluptates consectetur laudantium unde laborum, fuga dolores temporibus beatae quo ipsum quia?',
-      date: 'September 1, 2024',
-      image: Hotspring,
-    },
-    {
-      title: 'Road Repair Advisory',
-      content:
-        'Bukas po ay bigayan ng ayuda simula 9AM to 12PM. Maaring dalhin po ang mga sumusunod na requirements 1 valid ID, limang manok, limang baka at limang kambing at sabay sabay natin lutuin. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, maxime! Nobis modi accusamus veniam beatae ex consectetur voluptatibus laboriosam libero assumenda id, quo sed, vitae, laborum optio hic cum voluptatem! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Pariatur tempore autem sint. Assumenda autem dolore totam sequi voluptas voluptates consectetur laudantium unde laborum, fuga dolores temporibus beatae quo ipsum quia?',
-      date: 'September 1, 2024',
-      image: Hotspring,
-    },
-  ];
+  }, [announcements]);
 
   return (
     <section>
@@ -81,21 +74,27 @@ function Announcement() {
               className='flex w-full md:w-[500px] h-48 bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105'
             >
               <img
-                src={announcement.image}
+                src={announcement.imageUrl || DefaultPicture}
                 alt={announcement.title}
                 className='w-48 h-full object-cover'
               />
               <div className='flex flex-col justify-between p-4'>
                 <div>
                   <h2 className='text-md font-semibold text-green-500'>{announcement.title}</h2>
-                  <p className='text-xs text-gray-400'>Posted on: {announcement.date}</p>
+                  <p className='text-xs text-gray-400'>Posted on: {format(new Date(announcement.createdAt), 'Pp')}</p>
                 </div>
-                <p ref={textRef} className='text-sm text-gray-500 overflow-hidden overflow-ellipsis line-clamp-3'>
-                  {announcement.content}
-                </p>
-                {isOverflowing && (
+                {/* Render formatted text safely */}
+                <div
+                  ref={el => (textRefs.current[index] = el)}
+                  className='text-sm text-gray-500 overflow-hidden overflow-ellipsis line-clamp-3'
+                  dangerouslySetInnerHTML={{ __html: announcement.description }}
+                />
+                {overflowingAnnouncements[index] && (
                   <button
-                    onClick={() => setIsModalOpen(true)}
+                    onClick={() => {
+                      setSelectedAnnouncement(announcement);
+                      setIsModalOpen(true);
+                    }}
                     className='text-sm text-green-500 hover:underline mt-2 self-start'
                   >
                     Read More
@@ -107,7 +106,11 @@ function Announcement() {
         </div>
       )}
 
-      <AnnouncementModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <AnnouncementModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        announcement={selectedAnnouncement}
+      />
     </section>
   );
 }
