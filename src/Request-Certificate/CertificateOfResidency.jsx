@@ -5,6 +5,8 @@ import '../App.css';
 import axios from 'axios';
 import { MdOutlineContentCopy } from "react-icons/md";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 function CertificateOfResidency() {
   const [fullName, setFullName] = useState('');
   const [contactNumber, setContactNumber] = useState('');
@@ -157,7 +159,7 @@ function CertificateOfResidency() {
       };
 
       try {
-        const response = await axios.post('http://localhost:5000/submit-request', formData);
+        const response = await axios.post(`${API_BASE_URL}/submit-request`, formData);
         // alert(response.data);
       } catch (error) {
         console.error('Error submitting the form:', error);

@@ -4,6 +4,8 @@ import { FaRegCalendarAlt, FaRegClock, FaRegListAlt, FaCertificate } from "react
 import axios from 'axios';
 import { format } from 'date-fns';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 function TrackRequest() {
   // State for tracking input and request details
   const [trackingCode, setTrackingCode] = useState('');
@@ -19,7 +21,7 @@ function TrackRequest() {
     }
 
     try {
-      const response = await axios.get(`http://localhost:5000/api/track-request/${trackingCode}`);
+      const response = await axios.get(`${API_BASE_URL}/api/track-request/${trackingCode}`);
       setRequestDetails(response.data);
       setError('');
     } catch (err) {

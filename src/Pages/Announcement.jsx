@@ -6,6 +6,8 @@ import { format } from 'date-fns';
 import DefaultPicture from '../Images/Logo.png';
 import Picture from '../Images/About-Picture/bg-Picture.jpg';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 function Announcement() {
   const [isAnnouncement, setIsAnnouncement] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,7 +22,7 @@ function Announcement() {
     // Fetch announcements from backend
     const fetchAnnouncements = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/announcements');
+        const response = await axios.get(`${API_BASE_URL}/api/announcements`);
         setAnnouncements(response.data);
         setIsAnnouncement(response.data.length > 0);
       } catch (error) {

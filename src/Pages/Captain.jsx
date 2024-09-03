@@ -3,13 +3,15 @@ import axios from 'axios';
 import kap_image2 from '../Images/kap_image2.png'; // Still using local image for secondary display
 import map from '../Images/PHMap.png';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const Captain = () => {
   const [captain, setCaptain] = useState(null);
 
   useEffect(() => {
     const fetchCaptain = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/officials");
+        const response = await axios.get(`${API_BASE_URL}/api/officials`);
         // Filter the official who is the Barangay Captain
         const barangayCaptain = response.data.find(
           official => official.position.toLowerCase() === 'barangay captain' || official.position.toLowerCase() === 'punong barangay'

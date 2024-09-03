@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import axios from 'axios';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 // Custom Previous Arrow Component
 const CustomPrevArrow = (props) => {
   const { className, style, onClick } = props;
@@ -81,7 +83,7 @@ const Officials = () => {
   useEffect(() => {
     const fetchOfficials = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/officials");
+        const response = await axios.get(`${API_BASE_URL}/api/officials`);
         console.log(response.data); // Inspect the response
         setOfficials(response.data);
       } catch (err) {
