@@ -22,7 +22,7 @@ function AnnouncementModal({ isOpen, onClose, announcement }) {
                     {/* Close Button */}
                     <button
                         onClick={onClose}
-                        className="absolute top-4 right-4 text-red-500 bg-white rounded-full p-2 shadow-md transition-all duration-300 hover:bg-red-500 hover:text-white focus:outline-none"
+                        className="fixed top-4 right-4 text-red-500 bg-white rounded-full p-2 shadow-md transition-all duration-300 hover:bg-red-500 hover:text-white focus:outline-none"
                     >
                         <IoMdClose size={20} />
                     </button>
