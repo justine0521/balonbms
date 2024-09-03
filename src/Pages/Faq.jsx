@@ -8,7 +8,6 @@ const Faq = () => {
     const toggleAccordion = (index) => {
         setActiveIndex(activeIndex === index ? null : index);
     };
-
     return (
         <div className='max-w-5xl mx-auto p-6 mt-5'>
             <p className='mt-16 text-l text-green-500 text-center'>Barangay Balon Common FAQS</p>
