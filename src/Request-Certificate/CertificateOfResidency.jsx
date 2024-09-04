@@ -9,6 +9,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 function CertificateOfResidency() {
   const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
   const [contactNumber, setContactNumber] = useState('');
   const [pickUp, setPickUp] = useState(false);
   const [pickUpDate, setPickupDate] = useState('');  // State for Pickup Date
@@ -72,6 +73,11 @@ function CertificateOfResidency() {
     setFullName(value);
   };
 
+  const handleEmail = (event) => {
+    const value = event.target.value;
+    setEmail(value);
+  };
+
   const handleContactNumber = (event) => {
     const value = event.target.value;
     setContactNumber(value);
@@ -106,6 +112,7 @@ function CertificateOfResidency() {
 
   const resetForm = () => {
     setFullName('');
+    setEmail('');
     setContactNumber('');
     setPickUp(false);
     setPickupDate('');  // Reset pickup date
@@ -148,6 +155,7 @@ function CertificateOfResidency() {
         certificateType: 'Certificate of Residency',
         certId: '2',
         fullName,
+        email,
         contactNumber,
         pickUp,
         pickUpDate,  // Add pickup date to form data
@@ -208,6 +216,10 @@ function CertificateOfResidency() {
 
             <div className="w-full flex flex-col px-3">
               <input type="text" placeholder="Enter Full Name" className="p-2 border border-black outline-green-500 w-full" value={fullName} onChange={handleFullName} />
+            </div>
+
+            <div className="w-full flex flex-col px-3">
+              <input type="email" placeholder="Enter Email Address" className="p-2 border border-black outline-green-500 w-full" value={email} onChange={handleEmail} />
             </div>
 
             <div className="w-full flex flex-col px-3">
