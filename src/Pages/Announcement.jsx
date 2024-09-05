@@ -15,11 +15,9 @@ function Announcement() {
   const [announcements, setAnnouncements] = useState([]);
   const [selectedAnnouncement, setSelectedAnnouncement] = useState(null);
 
-  // Refs for dynamically checking overflow
   const textRefs = useRef([]);
 
   useEffect(() => {
-    // Fetch announcements from backend
     const fetchAnnouncements = async () => {
       try {
         const response = await axios.get(`${API_BASE_URL}/api/announcements`);
@@ -73,23 +71,22 @@ function Announcement() {
           {announcements.map((announcement, index) => (
             <div
               key={index}
-              className='flex w-full md:w-[500px] h-48 bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105'
+              className='flex flex-col sm:flex-row w-full md:w-[500px] bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105'
             >
               <img
                 src={announcement.imageUrl || DefaultPicture}
                 alt={announcement.title}
-                className='w-48 h-full object-cover'
+                className='w-full sm:w-48 h-48 sm:h-auto object-cover'
               />
-              <div className='flex flex-col justify-between p-4'>
+              <div className='flex flex-col justify-between p-4 flex-1'>
                 <div>
                   <h2 className='text-md font-semibold text-green-500'>{announcement.title}</h2>
                   <p className='text-xs text-gray-400 mb-2'>Posted on: {format(new Date(announcement.createdAt), 'Pp')}</p>
                   <hr />
                 </div>
-                {/* Render formatted text safely */}
                 <div
                   ref={el => (textRefs.current[index] = el)}
-                  className='text-sm text-gray-500 overflow-hidden overflow-ellipsis line-clamp-3'
+                  className='text-sm text-gray-500 overflow-hidden line-clamp-3'
                   dangerouslySetInnerHTML={{ __html: announcement.description }}
                 />
                 {overflowingAnnouncements[index] && (
