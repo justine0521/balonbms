@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import Logo from '../Images/logowhitebg.png'
 
@@ -7,6 +7,31 @@ import { FaLocationDot } from "react-icons/fa6";
 import { SiGmail } from "react-icons/si";
 
 function Footer() {
+  const [barangayName, setBarangayName] = useState('');
+  const [contactNumber, setContactNumber] = useState('');
+  const [facebook, setFacebook] = useState('');
+  const [email, setEmail] = useState('');
+
+  useEffect(() => {
+    const fetchBarangayInfo = async () => {
+      try{
+        const response = await fetch('http://localhost:5000/api/barangay-info')
+        if(response.ok) {
+          const data = await response.json();
+          setBarangayName(data.name)
+          setContactNumber(data.contactNumber)
+          setFacebook(data.facebook)
+          setEmail(data.email)
+        } else {
+          console.log('Failed to fetch barangay info')
+        }
+      } catch (error) {
+        console.error('Error fetching barangay info:', error);
+      }
+    }
+    fetchBarangayInfo();
+  }, [])
+
   return (
     <footer className="bg-green-500 text-white py-10">
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-5">
@@ -14,7 +39,7 @@ function Footer() {
         <div className="flex flex-col space-y-4">
           <div className='flex items-center gap-1'>
             <img src={Logo} alt="" className='h-20' />
-            <h2 className="text-xl text-white font-semibold">Barangay <br /> Balon Anito</h2>
+            <h2 className="text-xl text-white font-semibold">Barangay <br /> {barangayName}</h2>
           </div>
 
           <p className='font-dancing text-xl'>
@@ -52,9 +77,9 @@ function Footer() {
         <div>
           <h3 className="text-xl text-white font-semibold mb-4 mt-4 lg:mt-0">Contact Us</h3>
           <ul className="space-y-2">
-            <li className='flex items-center gap-2'><FaPhoneAlt className='text-white text-xl' />(047) 240-5500</li>
-            <li><a href="https://www.facebook.com/profile.php?id=100092042062918" className='flex items-center gap-2 hover:underline'><FaFacebookF className='text-white text-xl' />Better Balon Anito</a></li>
-            <li><a href="mailto:betterbalonanito@gmail.com" className='flex items-center gap-2 hover:underline'><SiGmail className='text-white text-xl' />betterbalonanito@gmail.com</a></li>
+            <li className='flex items-center gap-2'><FaPhoneAlt className='text-white text-xl' />{contactNumber}</li>
+            <li><a href="https://www.facebook.com/profile.php?id=100092042062918" className='flex items-center gap-2 hover:underline'><FaFacebookF className='text-white text-xl' />{facebook}</a></li>
+            <li><a href="mailto:betterbalonanito@gmail.com" className='flex items-center gap-2 hover:underline'><SiGmail className='text-white text-xl' />{email}</a></li>
           </ul>
         </div>
       </div>

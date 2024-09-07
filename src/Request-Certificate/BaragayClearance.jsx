@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Logo from '../Images/Logo.png';
-import BrgyClearance from '../Images/Certificate-Picture/Barangay Clearance.jpg'
+import BrgyClearance from '../Images/Certificate-Picture/Barangay Clearance-1.png'
 import '../App.css';
 import axios from 'axios';
 

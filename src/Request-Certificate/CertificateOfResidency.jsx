@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Logo from '../Images/Logo.png';
-import BarangayClearance from '../Images/Certificate-Picture/Barangay Clearance.jpg'
+import BarangayClearance from '../Images/Certificate-Picture/Certificate of Recidency-1.png'
 import '../App.css';
 import axios from 'axios';
 import { MdOutlineContentCopy } from "react-icons/md";
