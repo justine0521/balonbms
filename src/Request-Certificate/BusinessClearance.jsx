@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import Logo from '../Images/Logo.png';
 import BarangayClearance from '../Images/Certificate-Picture/Barangay Clearance.jpg';
+import { FaSpinner } from 'react-icons/fa'; // Import the Font Awesome spinner icon
 import '../App.css';
 
 import { MdOutlineContentCopy } from "react-icons/md";
@@ -23,6 +24,7 @@ function BusinessClearance() {
   const [showSubmitModal, setShowSubmitModal] = useState(false);
   const [showCopyTrackingModal, setShowCopyTrackingModal] = useState(false);
   const [timer, setTimer] = useState(3);
+  const [isSubmitting, setIsSubmitting] = useState(false); // New state for loading
   const progressBarRef = useRef(null);
 
   const handleImageClick = () => {
@@ -129,6 +131,7 @@ function BusinessClearance() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsSubmitting(true); // End loading
 
     if (fullName === '') {
       alert('Please enter your full name');
@@ -176,6 +179,7 @@ function BusinessClearance() {
         alert('There was an error submitting the form.');
       }
       console.log('Form submitted');
+      setIsSubmitting(false); // End loading
       resetForm();
       setShowSubmitModal(true);
     }
@@ -274,6 +278,12 @@ function BusinessClearance() {
             <div className="px-3 w-full">
               <button className="bg-green-500 text-white w-full p-1 font-semibold hover:bg-green-400">Submit</button>
             </div>
+            {/* Loading animation */}
+            {isSubmitting && (
+              <div className="flex justify-center items-center mt-3">
+                <FaSpinner className="animate-spin text-blue-500" /> {/* Font Awesome spinner */}
+              </div>
+            )}
           </div>
         </form>
       </div>
