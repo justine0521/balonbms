@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Logo from '../Images/Logo.png';
-import BrgyClearance from '../Images/Certificate-Picture/Barangay Clearance.jpg';
 import { FaSpinner } from 'react-icons/fa'; // Import the Font Awesome spinner icon
+import BrgyClearance from '../Images/Certificate-Picture/Barangay Clearance-1.png'
 import '../App.css';
 import axios from 'axios';
 

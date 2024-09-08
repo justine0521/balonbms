@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import Logo from '../Images/Logo.png';
-import BarangayClearance from '../Images/Certificate-Picture/Barangay Clearance.jpg';
 import { FaSpinner } from 'react-icons/fa'; // Import the Font Awesome spinner icon
+import BarangayClearance from '../Images/Certificate-Picture/Business Clearance-1.png';
 import '../App.css';
 
 import { MdOutlineContentCopy } from "react-icons/md";
