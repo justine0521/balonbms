@@ -6,6 +6,8 @@ import Picture2 from '../Images/picture2.png';
 import Picture3 from '../Images/picture3.png';
 import '../App.css';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 function Hero() {
   const [barangayName, setBarangayName] = useState('');
   const [isLoading, setIsLoading] = useState(true);
@@ -13,7 +15,7 @@ function Hero() {
   useEffect(() => {
     const fetchBarangayInfo = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/barangay-info');
+        const response = await fetch(`${API_BASE_URL}/api/barangay-info`);
         if (response.ok) {
           const data = await response.json();
           setBarangayName(data.name || '');

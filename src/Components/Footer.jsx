@@ -6,6 +6,8 @@ import { FaFacebookF, FaPhoneAlt } from 'react-icons/fa';
 import { FaLocationDot } from "react-icons/fa6";
 import { SiGmail } from "react-icons/si";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 function Footer() {
   const [barangayName, setBarangayName] = useState('');
   const [contactNumber, setContactNumber] = useState('');
@@ -14,9 +16,9 @@ function Footer() {
 
   useEffect(() => {
     const fetchBarangayInfo = async () => {
-      try{
-        const response = await fetch('http://localhost:5000/api/barangay-info')
-        if(response.ok) {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/barangay-info`)
+        if (response.ok) {
           const data = await response.json();
           setBarangayName(data.name)
           setContactNumber(data.contactNumber)

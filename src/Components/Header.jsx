@@ -3,15 +3,19 @@ import Navbar from "./Navbar";
 import { MdMenu, MdClose } from 'react-icons/md';
 import Balon from '../Images/Balon-Logo.jpg';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 function Header() {
   const [menuOpened, setMenuOpened] = useState(false);
-  const [barangayName, setBarangayName] = useState(''); 
+  const [barangayName, setBarangayName] = useState('');
   const toggleMenu = () => setMenuOpened(!menuOpened);
+
+
 
   useEffect(() => {
     const fetchBarangayInfo = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/barangay-info');
+        const response = await fetch(`${API_BASE_URL}/api/barangay-info`);
         if (response.ok) {
           const data = await response.json();
           setBarangayName(data.name || 'Balon Anito');
