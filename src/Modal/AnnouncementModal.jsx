@@ -16,7 +16,7 @@ function AnnouncementModal({ isOpen, onClose, announcement }) {
                     <img
                         src={announcement.imageUrl || Hotspring}
                         alt={announcement.title}
-                        className="w-full h-72 object-cover rounded-t-2xl"
+                        className="w-full h-96 object-fit rounded-t-2xl"
                     />
 
                     {/* Close Button */}

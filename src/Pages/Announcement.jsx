@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import AnnouncementModal from '../Modal/AnnouncementModal';
 import axios from 'axios';
 import { format } from 'date-fns';
-
 import DefaultPicture from '../Images/Logo.png';
 import Picture from '../Images/About-Picture/bg-Picture.jpg';
 
@@ -14,15 +13,21 @@ function Announcement() {
   const [overflowingAnnouncements, setOverflowingAnnouncements] = useState({});
   const [announcements, setAnnouncements] = useState([]);
   const [selectedAnnouncement, setSelectedAnnouncement] = useState(null);
-
   const textRefs = useRef([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const announcementsPerPage = 10;
 
+  // Fetch announcements when component mounts
   useEffect(() => {
     const fetchAnnouncements = async () => {
       try {
         const response = await axios.get(`${API_BASE_URL}/api/announcements`);
-        setAnnouncements(response.data);
-        setIsAnnouncement(response.data.length > 0);
+
+        const sortedAnnouncements = response.data.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
+        setAnnouncements(sortedAnnouncements);
+        setIsAnnouncement(sortedAnnouncements.length > 0);
       } catch (error) {
         console.error('Error fetching announcements:', error);
         setIsAnnouncement(false);
@@ -50,11 +55,23 @@ function Announcement() {
     return () => window.removeEventListener('resize', checkOverflow);
   }, [announcements]);
 
+  const totalPages = Math.ceil(announcements.length / announcementsPerPage);
+  const indexOfLastAnnouncement = currentPage * announcementsPerPage;
+  const indexOfFirstAnnouncement = indexOfLastAnnouncement - announcementsPerPage;
+  const currentAnnouncements = announcements.slice(indexOfFirstAnnouncement, indexOfLastAnnouncement);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+
   return (
     <section>
       <div className='relative h-96 w-full bg-cover bg-center' style={{ backgroundImage: `url(${Picture})` }}>
         <div className='absolute inset-0 bg-black bg-opacity-50'></div>
-
         <div className="relative flex justify-center items-center h-full z-10 p-4 text-white">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mt-20">ANNOUNCEMENT</h1>
         </div>
@@ -68,7 +85,7 @@ function Announcement() {
 
       {isAnnouncement && (
         <div className='flex flex-wrap justify-center gap-6 p-6'>
-          {announcements.map((announcement, index) => (
+          {currentAnnouncements.map((announcement, index) => (
             <div
               key={index}
               className='flex flex-col sm:flex-row w-full md:w-[500px] bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105'
@@ -103,6 +120,20 @@ function Announcement() {
               </div>
             </div>
           ))}
+        </div>
+      )}
+
+      {totalPages > 1 && (
+        <div className="flex justify-center my-4 w-full">
+          <button onClick={handlePreviousPage} disabled={currentPage === 1} className={`px-4 py-2 mx-2 rounded ${currentPage === 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-green-500 text-white hover:bg-green-600'}`}>
+            Previous
+          </button>
+
+          <span className="px-4 py-2 mx-2">Page {currentPage} of {totalPages}</span>
+
+          <button onClick={handleNextPage} disabled={currentPage === totalPages} className={`px-4 py-2 mx-2 rounded ${currentPage === totalPages ? 'bg-gray-300 cursor-not-allowed' : 'bg-green-500 text-white hover:bg-green-600'}`} >
+            Next
+          </button>
         </div>
       )}
 
