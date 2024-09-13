@@ -4,6 +4,7 @@ import axios from 'axios';
 import { format } from 'date-fns';
 import DefaultPicture from '../Images/Logo.png';
 import Picture from '../Images/About-Picture/bg-Picture.jpg';
+import '../App.css'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -17,6 +18,9 @@ function Announcement() {
   const [currentPage, setCurrentPage] = useState(1);
   const announcementsPerPage = 10;
 
+  const [loading, setLoading] = useState(null);
+  const [error, setError] = useState(null);
+
   // Fetch announcements when component mounts
   useEffect(() => {
     const fetchAnnouncements = async () => {
@@ -28,8 +32,10 @@ function Announcement() {
         );
         setAnnouncements(sortedAnnouncements);
         setIsAnnouncement(sortedAnnouncements.length > 0);
+        setLoading(sortedAnnouncements)
       } catch (error) {
         console.error('Error fetching announcements:', error);
+        setError("Failed to fetch the Barangay Announcement. Please try again later.")
         setIsAnnouncement(false);
       }
     };
@@ -67,6 +73,30 @@ function Announcement() {
   const handlePreviousPage = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
+
+  if (error) {
+    return (
+      <div className="flex flex-col justify-center items-center h-screen">
+        <p className="font-semibold text-red-500">{error}</p>
+      </div>
+    );
+  }
+
+  if (!loading) {
+    return (
+      <div className="flex flex-col justify-center items-center h-screen">
+        <div className="loading">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <p className='font-semibold text-green-500'>Fetching Data...</p>
+      </div>
+    );
+  }
 
   return (
     <section>
