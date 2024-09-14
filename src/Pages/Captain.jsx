@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import kap_image2 from '../Images/kap_image2.png'; // Still using local image for secondary display
 import map from '../Images/PHMap.png';
+import '../App.css'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Captain = () => {
   const [captain, setCaptain] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchCaptain = async () => {
@@ -19,15 +21,35 @@ const Captain = () => {
         setCaptain(barangayCaptain);
       } catch (error) {
         console.error("Error fetching the barangay captain data:", error);
+        setError("Failed to fetch the Barangay Captain's data. Please try again later."); 
       }
     };
 
     fetchCaptain();
   }, []);
 
-  // Display a loading message while the data is being fetched
+  if (error) {
+    return (
+      <div className="flex flex-col justify-center items-center h-screen">
+        <p className="font-semibold text-red-500">{error}</p>
+      </div>
+    );
+  }
+
   if (!captain) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex flex-col justify-center items-center h-screen">
+        <div className="loading">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <p className='font-semibold text-green-500'>Fetching Data...</p>
+      </div>
+    );
   }
 
   return (
