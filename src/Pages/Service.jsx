@@ -1,5 +1,5 @@
 import React from 'react'
-import Logo from '../Images/Logo.png'
+import Logo from '../Images/Logo2.png'
 import { NavLink } from 'react-router-dom'
 
 const Service = () => {
@@ -25,7 +25,7 @@ const Service = () => {
                     className=' bg-white flex flex-col scale-95 lg:transform-none md:flex-row w-full lg:w-2/6 h-fit justify-center md:justify-start items-center md:items-start py-5 px-5 rounded-md shadow-md transition-transform duration-200 transform hover:scale-105'>
                     <div className='flex flex-col md:flex-row w-full h-fit justify-center md:justify-start items-center md:items-start'>
                         <img src={Logo} alt='' className='h-24 mb-4 md:mb-0 md:mr-4' />
-                        <div className='flex flex-col items-center md:items-start text-center md:text-left'>
+                        <div className='flex flex-col w-full items-center md:items-start text-center md:text-left'>
                             <p className='font-semibold text-green-500'>Barangay Clearance</p>
                             <p className='text-gray-600'>View the requirements needed for Barangay Clearance and acquire online now.</p>
                         </div>
@@ -104,7 +104,7 @@ const Service = () => {
                     <div className='flex flex-col md:flex-row w-full h-fit justify-center md:justify-start items-center md:items-start'>
                         <img src={Logo} alt='' className='h-24 mb-4 md:mb-0 md:mr-4' />
                         <div className='flex flex-col items-center md:items-start text-center md:text-left'>
-                            <p className='font-semibold text-green-500'>Certificate of Good Moral Character</p>
+                            <p className='font-semibold text-green-500'>Certificate of Good Moral</p>
                             <p className='text-gray-600'>View the requirements needed for Certificate of Good Moral Character and acquire online now.</p>
                         </div>
                     </div>
