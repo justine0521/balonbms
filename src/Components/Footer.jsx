@@ -88,7 +88,7 @@ function Footer() {
 
       {/* Footer Bottom */}
       <div className="border-t border-white mt-8 pt-8 text-center">
-        <p><strong>&copy;</strong>2024 <strong className="text-white">Balon Anito.</strong> All rights reserved.</p>
+        <p><strong>&copy;</strong> {new Date().getFullYear()} <strong className="text-white">Balon Anito.</strong> All rights reserved.</p>
       </div>
     </footer>
   );
