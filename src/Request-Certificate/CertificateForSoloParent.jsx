@@ -10,15 +10,12 @@ import { MdOutlineContentCopy } from "react-icons/md";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 function CertificateForSoloParent() {
-  const [fullName, setFullName] = useState('');
+  const [parent, setParent] = useState('')
+  const [address, setAddress] = useState('')
+  const [child, setChild] = useState('')
+  const [dateOfBirth, setDateOfBirth] = useState('')
   const [email, setEmail] = useState('');
-  const [contactNumber, setContactNumber] = useState('');
-  const [pickUp, setPickUp] = useState(false);
-  const [pickUpDate, setPickupDate] = useState('');  // State for Pickup Date
-  const [paymentMethod, setPaymentMethod] = useState('');
-  const [referenceNo, setReferenceNo] = useState('');
-  const [selectedPurpose, setSelectedPurpose] = useState('');
-  const [selectType, setSelectType] = useState('');
+
   const [trackingCode, setTrackingCode] = useState('');
   const [isImageEnlarged, setIsImageEnlarged] = useState(false);
   const [showSubmitModal, setShowSubmitModal] = useState(false);
@@ -71,9 +68,23 @@ function CertificateForSoloParent() {
     });
   };
 
-  const handleFullName = (event) => {
+  const handleParient = (event) => {
     const value = event.target.value;
-    setFullName(value);
+    setParent(value);
+  };
+
+  const handleAddress = (event) => {
+    const value = event.target.value;
+    setAddress(value);
+  };
+
+  const handleChild = (event) => {
+    const value = event.target.value;
+    setChild(value);
+  };
+
+  const handleDateOfBirth = (event) => {
+    setDateOfBirth(event.target.value); 
   };
 
   const handleEmail = (event) => {
@@ -81,48 +92,13 @@ function CertificateForSoloParent() {
     setEmail(value);
   };
 
-  const handleContactNumber = (event) => {
-    const value = event.target.value;
-    setContactNumber(value);
-  };
-
-  const handleSelectType = (event) => {
-    const value = event.target.value;
-    setSelectType(value);
-    setPickUp(value === 'For-Pickup');
-    setPaymentMethod('');
-  };
-
-  const handlePickupDateChange = (event) => {
-    setPickupDate(event.target.value);  // Bind input to state
-    console.log(event.target.value);
-  };
-
-  const handlePaymentMethod = (event) => {
-    const value = event.target.value;
-    setPaymentMethod(value);
-  };
-
-  const handleReferenceNoChange = (event) => {
-    const value = event.target.value;
-    setReferenceNo(value);
-  };
-
-  const handlePurposeChange = (event) => {
-    const value = event.target.value;
-    setSelectedPurpose(value);
-  };
-
   const resetForm = () => {
-    setFullName('');
-    setEmail('');
-    setContactNumber('');
-    setPickUp(false);
-    setPickupDate('');  // Reset pickup date
-    setPaymentMethod('');
-    setReferenceNo('');
-    setSelectedPurpose('');
-    setSelectType('');
+    setParent('')
+    setAddress('')
+    setChild('')
+    setDateOfBirth('')
+    setEmail('')
+
     const newTrackingCode = generateTrackingCode();
     setTrackingCode(newTrackingCode);
   };
@@ -132,57 +108,46 @@ function CertificateForSoloParent() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsSubmitting(true); // Show loading animation
-
-    if (fullName === '') {
-      alert('Please enter your full name');
-    } else if (!isNaN(fullName)) {
+  
+    const dateRequest = new Date().toISOString(); 
+  
+    if (parent === '') {
+      alert('Please enter name of parent');
+    } else if (!isNaN(parent)) {
       alert('Please enter a valid name');
-    } else if (isNaN(contactNumber)) {
-      alert('Please enter a valid contact number');
-    } else if (contactNumber.length <= 10 || contactNumber.length > 12) {
-      alert('Please enter exact 11 numbers');
-    } else if (hasSpecialCharacters.test(fullName)) {
+    } else if (hasSpecialCharacters.test(parent)) {
       alert('Please enter a name without special characters');
-    } else if (selectType === '') {
-      alert('Please select Type');
-    } else if (selectType === 'For-Pickup' && !pickUp) {
-      alert('Please select a Pickup Date');
-    } else if (paymentMethod === 'G-Cash' && !referenceNo) {
-      alert('Please enter your Gcash Reference No.');
-    } else if (paymentMethod === '') {
-      alert('Please select a Payment Method');
-    } else if (selectedPurpose === '') {
-      alert('Please enter on what purpose you need the certificate');
+    } else if (address === '') {
+      alert('Please enter your address');
+    } else if (child === '') {
+      alert('Please enter name of your child');
+    } else if (dateOfBirth === '') {
+      alert('Please enter date of birth of your child');
     } else {
-      // Include pickupDate in formData
       const formData = {
         certificateType: 'Certificate For Solo Parent',
-        certId: '10',
-        fullName,
+        dateRequest,
+        parent,
+        address,
+        child,
+        dateOfBirth,
         email,
-        contactNumber,
-        pickUp,
-        pickUpDate,  // Add pickup date to form data
-        paymentMethod,
-        referenceNo,
-        selectedPurpose,
-        selectType,
         trackingCode,
       };
-
+  
       try {
-        const response = await axios.post(`${API_BASE_URL}/submit-request`, formData);
+        const response = await axios.post(`${API_BASE_URL}/api/soloParent`, formData);
         // alert(response.data);
       } catch (error) {
         console.error('Error submitting the form:', error);
         alert('There was an error submitting the form.');
       }
-      console.log('Form submitted');
       setIsSubmitting(false); // Hide loading animation
       resetForm();
       setShowSubmitModal(true);
     }
   };
+  
 
   return (
     <section className='mt-24 mb-10'>
@@ -192,10 +157,10 @@ function CertificateForSoloParent() {
             <img src={BarangayClearance} alt="Barangay Clearance" onClick={handleImageClick} className='cursor-pointer w-full h-full object-fit' />
           </div>
 
-          <p className='text-sm flex justify-end font-semibold text-gray-500 italic'>1 to 2 Days Processing</p>
+          <p className='text-sm flex justify-end font-semibold text-gray-500 italic'>Within the day process</p>
 
           <div className='my-3 text-gray-600'>
-            <p>Certificate For Solo Parent should certify that you are living in the area and that you are indeed a solo parent.</p>
+            <p>Magdala po ng valid ID, kapag kukunin na ang certificate sa Barangay, bilang patunay ng inyong pagkakakilanlan.</p>
           </div>
 
           {isImageEnlarged && (
@@ -206,7 +171,7 @@ function CertificateForSoloParent() {
         </div>
 
         <form className="w-full md:w-1/2 h-fit pb-5 bg-white mt-5 rounded" onSubmit={handleSubmit}>
-          <p className="text-green-500 bg-gray-100 font-semibold p-3 border">Certificate For Solo Parent</p>
+          <p className="text-green-500 bg-gray-100 font-semibold p-3 border">CERTIFICATE FOR SOLO PARENT</p>
 
           <div className="flex flex-col gap-3">
             <div className="w-full flex flex-col gap-y-1 px-3 py-3">
@@ -220,61 +185,31 @@ function CertificateForSoloParent() {
             </div>
 
             <div className="w-full flex flex-col px-3">
-              <input type="text" placeholder="Enter Full Name" className="p-2 border border-black outline-green-500 w-full" value={fullName} onChange={handleFullName} />
+              <label htmlFor="name-of-parent" className='text-gray-700 text-sm'>Name of Parent:</label>
+              <input type="text" id='name-of-parent' placeholder="Enter Name of Parent" className="p-2 border border-black outline-green-500 w-full" value={parent} onChange={handleParient} />
             </div>
 
             <div className="w-full flex flex-col px-3">
-              <input type="email" placeholder="Enter Email Address" className="p-2 border border-black outline-green-500 w-full" value={email} onChange={handleEmail} />
+              <label htmlFor="Address" className='text-gray-700 text-sm'>Address:</label>
+              <input type="text" id='Address' placeholder="House No. / Street / Subd Village" className="p-2 border border-black outline-green-500 w-full" value={address} onChange={handleAddress} />
             </div>
 
             <div className="w-full flex flex-col px-3">
-              <input type="text" placeholder="Enter Contact Number" className="p-2 border border-black outline-green-500 w-full" value={contactNumber} onChange={handleContactNumber} />
+              <label htmlFor="name-of-child" className='text-gray-700 text-sm'>Name of Child:</label>
+              <input type="text" id='name-of-child' placeholder="Enter Name of Child" className="p-2 border border-black outline-green-500 w-full" value={child} onChange={handleChild} />
             </div>
 
-            <div className="w-full flex flex-col gap-y-1 px-3">
-              <select name="" id="" className="p-2 border border-black outline-green-500 w-full" value={selectType} onChange={handleSelectType}>
-                <option value="">Select Type</option>
-                <option value="For-Delivery">For Delivery</option>
-                <option value="For-Pickup">For Pickup (in Barangay)</option>
-              </select>
+            <div className="w-full flex flex-col px-3">
+              <label htmlFor="date-of-birth" className='text-gray-700 text-sm'>Date of Birth:</label>
+              <input type="date" id='date-of-birth' className="p-2 border border-black outline-green-500 w-full" value={dateOfBirth} onChange={handleDateOfBirth} />
             </div>
 
-            {selectType === 'For-Pickup' && (
-              <div className="w-full flex flex-col gap-y-1 px-3">
-                <label className="text-green-500">Pickup Date</label>
-                <input type="date" name="pickupDate" className="p-2 border border-black outline-green-500 w-full" value={pickUpDate} onChange={handlePickupDateChange} />
-              </div>
-            )}
-
-            <div className="w-full flex flex-col gap-y-1 px-3">
-              <select name="" id="" className="p-2 border border-black outline-green-500 w-full" value={paymentMethod} onChange={handlePaymentMethod}>
-                <option value="">Select Payment Method</option>
-                {selectType === 'For-Pickup' ? (
-                  <>
-                    <option value="G-Cash">Pay Online (G-Cash)</option>
-                    <option value="COP">Cash on Pickup</option>
-                  </>
-                ) : (
-                  <>
-                    <option value="G-Cash">Pay Online (G-Cash)</option>
-                    <option value="COD">Cash on Delivery</option>
-                  </>
-                )}
-              </select>
+            <div className="w-full flex flex-col px-3">
+              <label htmlFor="email" className='text-gray-700 text-sm'>Email:</label>
+              <input type="email" id='email' placeholder="Enter Email Address" className="p-2 border border-black outline-green-500 w-full" value={email} onChange={handleEmail} />
             </div>
 
-            {paymentMethod === 'G-Cash' && (
-              <div className="w-full flex flex-col gap-y-1 px-3">
-                <label className="text-green-500">Reference No. (Please enter a valid reference number)</label>
-                <input type="text" name="reference" placeholder="Enter Gcash Reference No." className="p-2 border w-full" value={referenceNo} onChange={handleReferenceNoChange} />
-              </div>
-            )}
-
-            <div className="w-full flex flex-col gap-y-1 px-3">
-              <textarea name="" id="" rows={6} placeholder="Please state the purpose on what purpose you need the certificate." className="noResize border border-black p-2 outline-green-500 w-full" style={{ resize: 'none' }} value={selectedPurpose} onChange={handlePurposeChange}></textarea>
-            </div>
-
-            <div className="px-3 w-full">
+            <div className="px-3 w-full mt-3">
               <button className="bg-green-500 text-white w-full p-1 font-semibold hover:bg-green-400">Submit</button>
             </div>
             {/* Loading animation */}

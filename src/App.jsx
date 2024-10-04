@@ -8,12 +8,11 @@ import RequestForm from './Components/RequestForm';
 import BarangayClearance from './Request-Certificate/BaragayClearance'
 import CertificateOfResidency from './Request-Certificate/CertificateOfResidency'
 import CertificateOfIndigency from './Request-Certificate/CertificateOfIndigency'
-import CertificateOfLowIncome from './Request-Certificate/CertificateOfLowIncome'
+import CommonLaw from './Request-Certificate/CommonLaw'
 import BusinessClearance from './Request-Certificate/BusinessClearance'
-import CertificateOfDeath from './Request-Certificate/CertificateOfDeath'
-import CertificateOfNoProperty from './Request-Certificate/CertificateOfNoProperty'
-import CertificateOfGoodMoral from './Request-Certificate/CertificateOfGoodMoral'
-import CertificateForNewResidents from './Request-Certificate/CertificateForNewResidents'
+import TravelPermit from './Request-Certificate/TravelPermit'
+import Guardianship from './Request-Certificate/Guardianship'
+import JobSeeker from './Request-Certificate/JobSeeker'
 import CertificateForSoloParent from './Request-Certificate/CertificateForSoloParent'
 
 import Home from './Pages/Home';
@@ -44,12 +43,11 @@ function App() {
             <Route path="/barangay-clearance-form" element={<BarangayClearance />} />
             <Route path='/certificate-of-residency-form' element={<CertificateOfResidency />} />
             <Route path='/certificate-of-indigency-form' element={<CertificateOfIndigency />} />
-            <Route path='/certificate-of-low-income-form' element={<CertificateOfLowIncome />} />
+            <Route path='/common-law-form' element={<CommonLaw />} />
             <Route path='/business-clearance-form' element={<BusinessClearance />} />
-            <Route path='/certificate-of-death-form' element={<CertificateOfDeath />} />
-            <Route path='/certificate-of-no-property-form' element={<CertificateOfNoProperty />} />
-            <Route path='/certificate-of-good-moral-form' element={<CertificateOfGoodMoral />} />
-            <Route path='/certificate-for-new-residents-form' element={<CertificateForNewResidents />} />
+            <Route path='/travel-permit-form' element={<TravelPermit />} />
+            <Route path='/guardianship-form' element={<Guardianship />} />
+            <Route path='/job-seeker-form' element={<JobSeeker />} />
             <Route path='/certificate-for-solo-parent-form' element={<CertificateForSoloParent />} />
            
           </Routes>

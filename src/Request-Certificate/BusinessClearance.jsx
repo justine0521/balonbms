@@ -10,15 +10,12 @@ import { MdOutlineContentCopy } from "react-icons/md";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 function BusinessClearance() {
-  const [fullName, setFullName] = useState('');
+  const [owner, setOwner] = useState('');
+  const [business, setBusiness] = useState('')
+  const [natureOfBusiness, setNatureOfBusiness] = useState('')
+  const [address, setAddress] = useState('')
   const [email, setEmail] = useState('');
-  const [contactNumber, setContactNumber] = useState('');
-  const [pickUp, setPickUp] = useState(false);
-  const [pickUpDate, setPickupDate] = useState('');  // State for Pickup Date
-  const [paymentMethod, setPaymentMethod] = useState('');
-  const [referenceNo, setReferenceNo] = useState('');
-  const [selectedPurpose, setSelectedPurpose] = useState('');
-  const [selectType, setSelectType] = useState('');
+
   const [trackingCode, setTrackingCode] = useState('');
   const [isImageEnlarged, setIsImageEnlarged] = useState(false);
   const [showSubmitModal, setShowSubmitModal] = useState(false);
@@ -71,9 +68,24 @@ function BusinessClearance() {
     });
   };
 
-  const handleFullName = (event) => {
+  const handleOwner = (event) => {
     const value = event.target.value;
-    setFullName(value);
+    setOwner(value);
+  };
+
+  const handleBusiness = (event) => {
+    const value = event.target.value;
+    setBusiness(value);
+  };
+
+  const handleNatureOfBusiness = (event) => {
+    const value = event.target.value;
+    setNatureOfBusiness(value);
+  };
+
+  const handleAddress = (event) => {
+    const value = event.target.value;
+    setAddress(value);
   };
 
   const handleEmail = (event) => {
@@ -81,48 +93,13 @@ function BusinessClearance() {
     setEmail(value);
   };
 
-  const handleContactNumber = (event) => {
-    const value = event.target.value;
-    setContactNumber(value);
-  };
-
-  const handleSelectType = (event) => {
-    const value = event.target.value;
-    setSelectType(value);
-    setPickUp(value === 'For-Pickup');
-    setPaymentMethod('');
-  };
-
-  const handlePickupDateChange = (event) => {
-    setPickupDate(event.target.value);  // Bind input to state
-    console.log(event.target.value);
-  };
-
-  const handlePaymentMethod = (event) => {
-    const value = event.target.value;
-    setPaymentMethod(value);
-  };
-
-  const handleReferenceNoChange = (event) => {
-    const value = event.target.value;
-    setReferenceNo(value);
-  };
-
-  const handlePurposeChange = (event) => {
-    const value = event.target.value;
-    setSelectedPurpose(value);
-  };
-
   const resetForm = () => {
-    setFullName('');
+    setOwner('');
+    setBusiness('')
+    setNatureOfBusiness('')
+    setAddress('')
     setEmail('');
-    setContactNumber('');
-    setPickUp(false);
-    setPickupDate('');  // Reset pickup date
-    setPaymentMethod('');
-    setReferenceNo('');
-    setSelectedPurpose('');
-    setSelectType('');
+    
     const newTrackingCode = generateTrackingCode();
     setTrackingCode(newTrackingCode);
   };
@@ -133,52 +110,37 @@ function BusinessClearance() {
     event.preventDefault();
     setIsSubmitting(true); // End loading
 
-    if (fullName === '') {
-      alert('Please enter your full name');
-    } else if (!isNaN(fullName)) {
+    if (owner === '') {
+      alert('Please enter owner name');
+    } else if (!isNaN(owner)) {
       alert('Please enter a valid name');
-    } else if (isNaN(contactNumber)) {
-      alert('Please enter a valid contact number');
-    } else if (contactNumber.length <= 10 || contactNumber.length > 12) {
-      alert('Please enter exact 11 numbers');
-    } else if (hasSpecialCharacters.test(fullName)) {
+    } else if (hasSpecialCharacters.test(owner)) {
       alert('Please enter a name without special characters');
-    } else if (selectType === '') {
-      alert('Please select Type');
-    } else if (selectType === 'For-Pickup' && !pickUp) {
-      alert('Please select a Pickup Date');
-    } else if (paymentMethod === 'G-Cash' && !referenceNo) {
-      alert('Please enter your Gcash Reference No.');
-    } else if (paymentMethod === '') {
-      alert('Please select a Payment Method');
-    } else if (selectedPurpose === '') {
-      alert('Please enter on what purpose you need the certificate');
+    } else if (business === '') {
+      alert('Please enter your business');
+    } else if (natureOfBusiness === '') {
+      alert('Please enter your nature of business');
+    } else if (address === '') {
+      alert('Please enter your address of business');
     } else {
 
-      // Include pickupDate in formData
       const formData = {
         certificateType: 'Business Clearance',
-        certId: '5',
-        fullName,
+        owner,
+        business,
+        natureOfBusiness,
+        address,
         email,
-        contactNumber,
-        pickUp,
-        pickUpDate,  // Add pickup date to form data
-        paymentMethod,
-        referenceNo,
-        selectedPurpose,
-        selectType,
         trackingCode,
       };
 
       try {
-        const response = await axios.post(`${API_BASE_URL}/submit-request`, formData);
+        const response = await axios.post(`${API_BASE_URL}/api/businessClearance`, formData);
         // alert(response.data);
       } catch (error) {
         console.error('Error submitting the form:', error);
         alert('There was an error submitting the form.');
       }
-      console.log('Form submitted');
       setIsSubmitting(false); // End loading
       resetForm();
       setShowSubmitModal(true);
@@ -193,10 +155,10 @@ function BusinessClearance() {
             <img src={BarangayClearance} alt="Barangay Clearance" onClick={handleImageClick} className='cursor-pointer w-full h-full object-fit' />
           </div>
 
-          <p className='text-sm flex justify-end font-semibold text-gray-500 italic'>1 to 2 Days Processing</p>
+          <p className='text-sm flex justify-end font-semibold text-gray-500 italic'>Within the day process</p>
 
           <div className='my-3 text-gray-600'>
-            <p>A Business Clearance specifically refers to a document issued by your local barangay, the smallest unit of local government</p>
+            <p>Magdala po ng valid ID, kapag kukunin na ang certificate sa Barangay, bilang patunay ng inyong pagkakakilanlan.</p>
           </div>
 
           {isImageEnlarged && (
@@ -221,58 +183,28 @@ function BusinessClearance() {
             </div>
 
             <div className="w-full flex flex-col px-3">
-              <input type="text" placeholder="Enter Full Name" className="p-2 border border-black outline-green-500 w-full" value={fullName} onChange={handleFullName} />
+              <label htmlFor="owner" className='text-gray-700 text-sm'>Name of Owner:</label>
+              <input type="text" id='owner' placeholder="Enter Name of Owner" className="p-2 border border-black outline-green-500 w-full" value={owner} onChange={handleOwner} />
             </div>
 
             <div className="w-full flex flex-col px-3">
-              <input type="email" placeholder="Enter Email Address" className="p-2 border border-black outline-green-500 w-full" value={email} onChange={handleEmail} />
+              <label htmlFor="business" className='text-gray-700 text-sm'>Name of Business:</label>
+              <input type="text" id='business' placeholder="Enter Name of Business" className="p-2 border border-black outline-green-500 w-full" value={business} onChange={handleBusiness} />
             </div>
 
             <div className="w-full flex flex-col px-3">
-              <input type="text" placeholder="Enter Contact Number" className="p-2 border border-black outline-green-500 w-full" value={contactNumber} onChange={handleContactNumber} />
+              <label htmlFor="natureofbusiness" className='text-gray-700 text-sm'>Nature of Business:</label>
+              <input type="text" id='natureofbusiness' placeholder="Enter Nature of Business" className="p-2 border border-black outline-green-500 w-full" value={natureOfBusiness} onChange={handleNatureOfBusiness} />
             </div>
 
-            <div className="w-full flex flex-col gap-y-1 px-3">
-              <select name="" id="" className="p-2 border border-black outline-green-500 w-full" value={selectType} onChange={handleSelectType}>
-                <option value="">Select Type</option>
-                <option value="For-Delivery">For Delivery</option>
-                <option value="For-Pickup">For Pickup (in Barangay)</option>
-              </select>
+            <div className="w-full flex flex-col px-3">
+              <label htmlFor="addressofbusiness" className='text-gray-700 text-sm'>Address of Business:</label>
+              <input type="text" id='addressofbusiness' placeholder="Enter Address of Business" className="p-2 border border-black outline-green-500 w-full" value={address} onChange={handleAddress} />
             </div>
 
-            {selectType === 'For-Pickup' && (
-              <div className="w-full flex flex-col gap-y-1 px-3">
-                <label className="text-green-500">Pickup Date</label>
-                <input type="date" name="pickupDate" className="p-2 border border-black outline-green-500 w-full" value={pickUpDate} onChange={handlePickupDateChange} />
-              </div>
-            )}
-
-            <div className="w-full flex flex-col gap-y-1 px-3">
-              <select name="" id="" className="p-2 border border-black outline-green-500 w-full" value={paymentMethod} onChange={handlePaymentMethod}>
-                <option value="">Select Payment Method</option>
-                {selectType === 'For-Pickup' ? (
-                  <>
-                    <option value="G-Cash">Pay Online (G-Cash)</option>
-                    <option value="COP">Cash on Pickup</option>
-                  </>
-                ) : (
-                  <>
-                    <option value="G-Cash">Pay Online (G-Cash)</option>
-                    <option value="COD">Cash on Delivery</option>
-                  </>
-                )}
-              </select>
-            </div>
-
-            {paymentMethod === 'G-Cash' && (
-              <div className="w-full flex flex-col gap-y-1 px-3">
-                <label className="text-green-500">Reference No. (Please enter a valid reference number)</label>
-                <input type="text" name="reference" placeholder="Enter Gcash Reference No." className="p-2 border w-full" value={referenceNo} onChange={handleReferenceNoChange} />
-              </div>
-            )}
-
-            <div className="w-full flex flex-col gap-y-1 px-3">
-              <textarea name="" id="" rows={6} placeholder="Please state the purpose on what purpose you need the certificate." className="noResize border border-black p-2 outline-green-500 w-full" style={{ resize: 'none' }} value={selectedPurpose} onChange={handlePurposeChange}></textarea>
+            <div className="w-full flex flex-col px-3">
+              <label htmlFor="email" className='text-gray-700 text-sm'>Email:</label>
+              <input type="email" id='email' placeholder="Enter Email Address" className="p-2 border border-black outline-green-500 w-full" value={email} onChange={handleEmail} />
             </div>
 
             <div className="px-3 w-full">

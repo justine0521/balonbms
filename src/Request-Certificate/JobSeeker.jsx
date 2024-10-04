@@ -1,25 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Logo from '../Images/Logo.png';
 import { FaSpinner } from 'react-icons/fa'; // Import the Font Awesome spinner icon
-import BrgyClearance from '../Images/Certificate-Picture/Barangay Clearance-1.png'
+import BarangayClearance from '../Images/Certificate-Picture/Certificate for New Resident-1.png'
 import '../App.css';
 import axios from 'axios';
 
 import { MdOutlineContentCopy } from "react-icons/md";
+import { add } from 'date-fns';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-function BarangayClearance() {
+function FirtsTimeJobSeeker() {
   const [fullName, setFullName] = useState('');
   const [address, setAddress] = useState('')
-  const [gender, setGender] = useState('')
-  const [age, setAge] = useState('')
   const [birthday, setBirthday] = useState('')
-  const [birthPlace, setBirthPlace] = useState('')
+  const [age, setAge] = useState('')
+  const [gender, setGender] = useState('')
   const [civilStatus, setCivilStatus] = useState('')
-  const [bloodType, setBloodType] = useState('')
+  const [contactNumber, setContactNumber] = useState('')
+  const [education, setEducation] = useState('')
+  const [course, setCourse] = useState('')
   const [email, setEmail] = useState('');
-  const [purpose, setPurpose] = useState('');
 
   const [trackingCode, setTrackingCode] = useState('');
   const [isImageEnlarged, setIsImageEnlarged] = useState(false);
@@ -83,28 +84,19 @@ function BarangayClearance() {
     setAddress(value);
   };
 
-
-  const handleGender = (event) => {
+  const handleBirthday = (event) => {
     const value = event.target.value;
-    setGender(value);
+    setBirthday(value);
   };
-
 
   const handleAge = (event) => {
     const value = event.target.value;
     setAge(value);
   };
 
-
-  const handleBirthday = (event) => {
+  const handleGender = (event) => {
     const value = event.target.value;
-    setBirthday(value);
-  };
-
-
-  const handleBirthPlace = (event) => {
-    const value = event.target.value;
-    setBirthPlace(value);
+    setGender(value);
   };
 
   const handleCivilStatus = (event) => {
@@ -112,9 +104,19 @@ function BarangayClearance() {
     setCivilStatus(value);
   };
 
-  const handleBloodType = (event) => {
+  const handleContactNumber = (event) => {
     const value = event.target.value;
-    setBloodType(value);
+    setContactNumber(value);
+  };
+
+  const handleEducation = (event) => {
+    const value = event.target.value;
+    setEducation(value);
+  };
+
+  const handleCourse = (event) => {
+    const value = event.target.value;
+    setCourse(value);
   };
 
   const handleEmail = (event) => {
@@ -122,23 +124,18 @@ function BarangayClearance() {
     setEmail(value);
   };
 
-  const handlePurpose = (event) => {
-    const value = event.target.value;
-    setPurpose(value);
-  };
-
   const resetForm = () => {
     setFullName('');
     setAddress('')
-    setGender('')
-    setAge('')
     setBirthday('')
-    setBirthPlace('')
+    setAge('')
+    setGender('')
     setCivilStatus('')
-    setBloodType('')
+    setContactNumber('');
+    setEducation('')
+    setCourse('')
     setEmail('');
-    setPurpose('');
-
+    
     const newTrackingCode = generateTrackingCode();
     setTrackingCode(newTrackingCode);
   };
@@ -147,54 +144,60 @@ function BarangayClearance() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setIsSubmitting(true); // Start loading
+    setIsSubmitting(true); // Set loading to true when submitting the form
+
+    const dateRequest = new Date().toISOString(); 
 
     if (fullName === '') {
       alert('Please enter your name');
     } else if (!isNaN(fullName)) {
       alert('Please enter a valid name');
+    } else if (isNaN(contactNumber)) {
+      alert('Please enter a valid contact number');
+    } else if (contactNumber.length <= 10 || contactNumber.length > 12) {
+      alert('Please enter exact 11 numbers');
+    } else if (hasSpecialCharacters.test(fullName)) {
+      alert('Please enter a name without special characters');
     } else if (address === '') {
       alert('Please enter your address');
-    } else if (gender === '') {
-      alert('Please enter your gender');
+    } else if (birthday === '') {
+      alert('Please enter your birhtday');
     } else if (age === '') {
       alert('Please enter your age');
-    } else if (birthday === '') {
-      alert('Please enter your birthday');
-    } else if (birthPlace === '') {
-      alert('Please enter your birth place');
+    } else if (gender === '') {
+      alert('Please enter your gender');
     } else if (civilStatus === '') {
       alert('Please enter your civil status');
-    } else if (bloodType === '') {
-      alert('Please enter your blood type');
-    } else if (purpose === '') {
-      alert('Please enter your your purpose');
+    } else if (education === '') {
+      alert('Please enter your education');
+    } else if (course === '') {
+      alert('Please enter your course');
     } else {
-
       const formData = {
-        certificateType: 'Barangay Clearance',
+        certificateType: 'First Time Job Seeker',
+        dateRequest,
         fullName,
         address,
-        gender,
-        age,
         birthday,
-        birthPlace,
+        age,
+        gender,
         civilStatus,
-        bloodType,
+        contactNumber,
+        education,
+        course,
         email,
-        purpose,
         trackingCode,
       };
 
       try {
-        const response = await axios.post(`${API_BASE_URL}/api/barangayClearance`, formData);
+        const response = await axios.post(`${API_BASE_URL}/api/jobSeeker`, formData);
         // alert(response.data);
       } catch (error) {
         console.error('Error submitting the form:', error);
         alert('There was an error submitting the form.');
       }
-      setIsSubmitting(false); // End loading
       resetForm();
+      setIsSubmitting(false); // Set loading to false after submitting the form
       setShowSubmitModal(true);
     }
   };
@@ -204,7 +207,7 @@ function BarangayClearance() {
       <div className='px-5 h-fit flex justify-center flex-wrap gap-10'>
         <div className='w-96 h-fit mt-5 p-5 shadow-lg '>
           <div className='w-full h-96 bg-white '>
-            <img src={BrgyClearance} alt="Barangay Clearance" onClick={handleImageClick} className='cursor-pointer w-full h-full object-fit' />
+            <img src={BarangayClearance} alt="Barangay Clearance" onClick={handleImageClick} className='cursor-pointer w-full h-full object-fit' />
           </div>
 
           <p className='text-sm flex justify-end font-semibold text-gray-500 italic'>Within the day process</p>
@@ -215,13 +218,13 @@ function BarangayClearance() {
 
           {isImageEnlarged && (
             <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-10 z-50" onClick={handleImageClick}>
-              <img src={BrgyClearance} alt="Barangay Clearance" className="w-auto h-auto max-h-full max-w-full " />
+              <img src={BarangayClearance} alt="Barangay Clearance" className="w-auto h-auto max-h-full max-w-full " />
             </div>
           )}
         </div>
 
         <form className="w-full md:w-1/2 h-fit pb-5 bg-white mt-5 rounded" onSubmit={handleSubmit}>
-          <p className="text-green-500 bg-gray-100 font-semibold p-3 border">BARANGAY CLEARANCE</p>
+          <p className="text-green-500 bg-gray-100 font-semibold p-3 border">FIRST TIME JOB SEEKER</p>
 
           <div className="flex flex-col gap-2">
             <div className="w-full flex flex-col gap-y-1 px-3 py-3">
@@ -235,13 +238,25 @@ function BarangayClearance() {
             </div>
 
             <div className="w-full flex flex-col px-3">
-              <label htmlFor="" className='text-gray-700 text-sm'>Name:</label>
-              <input type="text" placeholder="Enter Full Name" className="p-2 border border-black outline-green-500 w-full" value={fullName} onChange={handleFullName} />
+              <label htmlFor="" className="text-gray-700 text-sm">Name:</label>
+              <input type="text" placeholder="Enter Name" className="p-2 border border-black outline-green-500 w-full" value={fullName} onChange={handleFullName} />
             </div>
 
             <div className="w-full flex flex-col px-3">
-              <label htmlFor="" className='text-gray-700 text-sm'>Address:</label>
+              <label htmlFor="" className="text-gray-700 text-sm">Address:</label>
               <input type="text" placeholder="Enter Address" className="p-2 border border-black outline-green-500 w-full" value={address} onChange={handleAddress} />
+            </div>
+
+            <div className="w-full flex gap-5 px-3">
+              <div className='w-full'>
+                <label htmlFor="" className='text-gray-700 text-sm'>Birthday:</label>
+                <input type="date" className="p-2 border border-black outline-green-500 w-full" value={birthday} onChange={handleBirthday} />
+              </div>
+
+              <div className="w-full">
+                <label htmlFor="" className='text-gray-700 text-sm'>Age:</label>
+                <input type="text" placeholder="Enter Age" className="p-2 border border-black outline-green-500 w-full" value={age} onChange={handleAge} />
+              </div>
             </div>
 
             <div className="w-full flex gap-5 px-3">
@@ -254,25 +269,6 @@ function BarangayClearance() {
                 </select>
               </div>
 
-              <div className="w-full ">
-                <label htmlFor="" className='text-gray-700 text-sm'>Age:</label>
-                <input type="text" placeholder="Enter Age" className="p-2 border border-black outline-green-500 w-full" value={age} onChange={handleAge} />
-              </div>
-            </div>
-
-            <div className="w-full flex gap-5 px-3">
-              <div className='w-full'>
-                <label htmlFor="" className='text-gray-700 text-sm'>Birthday:</label>
-                <input type="date" className="p-2 border border-black outline-green-500 w-full" value={birthday} onChange={handleBirthday} />
-              </div>
-            
-              <div className="w-full">
-                <label htmlFor="" className='text-gray-700 text-sm'>Birth Place:</label>
-                <input type="text" placeholder="Ex. Balanga, Bataan" className="p-2 border border-black outline-green-500 w-full" value={birthPlace} onChange={handleBirthPlace} />
-              </div>
-            </div>
-
-            <div className='w-full flex gap-5 px-3'>
               <div className="w-full">
                 <label htmlFor="civilStatus" className='text-gray-700 text-sm'>Civil Status:</label>
                 <select name="" id="civilStatus" className="p-2 border border-black outline-green-500 w-full" value={civilStatus} onChange={handleCivilStatus}>
@@ -285,35 +281,45 @@ function BarangayClearance() {
                   <option value="Annulled">Annulled</option>
                 </select>
               </div>
+            </div>
 
-              <div className="w-full">
-                <label htmlFor="bloodType" className="text-gray-700 text-sm">Blood Type:</label>
-                <select id="bloodType" className="p-2 border border-black outline-green-500 w-full" value={bloodType} onChange={handleBloodType}>
-                  <option value="" disabled>Select Blood Type</option>
-                  <option value="A+">A+</option>
-                  <option value="A-">A-</option>
-                  <option value="B+">B+</option>
-                  <option value="B-">B-</option>
-                  <option value="AB+">AB+</option>
-                  <option value="AB-">AB-</option>
-                  <option value="O+">O+</option>
-                  <option value="O-">O-</option>
+            
+
+            <div className="w-full flex gap-5 px-3">
+              <div className="w-full ">
+                <label htmlFor="education" className="text-gray-700 text-sm">Educational Attainment:</label>
+                <select id="education" className="p-2 border border-black outline-green-500 w-full" value={education} onChange={handleEducation}>
+                  <option value="" disabled>Educational Attainment</option>
+                  <option value="No Formal Education">No Formal Education</option>
+                  <option value="Elementary/Primary School">Elementary/Primary School</option>
+                  <option value="High School/Secondary Education">High School/Secondary Education</option>
+                  <option value="Vocational/Technical Education">Vocational/Technical Education</option>
+                  <option value="Associate Degree">Associate Degree</option>
+                  <option value="Bachelor’s Degree">Bachelor’s Degree</option>
+                  <option value="Postgraduate">Postgraduate</option>
+                  <option value="Post-Doctoral Studies">Post-Doctoral Studies</option>
                 </select>
               </div>
 
+              <div className="w-full">
+                <label htmlFor="" className="text-gray-700 text-sm">Course:</label>
+                <input type="text" placeholder="Enter Course" className="p-2 border border-black outline-green-500 w-full" value={course} onChange={handleCourse} />
+              </div>
             </div>
 
-            <div className="w-full flex flex-col px-3">
-              <label htmlFor="" className='text-gray-700 text-sm'>Email:</label>
-              <input type="email" placeholder="Enter Email Address" className="p-2 border border-black outline-green-500 w-full" value={email} onChange={handleEmail} />
+            <div className="w-full flex gap-5 px-3">
+              <div className="w-full ">
+                <label htmlFor="" className="text-gray-700 text-sm">Contact Number:</label>
+                <input type="text" placeholder="Enter Contact Number" className="p-2 border border-black outline-green-500 w-full" value={contactNumber} onChange={handleContactNumber} />
+              </div>
+
+              <div className="w-full">
+                <label htmlFor="" className="text-gray-700 text-sm">Email:</label>
+                <input type="email" placeholder="Enter Email Address" className="p-2 border border-black outline-green-500 w-full" value={email} onChange={handleEmail} />
+              </div>
             </div>
 
-            <div className="w-full flex flex-col gap-y-1 px-3">
-              <label htmlFor="" className='text-gray-700 text-sm'>Purpose:</label>
-              <textarea name="" id="" rows={6} placeholder="Please state the purpose on what purpose you need the certificate." className="noResize border border-black p-2 outline-green-500 w-full" style={{ resize: 'none' }} value={purpose} onChange={handlePurpose}></textarea>
-            </div>
-
-            <div className="px-3 w-full">
+            <div className="px-3 w-full my-3">
               <button className="bg-green-500 text-white w-full p-1 font-semibold hover:bg-green-400">Submit</button>
             </div>
             {/* Loading animation */}
@@ -347,4 +353,4 @@ function BarangayClearance() {
   );
 }
 
-export default BarangayClearance;
+export default FirtsTimeJobSeeker;
