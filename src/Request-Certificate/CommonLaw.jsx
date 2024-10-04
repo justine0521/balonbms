@@ -1,21 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Logo from '../Images/Logo.png';
 import { FaSpinner } from 'react-icons/fa'; // Import the Font Awesome spinner icon
-import BarangayClearance from '../Images/Certificate-Picture/Certificate of Recidency-1.png'
+import BarangayClearance from '../Images/Certificate-Picture/Certificate of Low Income-1.png'
 import '../App.css';
 import axios from 'axios';
+
 import { MdOutlineContentCopy } from "react-icons/md";
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-function CertificateOfResidency() {
-  const [fullName, setFullName] = useState('');
-  const [address, setAddress] = useState('')
-  const [civilStatus, setCivilStatus] = useState('')
-  const [taon, setTaon] = useState(null)
-  const [email, setEmail] = useState('');
+function CommonLaw() {
+  const [male, setMale] = useState('')
+  const [female, setFemale] = useState('')
+  const [tirahan, setTirahan] = useState('')
+  const [yearTogether, setYearTogether] = useState('')
+  const [email, setEmail] = useState('')
 
   const [trackingCode, setTrackingCode] = useState('');
   const [isImageEnlarged, setIsImageEnlarged] = useState(false);
@@ -69,9 +68,24 @@ function CertificateOfResidency() {
     });
   };
 
-  const handleFullName = (event) => {
+  const handleMale = (event) => {
     const value = event.target.value;
-    setFullName(value);
+    setMale(value);
+  };
+
+  const handleFemale = (event) => {
+    const value = event.target.value;
+    setFemale(value);
+  };
+
+  const handleTirahan = (event) => {
+    const value = event.target.value;
+    setTirahan(value);
+  };
+
+  const handleYearTogether = (event) => {
+    const value = event.target.value;
+    setYearTogether(value);
   };
 
   const handleEmail = (event) => {
@@ -79,28 +93,13 @@ function CertificateOfResidency() {
     setEmail(value);
   };
 
-  const handleAddress = (event) => {
-    const value = event.target.value;
-    setAddress(value);
-  };
-
-  const handleCivilStatus = (event) => {
-    const value = event.target.value;
-    setCivilStatus(value);
-  };
-
-  const handleTaon = (event) => {
-    const value = event.target.value;
-    setTaon(value);
-  };
-
   const resetForm = () => {
-    setFullName('');
-    setAddress('')
-    setCivilStatus('')
-    setTaon(null)
+    setMale('');
+    setFemale('')
+    setTirahan('')
+    setYearTogether('')
     setEmail('');
-
+    
     const newTrackingCode = generateTrackingCode();
     setTrackingCode(newTrackingCode);
   };
@@ -111,30 +110,29 @@ function CertificateOfResidency() {
     event.preventDefault();
     setIsSubmitting(true);
 
-    if (fullName === '') {
-      alert('Please enter your full name');
-    } else if (!isNaN(fullName)) {
+    if (male && female === '') {
+      alert('Please enter name');
+    } else if (!isNaN(male && female)) {
       alert('Please enter a valid name');
-    } else if (hasSpecialCharacters.test(fullName)) {
+    } else if (hasSpecialCharacters.test(male && female)) {
       alert('Please enter a name without special characters');
-    } else if (address === '') {
-      alert('Please enter your address');
-    } else if (civilStatus === '') {
-      alert('Please enter your civil status');
+    } else if (tirahan === '') {
+      alert('Please enter tirahan');
+    } else if (yearTogether === '') {
+      alert('Please enter year together');
     } else {
-
       const formData = {
-        certificateType: 'Certificate of Residency',
-        fullName,
-        address,
-        civilStatus,
-        taon,
+        certificateType: 'Common Law',
+        male,
+        female,
+        tirahan,
+        yearTogether,
         email,
         trackingCode,
       };
 
       try {
-        const response = await axios.post(`${API_BASE_URL}/api/residency`, formData);
+        const response = await axios.post(`${API_BASE_URL}/api/commonLaw`, formData);
         // alert(response.data);
       } catch (error) {
         console.error('Error submitting the form:', error);
@@ -151,7 +149,7 @@ function CertificateOfResidency() {
       <div className='px-5 h-fit flex justify-center flex-wrap gap-10'>
         <div className='w-96 h-fit mt-5 p-5 shadow-lg '>
           <div className='w-full h-96 bg-white '>
-            <img src={BarangayClearance} alt="Barangay Clearance" onClick={handleImageClick} className='cursor-pointer w-full h-full object-fit' />
+            <img src={BarangayClearance} alt="Common Law" onClick={handleImageClick} className='cursor-pointer w-full h-full object-fit' />
           </div>
 
           <p className='text-sm flex justify-end font-semibold text-gray-500 italic'>Within the day process</p>
@@ -168,7 +166,7 @@ function CertificateOfResidency() {
         </div>
 
         <form className="w-full md:w-1/2 h-fit pb-5 bg-white mt-5 rounded" onSubmit={handleSubmit}>
-          <p className="text-green-500 bg-gray-100 font-semibold p-3 border">CERTIFICATE OF RESIDENCY</p>
+          <p className="text-green-500 bg-gray-100 font-semibold p-3 border">COMMON LAW</p>
 
           <div className="flex flex-col gap-3">
             <div className="w-full flex flex-col gap-y-1 px-3 py-3">
@@ -182,39 +180,31 @@ function CertificateOfResidency() {
             </div>
 
             <div className="w-full flex flex-col px-3">
-              <label htmlFor="name" className='text-gray-700 text-sm'>Name:</label>
-              <input type="text" id='name' placeholder="Enter Full Name" className="p-2 border border-black outline-green-500 w-full" value={fullName} onChange={handleFullName} />
+              <label htmlFor="male" className='text-gray-700 text-sm'>Pangalan ng Lalaki:</label>
+              <input type="text" id='male' placeholder="Pangalan ng Lalaki" className="p-2 border border-black outline-green-500 w-full" value={male} onChange={handleMale} />
             </div>
 
             <div className="w-full flex flex-col px-3">
-              <label htmlFor="Address" className='text-gray-700 text-sm'>Address:</label>
-              <input type="text" id='Address' placeholder="House No. / Street / Subd Village" className="p-2 border border-black outline-green-500 w-full" value={address} onChange={handleAddress} />
+              <label htmlFor="female" className='text-gray-700 text-sm'>Pangalan ng Babae:</label>
+              <input type="text" id='female' placeholder="Pangalan ng Babae" className="p-2 border border-black outline-green-500 w-full" value={female} onChange={handleFemale} />
             </div>
 
             <div className="w-full flex flex-col px-3">
-              <label htmlFor="civilStatus" className='text-gray-700 text-sm'>Civil Status:</label>
-              <select name="" id="civilStatus" className="p-2 border border-black outline-green-500 w-full" value={civilStatus} onChange={handleCivilStatus}>
-                <option value="" disabled>Civil Status</option>
-                <option value="Single">Single</option>
-                <option value="Married">Married</option>
-                <option value="Widowed">Widowed</option>
-                <option value="Divorced">Divorced</option>
-                <option value="Seperated">Seperated</option>
-                <option value="Annulled">Annulled</option>
-              </select>
+              <label htmlFor="tirahan" className='text-gray-700 text-sm'>Tirahan:</label>
+              <input type="text" id='tirahan' placeholder="Tirahan" className="p-2 border border-black outline-green-500 w-full" value={tirahan} onChange={handleTirahan} />
             </div>
 
             <div className="w-full flex flex-col px-3">
-              <label htmlFor="year" className='text-gray-700 text-sm'>Anong Taon Tumira ng Balon Anito:</label>
-              <DatePicker selected={taon} onChange={(date) => setTaon(date)} showYearPicker  dateFormat="yyyy" className="p-2 border border-black outline-green-500 w-full" placeholderText="Select Year"/>
+              <label htmlFor="taon" className='text-gray-700 text-sm'>Ilang taon / Buwan nang nagsasama:</label>
+              <input type="text" id='taon' placeholder="ex. 1 Buwan" className="p-2 border border-black outline-green-500 w-full" value={yearTogether} onChange={handleYearTogether} />
             </div>
 
             <div className="w-full flex flex-col px-3">
               <label htmlFor="email" className='text-gray-700 text-sm'>Email:</label>
-              <input type="email" id='email' placeholder="Enter Email Address" className="p-2 border border-black outline-green-500 w-full" value={email} onChange={handleEmail} />
+              <input type="email" id='email' placeholder="Email" className="p-2 border border-black outline-green-500 w-full" value={email} onChange={handleEmail} />
             </div>
 
-            <div className="px-3 w-full mt-3">
+            <div className="px-3 w-full">
               <button className="bg-green-500 text-white w-full p-1 font-semibold hover:bg-green-400">Submit</button>
             </div>
             {/* Loading animation */}
@@ -248,4 +238,4 @@ function CertificateOfResidency() {
   );
 }
 
-export default CertificateOfResidency;
+export default CommonLaw;

@@ -47,7 +47,7 @@ const Captain = () => {
           <span></span>
         </div>
 
-        <p className='font-semibold text-green-500'>Fetching Data...</p>
+        <p className='font-semibold text-green-500'>Loading...</p>
       </div>
     );
   }

@@ -84,7 +84,7 @@ const Officials = () => {
     const fetchOfficials = async () => {
       try {
         const response = await axios.get(`${API_BASE_URL}/api/officials`);
-        console.log(response.data); // Inspect the response
+
         setOfficials(response.data);
       } catch (err) {
         setError(err.message);
