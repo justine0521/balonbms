@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import Logo from '../Images/logowhitebg.png'
 
 import { FaFacebookF, FaPhoneAlt } from 'react-icons/fa';
 import { FaLocationDot } from "react-icons/fa6";
@@ -9,6 +8,7 @@ import { SiGmail } from "react-icons/si";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 function Footer() {
+  const [barangayLogo, setBarangayLogo] = useState('');
   const [barangayName, setBarangayName] = useState('');
   const [contactNumber, setContactNumber] = useState('');
   const [facebook, setFacebook] = useState('');
@@ -20,6 +20,7 @@ function Footer() {
         const response = await fetch(`${API_BASE_URL}/api/barangay-info`)
         if (response.ok) {
           const data = await response.json();
+          setBarangayLogo(data.logoUrl)
           setBarangayName(data.name)
           setContactNumber(data.contactNumber)
           setFacebook(data.facebook)
@@ -40,7 +41,7 @@ function Footer() {
         {/* Logo Section */}
         <div className="flex flex-col space-y-4">
           <div className='flex items-center gap-1'>
-            <img src={Logo} alt="" className='h-20' />
+            <img src={barangayLogo} alt="" className='h-20' />
             <h2 className="text-xl text-white font-semibold">Barangay <br /> {barangayName}</h2>
           </div>
 
