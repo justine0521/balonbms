@@ -1,21 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Logo from '../Images/Logo.png';
 import { FaSpinner } from 'react-icons/fa'; // Import the Font Awesome spinner icon
-import BarangayClearance from '../Images/Certificate-Picture/Certificate of Recidency-1.png'
+import BarangayClearance from '../Images/Certificate-Picture/Certificate of Good Moral-1.png'
 import '../App.css';
 import axios from 'axios';
+
 import { MdOutlineContentCopy } from "react-icons/md";
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-function CertificateOfResidency() {
-  const [fullName, setFullName] = useState('');
+function Guardianship() {
+  const [guardian, setGuardian] = useState('')
   const [address, setAddress] = useState('')
-  const [civilStatus, setCivilStatus] = useState('')
-  const [taon, setTaon] = useState(null)
-  const [email, setEmail] = useState('');
+  const [child, setChild] = useState('')
+  const [birthdayOfChild, setBirthdayOfChild] = useState('')
+  const [placeOfBirth, setPlaceOfBirth] = useState('')
+  const [email, setEmail] = useState('')
 
   const [trackingCode, setTrackingCode] = useState('');
   const [isImageEnlarged, setIsImageEnlarged] = useState(false);
@@ -69,14 +69,9 @@ function CertificateOfResidency() {
     });
   };
 
-  const handleFullName = (event) => {
+  const handleGuardian = (event) => {
     const value = event.target.value;
-    setFullName(value);
-  };
-
-  const handleEmail = (event) => {
-    const value = event.target.value;
-    setEmail(value);
+    setGuardian(value);
   };
 
   const handleAddress = (event) => {
@@ -84,23 +79,34 @@ function CertificateOfResidency() {
     setAddress(value);
   };
 
-  const handleCivilStatus = (event) => {
+  const handleChild = (event) => {
     const value = event.target.value;
-    setCivilStatus(value);
+    setChild(value);
   };
 
-  const handleTaon = (event) => {
+  const handleBirthdayOfChild = (event) => {
     const value = event.target.value;
-    setTaon(value);
+    setBirthdayOfChild(value);
+  };
+
+  const handlePlaceOfBirth = (event) => {
+    const value = event.target.value;
+    setPlaceOfBirth(value);
+  };
+
+  const handleEmail = (event) => {
+    const value = event.target.value;
+    setEmail(value);
   };
 
   const resetForm = () => {
-    setFullName('');
-    setAddress('')
-    setCivilStatus('')
-    setTaon(null)
+    setGuardian('');
+    setAddress('');
+    setChild('');
+    setBirthdayOfChild('');
+    setPlaceOfBirth('');
     setEmail('');
-
+    
     const newTrackingCode = generateTrackingCode();
     setTrackingCode(newTrackingCode);
   };
@@ -111,30 +117,34 @@ function CertificateOfResidency() {
     event.preventDefault();
     setIsSubmitting(true);
 
-    if (fullName === '') {
-      alert('Please enter your full name');
-    } else if (!isNaN(fullName)) {
+    if (guardian === '') {
+      alert('Please enter name of guardian');
+    } else if (!isNaN(guardian)) {
       alert('Please enter a valid name');
-    } else if (hasSpecialCharacters.test(fullName)) {
-      alert('Please enter a name without special characters');
+    } else if (hasSpecialCharacters.test(guardian)) {
+      alert('Please enter a guardian name without special characters');
     } else if (address === '') {
       alert('Please enter your address');
-    } else if (civilStatus === '') {
-      alert('Please enter your civil status');
+    } else if (child === '') {
+      alert('Please name of your child');
+    } else if (birthdayOfChild === '') {
+      alert('Please enter the birthday of your child');
+    } else if (placeOfBirth === '') {
+      alert('Please enter place of birth of child');
     } else {
-
       const formData = {
-        certificateType: 'Certificate of Residency',
-        fullName,
+        certificateType: 'Guardianship',
+        guardian,
         address,
-        civilStatus,
-        taon,
+        child,
+        birthdayOfChild,
+        placeOfBirth,
         email,
         trackingCode,
       };
 
       try {
-        const response = await axios.post(`${API_BASE_URL}/api/residency`, formData);
+        const response = await axios.post(`${API_BASE_URL}/api/guardianship`, formData);
         // alert(response.data);
       } catch (error) {
         console.error('Error submitting the form:', error);
@@ -168,7 +178,7 @@ function CertificateOfResidency() {
         </div>
 
         <form className="w-full md:w-1/2 h-fit pb-5 bg-white mt-5 rounded" onSubmit={handleSubmit}>
-          <p className="text-green-500 bg-gray-100 font-semibold p-3 border">CERTIFICATE OF RESIDENCY</p>
+          <p className="text-green-500 bg-gray-100 font-semibold p-3 border">GUARDIANSHIP</p>
 
           <div className="flex flex-col gap-3">
             <div className="w-full flex flex-col gap-y-1 px-3 py-3">
@@ -182,31 +192,28 @@ function CertificateOfResidency() {
             </div>
 
             <div className="w-full flex flex-col px-3">
-              <label htmlFor="name" className='text-gray-700 text-sm'>Name:</label>
-              <input type="text" id='name' placeholder="Enter Full Name" className="p-2 border border-black outline-green-500 w-full" value={fullName} onChange={handleFullName} />
+              <label htmlFor="guardian" className='text-gray-700 text-sm'>Guadian:</label>
+              <input type="text" id='guardian' placeholder="Enter Name of Guardian" className="p-2 border border-black outline-green-500 w-full" value={guardian} onChange={handleGuardian} />
             </div>
 
             <div className="w-full flex flex-col px-3">
-              <label htmlFor="Address" className='text-gray-700 text-sm'>Address:</label>
-              <input type="text" id='Address' placeholder="House No. / Street / Subd Village" className="p-2 border border-black outline-green-500 w-full" value={address} onChange={handleAddress} />
+              <label htmlFor="address" className='text-gray-700 text-sm'>Address:</label>
+              <input type="text" id='address' placeholder="Enter Address" className="p-2 border border-black outline-green-500 w-full" value={address} onChange={handleAddress} />
             </div>
 
             <div className="w-full flex flex-col px-3">
-              <label htmlFor="civilStatus" className='text-gray-700 text-sm'>Civil Status:</label>
-              <select name="" id="civilStatus" className="p-2 border border-black outline-green-500 w-full" value={civilStatus} onChange={handleCivilStatus}>
-                <option value="" disabled>Civil Status</option>
-                <option value="Single">Single</option>
-                <option value="Married">Married</option>
-                <option value="Widowed">Widowed</option>
-                <option value="Divorced">Divorced</option>
-                <option value="Seperated">Seperated</option>
-                <option value="Annulled">Annulled</option>
-              </select>
+              <label htmlFor="child" className='text-gray-700 text-sm'>Name of Child:</label>
+              <input type="text" id='child' placeholder="Enter Name of Child" className="p-2 border border-black outline-green-500 w-full" value={child} onChange={handleChild} />
             </div>
 
             <div className="w-full flex flex-col px-3">
-              <label htmlFor="year" className='text-gray-700 text-sm'>Anong Taon Tumira ng Balon Anito:</label>
-              <DatePicker selected={taon} onChange={(date) => setTaon(date)} showYearPicker  dateFormat="yyyy" className="p-2 border border-black outline-green-500 w-full" placeholderText="Select Year"/>
+              <label htmlFor="birthday"  className='text-gray-700 text-sm'>Birthday of Child:</label>
+              <input type="date" id='birthday' className="p-2 border border-black outline-green-500 w-full" value={birthdayOfChild} onChange={handleBirthdayOfChild} />
+            </div>
+
+            <div className="w-full flex flex-col px-3">
+              <label htmlFor="place" className='text-gray-700 text-sm'>Place of Birth of Child:</label>
+              <input type="text" id='place' placeholder="Enter Place of Birth of Child" className="p-2 border border-black outline-green-500 w-full" value={placeOfBirth} onChange={handlePlaceOfBirth} />
             </div>
 
             <div className="w-full flex flex-col px-3">
@@ -214,7 +221,7 @@ function CertificateOfResidency() {
               <input type="email" id='email' placeholder="Enter Email Address" className="p-2 border border-black outline-green-500 w-full" value={email} onChange={handleEmail} />
             </div>
 
-            <div className="px-3 w-full mt-3">
+            <div className="px-3 w-full">
               <button className="bg-green-500 text-white w-full p-1 font-semibold hover:bg-green-400">Submit</button>
             </div>
             {/* Loading animation */}
@@ -248,4 +255,4 @@ function CertificateOfResidency() {
   );
 }
 
-export default CertificateOfResidency;
+export default Guardianship;

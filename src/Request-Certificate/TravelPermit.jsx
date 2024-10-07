@@ -1,22 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Logo from '../Images/Logo.png';
 import { FaSpinner } from 'react-icons/fa'; // Import the Font Awesome spinner icon
-import BarangayClearance from '../Images/Certificate-Picture/Certificate of Recidency-1.png'
+import BarangayClearance from '../Images/Certificate-Picture/Certificate of No Property-1.png'
 import '../App.css';
 import axios from 'axios';
+
 import { MdOutlineContentCopy } from "react-icons/md";
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-function CertificateOfResidency() {
-  const [fullName, setFullName] = useState('');
+function TravelPermit() {
+  const [owner, setOwner] = useState('')
   const [address, setAddress] = useState('')
-  const [civilStatus, setCivilStatus] = useState('')
-  const [taon, setTaon] = useState(null)
-  const [email, setEmail] = useState('');
-
+  const [typeOfCar, setTypeOfCar] = useState('')
+  const [plateNumber, setPlateNumber] = useState('')
+  const [scrap, setScrap] = useState('')
+  const [driver, setDriver] = useState('')
+  const [driverLicense, setDriverLincese] = useState('')
+  const [whenToTravel, setWhenToTravel] = useState('')
+  const [whereToTravel, setWhereToTravel] = useState('')
+  const [email, setEmail] = useState('')
+  
   const [trackingCode, setTrackingCode] = useState('');
   const [isImageEnlarged, setIsImageEnlarged] = useState(false);
   const [showSubmitModal, setShowSubmitModal] = useState(false);
@@ -69,14 +73,9 @@ function CertificateOfResidency() {
     });
   };
 
-  const handleFullName = (event) => {
+  const handleOwner = (event) => {
     const value = event.target.value;
-    setFullName(value);
-  };
-
-  const handleEmail = (event) => {
-    const value = event.target.value;
-    setEmail(value);
+    setOwner(value);
   };
 
   const handleAddress = (event) => {
@@ -84,21 +83,56 @@ function CertificateOfResidency() {
     setAddress(value);
   };
 
-  const handleCivilStatus = (event) => {
+  const handleTypeOfCar = (event) => {
     const value = event.target.value;
-    setCivilStatus(value);
+    setTypeOfCar(value);
   };
 
-  const handleTaon = (event) => {
+  const handlePlateNumber = (event) => {
     const value = event.target.value;
-    setTaon(value);
+    setPlateNumber(value);
+  };
+
+  const handleScrap = (event) => {
+    const value = event.target.value;
+    setScrap(value);
+  };
+
+  const handleDriver = (event) => {
+    const value = event.target.value;
+    setDriver(value);
+  };
+
+  const handleDriverLicense = (event) => {
+    const value = event.target.value;
+    setDriverLincese(value);
+  };
+
+  const handleWhenToTravel = (event) => {
+    const value = event.target.value;
+    setWhenToTravel(value);
+  };
+
+  const handleWhereToTravel = (event) => {
+    const value = event.target.value;
+    setWhereToTravel(value);
+  };
+
+  const handleEmail = (event) => {
+    const value = event.target.value;
+    setEmail(value);
   };
 
   const resetForm = () => {
-    setFullName('');
+    setOwner('');
     setAddress('')
-    setCivilStatus('')
-    setTaon(null)
+    setTypeOfCar('')
+    setPlateNumber('')
+    setScrap('')
+    setDriver('')
+    setDriverLincese('')
+    setWhenToTravel('')
+    setWhereToTravel('')
     setEmail('');
 
     const newTrackingCode = generateTrackingCode();
@@ -111,30 +145,45 @@ function CertificateOfResidency() {
     event.preventDefault();
     setIsSubmitting(true);
 
-    if (fullName === '') {
-      alert('Please enter your full name');
-    } else if (!isNaN(fullName)) {
+    if (owner === '') {
+      alert('Please enter pangalan ng may ari');
+    } else if (!isNaN(owner)) {
       alert('Please enter a valid name');
-    } else if (hasSpecialCharacters.test(fullName)) {
-      alert('Please enter a name without special characters');
+    } else if (plateNumber === '') {
+      alert('Please enter your plate number');
+    } else if (scrap === '') {
+      alert('Please enter anong scrap ang ita-travel');
     } else if (address === '') {
       alert('Please enter your address');
-    } else if (civilStatus === '') {
-      alert('Please enter your civil status');
+    } else if (driver === '') {
+      alert('Please enter name of your driver');
+    } else if (driverLicense === '') {
+      alert('Please enter your driver license');
+    } else if (whenToTravel === '') {
+      alert('Please enter kung kailan ita-travel');
+    } else if (whereToTravel === '') {
+      alert('Please enter kung saan dadalhin');
+    } else if (email === '') {
+      alert('Please enter your email address');
     } else {
 
       const formData = {
-        certificateType: 'Certificate of Residency',
-        fullName,
+        certificateType: 'Travel Permit',
+        owner,
         address,
-        civilStatus,
-        taon,
+        typeOfCar,
+        plateNumber,
+        scrap,
+        driver,
+        driverLicense,
+        whenToTravel,
+        whereToTravel,
         email,
         trackingCode,
       };
 
       try {
-        const response = await axios.post(`${API_BASE_URL}/api/residency`, formData);
+        const response = await axios.post(`${API_BASE_URL}/api/travelPermit`, formData);
         // alert(response.data);
       } catch (error) {
         console.error('Error submitting the form:', error);
@@ -168,7 +217,7 @@ function CertificateOfResidency() {
         </div>
 
         <form className="w-full md:w-1/2 h-fit pb-5 bg-white mt-5 rounded" onSubmit={handleSubmit}>
-          <p className="text-green-500 bg-gray-100 font-semibold p-3 border">CERTIFICATE OF RESIDENCY</p>
+          <p className="text-green-500 bg-gray-100 font-semibold p-3 border">TRAVEL PERMIT</p>
 
           <div className="flex flex-col gap-3">
             <div className="w-full flex flex-col gap-y-1 px-3 py-3">
@@ -182,39 +231,60 @@ function CertificateOfResidency() {
             </div>
 
             <div className="w-full flex flex-col px-3">
-              <label htmlFor="name" className='text-gray-700 text-sm'>Name:</label>
-              <input type="text" id='name' placeholder="Enter Full Name" className="p-2 border border-black outline-green-500 w-full" value={fullName} onChange={handleFullName} />
+              <label htmlFor="" className='text-gray-700 text-sm'>Pangalan ng May-ari:</label>
+              <input type="text" placeholder="Pangalan ng May-ari" className="p-2 border border-black outline-green-500 w-full" value={owner} onChange={handleOwner} />
             </div>
 
             <div className="w-full flex flex-col px-3">
-              <label htmlFor="Address" className='text-gray-700 text-sm'>Address:</label>
-              <input type="text" id='Address' placeholder="House No. / Street / Subd Village" className="p-2 border border-black outline-green-500 w-full" value={address} onChange={handleAddress} />
+              <label htmlFor="" className='text-gray-700 text-sm'>Address:</label>
+              <input type="text" placeholder="Address" className="p-2 border border-black outline-green-500 w-full" value={address} onChange={handleAddress} />
+            </div>
+
+            <div className="w-full flex gap-3 px-3">
+              <div className="w-full">
+                <label htmlFor="" className='text-gray-700 text-sm'>Uri ng Sasakyan:</label>
+                <input type="text" placeholder="Uri ng Sasakyan" className="p-2 border border-black outline-green-500 w-full" value={typeOfCar} onChange={handleTypeOfCar} />
+              </div>
+
+              <div className="w-full">
+                <label htmlFor="" className='text-gray-700 text-sm'>Plate Number:</label>
+                <input type="text" placeholder="Plate Number" className="p-2 border border-black outline-green-500 w-full" value={plateNumber} onChange={handlePlateNumber} />
+              </div>
             </div>
 
             <div className="w-full flex flex-col px-3">
-              <label htmlFor="civilStatus" className='text-gray-700 text-sm'>Civil Status:</label>
-              <select name="" id="civilStatus" className="p-2 border border-black outline-green-500 w-full" value={civilStatus} onChange={handleCivilStatus}>
-                <option value="" disabled>Civil Status</option>
-                <option value="Single">Single</option>
-                <option value="Married">Married</option>
-                <option value="Widowed">Widowed</option>
-                <option value="Divorced">Divorced</option>
-                <option value="Seperated">Seperated</option>
-                <option value="Annulled">Annulled</option>
-              </select>
+              <label htmlFor="" className='text-gray-700 text-sm'>Anong Scrap ang Ita-Travel:</label>
+              <input type="text" placeholder="Anong Scrap ang Ita-Travel" className="p-2 border border-black outline-green-500 w-full" value={scrap} onChange={handleScrap} />
             </div>
 
             <div className="w-full flex flex-col px-3">
-              <label htmlFor="year" className='text-gray-700 text-sm'>Anong Taon Tumira ng Balon Anito:</label>
-              <DatePicker selected={taon} onChange={(date) => setTaon(date)} showYearPicker  dateFormat="yyyy" className="p-2 border border-black outline-green-500 w-full" placeholderText="Select Year"/>
+              <label htmlFor="" className='text-gray-700 text-sm'>Pangalan ng Driver:</label>
+              <input type="text" placeholder="Pangalan ng Driver" className="p-2 border border-black outline-green-500 w-full" value={driver} onChange={handleDriver} />
             </div>
 
             <div className="w-full flex flex-col px-3">
-              <label htmlFor="email" className='text-gray-700 text-sm'>Email:</label>
-              <input type="email" id='email' placeholder="Enter Email Address" className="p-2 border border-black outline-green-500 w-full" value={email} onChange={handleEmail} />
+              <label htmlFor="" className='text-gray-700 text-sm'>Driver's License:</label>
+              <input type="text" placeholder="Driver's License" className="p-2 border border-black outline-green-500 w-full" value={driverLicense} onChange={handleDriverLicense} />
             </div>
 
-            <div className="px-3 w-full mt-3">
+            <div className="w-full flex gap-3 px-3">
+              <div className="w-full">
+                <label htmlFor="" className='text-gray-700 text-sm'>kailan Ita-Travel:</label>
+                <input type="date" className="p-2 border border-black outline-green-500 w-full" value={whenToTravel} onChange={handleWhenToTravel} />
+              </div>
+
+              <div className="w-full">
+                <label htmlFor="" className='text-gray-700 text-sm'>Saan Dadalhin:</label>
+                <input type="text" placeholder="Saan Dadalhin" className="p-2 border border-black outline-green-500 w-full" value={whereToTravel} onChange={handleWhereToTravel} />
+              </div>
+            </div>
+
+            <div className="w-full flex flex-col px-3">
+              <label htmlFor="" className='text-gray-700 text-sm'>Email:</label>
+              <input type="email" placeholder="Enter Email Address" className="p-2 border border-black outline-green-500 w-full" value={email} onChange={handleEmail} />
+            </div>
+
+            <div className="px-3 w-full my-3">
               <button className="bg-green-500 text-white w-full p-1 font-semibold hover:bg-green-400">Submit</button>
             </div>
             {/* Loading animation */}
@@ -248,4 +318,4 @@ function CertificateOfResidency() {
   );
 }
 
-export default CertificateOfResidency;
+export default TravelPermit;
