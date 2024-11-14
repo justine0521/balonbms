@@ -12,7 +12,6 @@ import Image5 from '../Images/About-Picture/About-Picture5.jpg';
 import Image6 from '../Images/About-Picture/About-Picture6.jpg';
 import Image7 from '../Images/About-Picture/About-Picture7.jpg';
 import Image8 from '../Images/About-Picture/About-Picture8.jpg';
-import { div } from 'three/webgpu';
 import HistorySection from '../Components/HistorySection';
 import AccomplishmentSection from '../Components/AccomplishmentSection';
 
