@@ -76,7 +76,10 @@ const Navbar = ({ containerStyles }) => {
         )}
       </NavLink>
 
+<<<<<<< HEAD
       {/* Removed the Track Request Feature */}
+=======
+>>>>>>> 0ea9f65789507b2b51730e02641d480c1f2c4666
       {/* <NavLink to={'/pages/track-request'}>
         {({ isActive }) => (
           <button className={`${isActive ? 'text-green-400 text-sm font-semibold flex-1 border-b-2 border-b-green-400' : 'hover:text-green-500'} p-2`}>
