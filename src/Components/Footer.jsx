@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import Logo from '../Images/logowhitebg.png'
 
 import { FaFacebookF, FaPhoneAlt } from 'react-icons/fa';
 import { FaLocationDot } from "react-icons/fa6";
@@ -9,6 +8,7 @@ import { SiGmail } from "react-icons/si";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 function Footer() {
+  const [barangayLogo, setBarangayLogo] = useState('');
   const [barangayName, setBarangayName] = useState('');
   const [contactNumber, setContactNumber] = useState('');
   const [facebook, setFacebook] = useState('');
@@ -20,6 +20,7 @@ function Footer() {
         const response = await fetch(`${API_BASE_URL}/api/barangay-info`)
         if (response.ok) {
           const data = await response.json();
+          setBarangayLogo(data.logoUrl)
           setBarangayName(data.name)
           setContactNumber(data.contactNumber)
           setFacebook(data.facebook)
@@ -39,7 +40,7 @@ function Footer() {
       <div className="footer max-w-screen-xl mx-auto p-10 text-white">
         <aside>
           <div className='flex flex-wrap items-center gap-2'>
-            <img src={Logo} alt="Balon Anito Logo" className='h-24'/>
+            <img src={barangayLogo} alt="Balon Anito Logo" className='h-24'/>
 
             <div className='text-xl text-white'>
               <p>Barangay</p>
@@ -89,7 +90,6 @@ function Footer() {
             {contactNumber}
           </li>
 
-
           <a href="https://www.facebook.com/profile.php?id=100092042062918" className='flex items-center gap-2 link link-hover'>
             <FaFacebookF className='text-white text-xl' />
             {facebook}
@@ -99,10 +99,11 @@ function Footer() {
             {email}
           </a>
         </nav>
+      </div>
 
-    <div className="border-t border-white bg-green-500  p-8 text-center">
-      <p className='text-white'><strong>&copy;</strong> {new Date().getFullYear()} <strong className="text-white">Balon Anito.</strong> All rights reserved.</p>
-    </div>
+      <div className="border-t border-white bg-green-500  p-8 text-center">
+        <p className='text-white'><strong>&copy;</strong> {new Date().getFullYear()} <strong className="text-white">Balon Anito.</strong> All rights reserved.</p>
+      </div>
 
     </footer>
   );
