@@ -223,8 +223,8 @@ function BarangayClearance() {
         <form className="w-full md:w-1/2 h-fit pb-5 bg-white mt-5 rounded" onSubmit={handleSubmit}>
           <p className="text-green-500 bg-gray-100 font-semibold p-3 border">BARANGAY CLEARANCE</p>
 
-          <div className="flex flex-col gap-2">
-            <div className="w-full flex flex-col gap-y-1 px-3 py-3">
+          <div className="flex flex-col gap-2 mt-2">
+            {/* <div className="w-full flex flex-col gap-y-1 px-3 py-3">
               <label className="text-green-500 font-semibold">Tracking Code <span className='text-gray-600 font-normal'>(Copy your tracking code)</span></label>
 
               <div className='relative'>
@@ -232,7 +232,7 @@ function BarangayClearance() {
 
                 <MdOutlineContentCopy onClick={handleCopyTracking} className='absolute top-3 right-3 text-lg cursor-pointer text-green-500' />
               </div>
-            </div>
+            </div> */}
 
             <div className="w-full flex flex-col px-3">
               <label htmlFor="" className='text-gray-700 text-sm'>Name:</label>
