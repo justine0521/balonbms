@@ -198,7 +198,7 @@ function Guardianship() {
 
             <div className="w-full flex flex-col px-3">
               <label htmlFor="address" className='text-gray-700 text-sm'>Address:</label>
-              <input type="text" id='address' placeholder="Enter Address" className="p-2 border border-black outline-green-500 w-full" value={address} onChange={handleAddress} />
+              <input type="text" id='address' placeholder="House No. / Street / Subd Village" className="p-2 border border-black outline-green-500 w-full" value={address} onChange={handleAddress} />
             </div>
 
             <div className="w-full flex flex-col px-3">

@@ -97,7 +97,7 @@ const Officials = () => {
   }, []);
 
   return (
-    <section className="flex flex-col items-center mb-5">
+    <section className="flex flex-col items-center mb-5 max-w-screen-xl mx-auto">
       <div className="relative w-full bg-cover bg-center">
         <div className="relative inset-0 flex items-center justify-center">
           <div className="text-center text-black px-10 pt-10">

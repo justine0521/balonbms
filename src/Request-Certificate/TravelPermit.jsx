@@ -237,7 +237,7 @@ function TravelPermit() {
 
             <div className="w-full flex flex-col px-3">
               <label htmlFor="" className='text-gray-700 text-sm'>Address:</label>
-              <input type="text" placeholder="Address" className="p-2 border border-black outline-green-500 w-full" value={address} onChange={handleAddress} />
+              <input type="text" placeholder="House No. / Street / Subd Village" className="p-2 border border-black outline-green-500 w-full" value={address} onChange={handleAddress} />
             </div>
 
             <div className="w-full flex gap-3 px-3">

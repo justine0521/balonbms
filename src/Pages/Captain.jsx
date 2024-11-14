@@ -53,7 +53,7 @@ const Captain = () => {
   }
 
   return (
-    <section className="relative flex flex-col lg:flex-row items-center bg-white p-8">
+    <section className="relative flex flex-col lg:flex-row items-center bg-white p-8 max-w-screen-xl mx-auto">
       <div className="lg:w-1/3 w-full flex flex-col items-center">
         <div className="absolute inset-0 z-0 opacity-30">
           <img
