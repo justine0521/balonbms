@@ -8,6 +8,16 @@ export default {
       fontFamily: {
         'dancing': ['Dancing Script', 'cursive'],
       },
+      
+      colors: {
+        "darkGreen": "#2c6e49",
+        "whiteBg": "#edf2f4",
+        "white": "#ffffff",
+        "lightGreen": "#d8f3dc",
+        "greyBg": "#e9ecef",
+        "randomBg": "#fbfbf2",
+        
+      },
     },
   },
   plugins: [require("daisyui")],

@@ -12,6 +12,9 @@ import Image5 from '../Images/About-Picture/About-Picture5.jpg';
 import Image6 from '../Images/About-Picture/About-Picture6.jpg';
 import Image7 from '../Images/About-Picture/About-Picture7.jpg';
 import Image8 from '../Images/About-Picture/About-Picture8.jpg';
+import { div } from 'three/webgpu';
+import HistorySection from '../Components/HistorySection';
+import AccomplishmentSection from '../Components/AccomplishmentSection';
 
 function About() {
     const [ActiveAboutTab, setActiveAboutTab] = useState('Mission');
@@ -105,7 +108,30 @@ function About() {
                     </div>
                 </div>
             </div>
+
+            <div className="flex flex-col mx-0 lg:mx-10 wrap mt-20 mb-0 md:flex-row border-b-2 border-green-500">
+                <HistorySection/>
+            </div>
+            
+            <div className="relative w-full h-72 bg-cover bg-center mb-20">
+                <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-center text-white px-10 pt-10 mt-48 lg:mt-0">
+                        <h1 className="text-2xl font-bold mb-4 text-green-500">Accomplishments</h1>
+                        <p className="text-lg text-black">
+                        Barangay Balon Anito has been recognized for numerous achievements in recent years,
+                        demonstrating its commitment to serving the community. Some of the notable accomplishments
+                        include:</p>
+                    </div>
+                </div>
+            </div>
+            <div className="flex flex-col mx-0 lg:mx-10 wrap mt-0 md:flex-row mb-10">
+                <AccomplishmentSection/>
+            </div>
+            
         </section>
+
+
+        
     );
 }
 
