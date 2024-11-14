@@ -89,6 +89,7 @@ function Footer() {
             {contactNumber}
           </li>
 
+
           <a href="https://www.facebook.com/profile.php?id=100092042062918" className='flex items-center gap-2 link link-hover'>
             <FaFacebookF className='text-white text-xl' />
             {facebook}
@@ -98,7 +99,6 @@ function Footer() {
             {email}
           </a>
         </nav>
-      </div>
 
     <div className="border-t border-white bg-green-500  p-8 text-center">
       <p className='text-white'><strong>&copy;</strong> {new Date().getFullYear()} <strong className="text-white">Balon Anito.</strong> All rights reserved.</p>
