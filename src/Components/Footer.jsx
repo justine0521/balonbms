@@ -78,6 +78,7 @@ function Footer() {
           <NavLink to={"/pages/service"} className="link link-hover">Services</NavLink>
           <NavLink to={"/pages/news"} className="link link-hover">News</NavLink>
           <NavLink to={"/pages/faq"} className="link link-hover">FAQ</NavLink>
+
           {/* <NavLink to={"/pages/track-request"} className="link link-hover">Track Request</NavLink> */}
         </nav>
 
