@@ -6,6 +6,11 @@
   display: none;
 }
 
+.no-scrollbar {
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+}
+
 @keyframes shrink {
   from {
     width: 100%;
