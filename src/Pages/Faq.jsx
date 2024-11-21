@@ -31,7 +31,7 @@ const Faq = () => {
                             </h3>
                             {activeIndex === 0 && (
                                 <p className='text-gray-600 mt-2'>
-                                    Pwede kang mag-request ng certification sa aming website. Pindutin lamang ang "Services" sa navigation bar ng website, piliin kung anong uri ng certificate ang iyong kailangan, punan ang kinakailangang impormasyon, at i-submit ang iyong request.
+                                    Puwede kang mag-request ng certification sa aming website. Pindutin lamang ang "Services" sa navigation bar ng website, piliin kung anong uri ng certificate ang iyong kailangan, punan ang kinakailangang impormasyon, at i-submit ang iyong request.
                                 </p>
                             )}
                         </div>
@@ -47,7 +47,7 @@ const Faq = () => {
                             </h3>
                             {activeIndex === 1 && (
                                 <p className='text-gray-600 mt-2'>
-                                    Ang mga residente ay maaaring mag-request ng Barangay Clearance, Certificate of Residency, Indigency Certificate, at iba pang certification na inaalok ng barangay.
+                                    Ang mga residente ay maaaring mag-request ng Barangay Clearance, Certificate of Residency, Indigency Certificate, at iba pang certification na inaalok ng barangay. Pindutin lamang ang "Services" sa navigation bar oh sa loob ng menubar ng website.
                                 </p>
                             )}
                         </div>
@@ -63,7 +63,7 @@ const Faq = () => {
                             </h3>
                             {activeIndex === 2 && (
                                 <p className='text-gray-600 mt-2'>
-                                    Oo, mayroong kaukulang bayad para sa bawat certification. Makikita mo ito bago ka magsubmit ng iyong request.
+                                    Opo, mayroong kaukulang bayad para sa bawat certification. Makikita mo ito bago ka magsubmit ng iyong request.
                                 </p>
                             )}
                         </div>
@@ -79,7 +79,7 @@ const Faq = () => {
                             </h3>
                             {activeIndex === 3 && (
                                 <p className='text-gray-600 mt-2'>
-                                    Maaari kang magbayad through online gamit ang GCash. Pwede ring magbayad ng cash kapag in-deliver na ang certification sa iyong bahay.
+                                    Para sa proseso ng pagbabayad ng inyong request, inaanyayahan namin kayong bumisita sa Barangay Hall. Dito, maaaring pag-usapan ang kabuuang halaga ng bayad kasama ang mga opisyal ng barangay upang matiyak na maayos at transparent ang transaksyon.
                                 </p>
                             )}
                         </div>
