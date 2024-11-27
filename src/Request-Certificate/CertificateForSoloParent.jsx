@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Logo from '../Images/Logo.png';
-import { FaSpinner } from 'react-icons/fa'; // Import the Font Awesome spinner icon
 import BarangayClearance from '../Images/Certificate-Picture/Certificate for Solo Parent-1.png'
 import '../App.css';
 import axios from 'axios';
+import SubmitModal from '../Modal/SubmitModal';
 
 import { MdOutlineContentCopy } from "react-icons/md";
 
@@ -21,7 +20,7 @@ function CertificateForSoloParent() {
   const [showSubmitModal, setShowSubmitModal] = useState(false);
   const [showCopyTrackingModal, setShowCopyTrackingModal] = useState(false);
   const [timer, setTimer] = useState(3);
-  const [isSubmitting, setIsSubmitting] = useState(false); // New state for loading
+  const [isLoading, setIsLoading] = useState(false);
   const progressBarRef = useRef(null);
 
   const handleImageClick = () => {
@@ -107,42 +106,47 @@ function CertificateForSoloParent() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setIsSubmitting(true); // Show loading animation
-  
-    const dateRequest = new Date().toISOString(); 
   
     if (parent === '') {
       alert('Please enter name of parent');
+      return;
     } else if (!isNaN(parent)) {
       alert('Please enter a valid name');
+      return;
     } else if (hasSpecialCharacters.test(parent)) {
       alert('Please enter a name without special characters');
+      return;
     } else if (address === '') {
       alert('Please enter your address');
+      return;
     } else if (child === '') {
       alert('Please enter name of your child');
+      return;
     } else if (dateOfBirth === '') {
       alert('Please enter date of birth of your child');
+      return;
     } else {
-      const formData = {
-        certificateType: 'Certificate For Solo Parent',
-        dateRequest,
-        parent,
-        address,
-        child,
-        dateOfBirth,
-        email,
-        trackingCode,
-      };
+      setIsLoading(true);
+    }
   
-      try {
-        const response = await axios.post(`${API_BASE_URL}/api/soloParent`, formData);
-        // alert(response.data);
-      } catch (error) {
-        console.error('Error submitting the form:', error);
-        alert('There was an error submitting the form.');
-      }
-      setIsSubmitting(false); // Hide loading animation
+    const formData = {
+      certificateType: 'Certificate For Solo Parent',
+      dateRequest: new Date().toISOString(),
+      parent,
+      address,
+      child,
+      dateOfBirth,
+      email,
+      trackingCode,
+    };
+  
+    try {
+      const response = await axios.post(`${API_BASE_URL}/api/soloParent`, formData);
+    } catch (error) {
+      console.error('Error submitting the form:', error);
+      alert('There was an error submitting the form.');
+    } finally {
+      setIsLoading(false);
       resetForm();
       setShowSubmitModal(true);
     }
@@ -209,15 +213,11 @@ function CertificateForSoloParent() {
               <input type="email" id='email' placeholder="Enter Email Address" className="p-2 border border-black outline-green-500 w-full" value={email} onChange={handleEmail} />
             </div>
 
-            <div className="px-3 w-full mt-3">
-              <button className="bg-green-500 text-white w-full p-1 font-semibold hover:bg-green-400">Submit</button>
+            <div className="px-3 w-full">
+              <button className={`bg-green-500 text-white w-full p-1 font-semibold hover:bg-green-400 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`} disabled={isLoading}>
+                {isLoading ? 'Submitting' : 'Submit'}
+              </button>
             </div>
-            {/* Loading animation */}
-            {isSubmitting && (
-              <div className="flex justify-center items-center mt-3">
-                <FaSpinner className="animate-spin text-blue-500" /> {/* Font Awesome spinner */}
-              </div>
-            )}
           </div>
         </form>
       </div>
@@ -232,12 +232,7 @@ function CertificateForSoloParent() {
       )}
 
       {showSubmitModal && (
-        <div className="fixed right-5 top-5 flex items-center justify-center z-50">
-          <div className="bg-green-100 p-5 rounded shadow-lg w-80">
-            <p className="text-center text-gray-600 mb-4">Form Submitted Successfully!</p>
-            <div ref={progressBarRef} className="h-1 bg-green-500"></div>
-          </div>
-        </div>
+        <SubmitModal progressBarRef={progressBarRef}/>
       )}
     </section>
   );

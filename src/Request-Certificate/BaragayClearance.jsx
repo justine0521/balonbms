@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Logo from '../Images/Logo.png';
 import { FaSpinner } from 'react-icons/fa'; // Import the Font Awesome spinner icon
 import BrgyClearance from '../Images/Certificate-Picture/Barangay Clearance-1.png'
 import '../App.css';
 import axios from 'axios';
 
 import { MdOutlineContentCopy } from "react-icons/md";
+import SubmitModal from '../Modal/SubmitModal';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -26,7 +26,7 @@ function BarangayClearance() {
   const [showSubmitModal, setShowSubmitModal] = useState(false);
   const [showCopyTrackingModal, setShowCopyTrackingModal] = useState(false);
   const [timer, setTimer] = useState(3);
-  const [isSubmitting, setIsSubmitting] = useState(false); // New state for loading
+  const [isLoading, setIsLoading] = useState(false);
   const progressBarRef = useRef(null);
 
   const handleImageClick = () => {
@@ -83,24 +83,20 @@ function BarangayClearance() {
     setAddress(value);
   };
 
-
   const handleGender = (event) => {
     const value = event.target.value;
     setGender(value);
   };
-
 
   const handleAge = (event) => {
     const value = event.target.value;
     setAge(value);
   };
 
-
   const handleBirthday = (event) => {
     const value = event.target.value;
     setBirthday(value);
   };
-
 
   const handleBirthPlace = (event) => {
     const value = event.target.value;
@@ -147,58 +143,69 @@ function BarangayClearance() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setIsSubmitting(true); // Start loading
 
     if (fullName === '') {
       alert('Please enter your name');
+      return;
     } else if (!isNaN(fullName)) {
       alert('Please enter a valid name');
+      return; 
     } else if (address === '') {
       alert('Please enter your address');
+      return; 
     } else if (gender === '') {
       alert('Please enter your gender');
+      return;
     } else if (age === '') {
       alert('Please enter your age');
+      return; 
     } else if (birthday === '') {
       alert('Please enter your birthday');
+      return; 
     } else if (birthPlace === '') {
       alert('Please enter your birth place');
+      return;
     } else if (civilStatus === '') {
       alert('Please enter your civil status');
+      return; 
     } else if (bloodType === '') {
       alert('Please enter your blood type');
+      return;
     } else if (purpose === '') {
-      alert('Please enter your your purpose');
+      alert('Please enter your purpose');
+      return; 
     } else {
-
-      const formData = {
-        certificateType: 'Barangay Clearance',
-        fullName,
-        address,
-        gender,
-        age,
-        birthday,
-        birthPlace,
-        civilStatus,
-        bloodType,
-        email,
-        purpose,
-        trackingCode,
-      };
-
-      try {
-        const response = await axios.post(`${API_BASE_URL}/api/barangayClearance`, formData);
-        // alert(response.data);
-      } catch (error) {
-        console.error('Error submitting the form:', error);
-        alert('There was an error submitting the form.');
-      }
-      setIsSubmitting(false); // End loading
+      setIsLoading(true);
+    }
+  
+    const formData = {
+      certificateType: 'Barangay Clearance',
+      fullName,
+      address,
+      gender,
+      age,
+      birthday,
+      birthPlace,
+      civilStatus,
+      bloodType,
+      email,
+      purpose,
+      trackingCode,
+    };
+  
+    try {
+      const response = await axios.post(`${API_BASE_URL}/api/barangayClearance`, formData);
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error submitting the form:', error);
+      alert('There was an error submitting the form.');
+    } finally {
+      setIsLoading(false);
       resetForm();
       setShowSubmitModal(true);
     }
   };
-
+  
   return (
     <section className='mt-24 mb-10'>
       <div className='px-5 h-fit flex justify-center flex-wrap gap-10'>
@@ -314,34 +321,25 @@ function BarangayClearance() {
             </div>
 
             <div className="px-3 w-full">
-              <button className="bg-green-500 text-white w-full p-1 font-semibold hover:bg-green-400">Submit</button>
+              <button className={`bg-green-500 text-white w-full p-1 font-semibold hover:bg-green-400 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`} disabled={isLoading}>
+                {isLoading ? 'Submitting' : 'Submit'}
+              </button>
             </div>
-            {/* Loading animation */}
-            {isSubmitting && (
-              <div className="flex justify-center items-center mt-3">
-                <FaSpinner className="animate-spin text-blue-500" /> {/* Font Awesome spinner */}
-              </div>
-            )}
           </div>
         </form>
       </div>
 
-      {showCopyTrackingModal && (
+      {/* {showCopyTrackingModal && (
         <div className="fixed right-5 top-5 flex items-center justify-center z-50">
           <div className="bg-green-100 p-5 rounded shadow-lg w-80">
             <p className="text-center text-gray-600 mb-4">Tracking Code copied successfully!</p>
             <div ref={progressBarRef} className="h-1 bg-green-500"></div>
           </div>
         </div>
-      )}
+      )} */}
 
       {showSubmitModal && (
-        <div className="fixed right-5 top-5 flex items-center justify-center z-50">
-          <div className="bg-green-100 p-5 rounded shadow-lg w-80">
-            <p className="text-center text-gray-600 mb-4">Form Submitted Successfully!</p>
-            <div ref={progressBarRef} className="h-1 bg-green-500"></div>
-          </div>
-        </div>
+        <SubmitModal progressBarRef={progressBarRef}/>
       )}
     </section>
   );

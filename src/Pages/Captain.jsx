@@ -3,6 +3,7 @@ import axios from 'axios';
 import kap_image2 from '../Images/kap_image2.png'; // Still using local image for secondary display
 import map from '../Images/PHMap.png';
 import '../App.css'
+import { NavLink } from 'react-router-dom';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -16,15 +17,17 @@ const Captain = () => {
         const response = await axios.get(`${API_BASE_URL}/api/officials`);
         // Filter the official who is the Barangay Captain
         const barangayCaptain = response.data.find(
-          official => official.position.toLowerCase() === 'barangay captain' || official.position.toLowerCase() === 'punong barangay'
+          (official) =>
+            official.position.toLowerCase() === "barangay captain" ||
+            official.position.toLowerCase() === "punong barangay"
         );
         setCaptain(barangayCaptain);
-      } catch (error) {
-        console.error("Error fetching the barangay captain data:", error);
-        setError("Failed to fetch the Barangay Captain's data. Please try again later."); 
+      } catch (err) {
+        console.error("Error fetching the barangay captain data:", err);
+        setError(err.message); // Set the error state here
       }
     };
-
+  
     fetchCaptain();
   }, []);
 
@@ -52,6 +55,14 @@ const Captain = () => {
     );
   }
 
+  if (error) {
+    return (
+      <p className="bg-red-100 text-red-600 border border-red-500 px-4 py-2 rounded-md">
+        Error: {error.message}
+      </p>
+    );
+  }
+
   return (
     <section className="relative flex flex-col lg:flex-row items-center bg-white p-8 max-w-screen-xl mx-auto">
       <div className="lg:w-1/3 w-full flex flex-col items-center">
@@ -63,7 +74,7 @@ const Captain = () => {
           />
         </div>
         <img
-          src={captain.imageUrl} // Use the S3 image URL
+          src={captain.imageUrl}
           alt={captain.fullname}
           className="w-64 h-64 relative object-cover"
         />
@@ -84,9 +95,12 @@ const Captain = () => {
           {`Barangay Captain ${captain.fullname}, an accomplished advocate for working people and a proud product of the District.
           Barangay Captain ${captain.fullname} started serving since ${captain.startYear}. Learn more about Barangay Captain ${captain.fullname} and read his blog.`}
         </p>
-        <button className="mt-8 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 transition duration-200">
-          Contact Us
-        </button>
+
+        <NavLink to={'/pages/about'}>
+          <button className="mt-8 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 transition duration-200">
+            About Us
+          </button>
+        </NavLink>
       </div>
     </section>
   );

@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Logo from '../Images/Logo.png';
-import { FaSpinner } from 'react-icons/fa'; // Import the Font Awesome spinner icon
 import BarangayClearance from '../Images/Certificate-Picture/Certificate of Good Moral-1.png'
 import '../App.css';
 import axios from 'axios';
+import SubmitModal from '../Modal/SubmitModal';
 
 import { MdOutlineContentCopy } from "react-icons/md";
 
@@ -22,7 +21,7 @@ function Guardianship() {
   const [showSubmitModal, setShowSubmitModal] = useState(false);
   const [showCopyTrackingModal, setShowCopyTrackingModal] = useState(false);
   const [timer, setTimer] = useState(3);
-  const [isSubmitting, setIsSubmitting] = useState(false); // New state for loading
+  const [isLoading, setIsLoading] = useState(false);
   const progressBarRef = useRef(null);
 
   const handleImageClick = () => {
@@ -115,46 +114,55 @@ function Guardianship() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setIsSubmitting(true);
-
+  
     if (guardian === '') {
       alert('Please enter name of guardian');
+      return;
     } else if (!isNaN(guardian)) {
       alert('Please enter a valid name');
+      return;
     } else if (hasSpecialCharacters.test(guardian)) {
       alert('Please enter a guardian name without special characters');
+      return;
     } else if (address === '') {
       alert('Please enter your address');
+      return;
     } else if (child === '') {
       alert('Please name of your child');
+      return;
     } else if (birthdayOfChild === '') {
       alert('Please enter the birthday of your child');
+      return;
     } else if (placeOfBirth === '') {
       alert('Please enter place of birth of child');
+      return;
     } else {
-      const formData = {
-        certificateType: 'Guardianship',
-        guardian,
-        address,
-        child,
-        birthdayOfChild,
-        placeOfBirth,
-        email,
-        trackingCode,
-      };
-
-      try {
-        const response = await axios.post(`${API_BASE_URL}/api/guardianship`, formData);
-        // alert(response.data);
-      } catch (error) {
-        console.error('Error submitting the form:', error);
-        alert('There was an error submitting the form.');
-      }
-      setIsSubmitting(false);
+      setIsLoading(true);
+    }
+  
+    const formData = {
+      certificateType: 'Guardianship',
+      guardian,
+      address,
+      child,
+      birthdayOfChild,
+      placeOfBirth,
+      email,
+      trackingCode,
+    };
+  
+    try {
+      const response = await axios.post(`${API_BASE_URL}/api/guardianship`, formData);
+    } catch (error) {
+      console.error('Error submitting the form:', error);
+      alert('There was an error submitting the form.');
+    } finally {
+      setIsLoading(false);
       resetForm();
       setShowSubmitModal(true);
     }
   };
+  
 
   return (
     <section className='mt-24 mb-10'>
@@ -222,14 +230,10 @@ function Guardianship() {
             </div>
 
             <div className="px-3 w-full">
-              <button className="bg-green-500 text-white w-full p-1 font-semibold hover:bg-green-400">Submit</button>
+              <button className={`bg-green-500 text-white w-full p-1 font-semibold hover:bg-green-400 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`} disabled={isLoading}>
+                {isLoading ? 'Submitting' : 'Submit'}
+              </button>
             </div>
-            {/* Loading animation */}
-            {isSubmitting && (
-              <div className="flex justify-center items-center mt-3">
-                <FaSpinner className="animate-spin text-blue-500" /> {/* Font Awesome spinner */}
-              </div>
-            )}
           </div>
         </form>
       </div>
@@ -244,12 +248,7 @@ function Guardianship() {
       )}
 
       {showSubmitModal && (
-        <div className="fixed right-5 top-5 flex items-center justify-center z-50">
-          <div className="bg-green-100 p-5 rounded shadow-lg w-80">
-            <p className="text-center text-gray-600 mb-4">Form Submitted Successfully!</p>
-            <div ref={progressBarRef} className="h-1 bg-green-500"></div>
-          </div>
-        </div>
+        <SubmitModal progressBarRef={progressBarRef}/>
       )}
     </section>
   );
