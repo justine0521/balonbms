@@ -9,7 +9,7 @@ const CustomPrevArrow = (props) => {
   const { className, style, onClick } = props;
   return (
     <div
-      className={`${className} text-gray-400`} // Tailwind class for light gray color
+      className={`${className} text-gray-400`} 
       style={{ ...style, display: 'block' }}
       onClick={onClick}
     >
@@ -48,7 +48,7 @@ const CustomNextArrow = (props) => {
 
 const settings = {
   arrows: false,
-  dots: true,
+  dots: false,
   infinite: true,
   speed: 800,
   swipe: true,
@@ -79,17 +79,19 @@ const settings = {
 
 const Officials = () => {
   const [officials, setOfficials] = useState([]);
+  const [loading, setLoading] = useState(true); // Added loading state
+  const [error, setError] = useState(null); // Added error state
 
   useEffect(() => {
     const fetchOfficials = async () => {
+      setLoading(true); // Set loading to true when fetching starts
       try {
         const response = await axios.get(`${API_BASE_URL}/api/officials`);
-
         setOfficials(response.data);
       } catch (err) {
-        setError(err.message);
+        setError(err.message); // Set error message if the request fails
       } finally {
-        setLoading(false);
+        setLoading(false); // Set loading to false once fetching is complete
       }
     };
 
@@ -108,24 +110,41 @@ const Officials = () => {
       </div>
 
       <div className="w-full px-4 sm:px-8 md:px-16 lg:px-24 pb-12">
-        <Slider {...settings}>
-          {officials.map((data) => (
-            <div key={data._id} className="justify-center">
-              <div className="bg-white shadow-2xl p-10 text-center">
-                <div className="overflow-hidden rounded-full w-40 h-40 mx-auto mb-10">
-                  <img src={data.imageUrl} alt={data.fullname} className="w-full h-full object-cover" />
-                </div>
-                <div className="space-y-2">
-                  <p className="font-bold">{data.fullname}</p>
-                  <p className="text-sm text-blue-500">{data.position}</p>
+        {loading ? (
+          <div className="flex flex-col justify-center items-center">
+          <div className="loading">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+  
+          <p className='font-semibold text-green-500'>Loading...</p>
+        </div>
+        ) : error ? (
+          <div className="text-center text-red-500">Error: {error}</div>
+        ) : (
+          <Slider {...settings}>
+            {officials.map((data) => (
+              <div key={data._id} className="justify-center">
+                <div className="bg-white shadow-2xl p-10 text-center">
+                  <div className="overflow-hidden rounded-full w-40 h-40 mx-auto mb-10">
+                    <img src={data.imageUrl} alt={data.fullname} className="w-full h-full object-cover" />
+                  </div>
+                  <div className="space-y-2">
+                    <p className="font-bold">{data.fullname}</p>
+                    <p className="text-sm text-blue-500">{data.position}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </Slider>
+            ))}
+          </Slider>
+        )}
       </div>
     </section>
   );
 };
 
 export default Officials;
+

@@ -33,7 +33,7 @@ function About() {
             <div className='max-w-screen-xl mx-auto'>
                 <div className="relative w-full h-72 bg-cover bg-center">
                     <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-center text-white px-10 pt-10 mt-48 lg:mt-0">
+                        <div className="text-center text-white px-10 mt-48 lg:mt-0">
                             <h1 className="text-5xl font-bold mb-4 text-green-500">About Barangay Balon Anito</h1>
                             <p className="text-2xl text-green-500">Welcome to Barangay Balon Anito, a vibrant and inclusive community.</p>
                         </div>

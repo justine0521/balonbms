@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Logo from '../Images/Logo.png';
-import { FaSpinner } from 'react-icons/fa'; // Import the Font Awesome spinner icon
 import BarangayClearance from '../Images/Certificate-Picture/Certificate of Low Income-1.png'
 import '../App.css';
 import axios from 'axios';
+import SubmitModal from '../Modal/SubmitModal';
 
 import { MdOutlineContentCopy } from "react-icons/md";
 
@@ -21,7 +20,7 @@ function CommonLaw() {
   const [showSubmitModal, setShowSubmitModal] = useState(false);
   const [showCopyTrackingModal, setShowCopyTrackingModal] = useState(false);
   const [timer, setTimer] = useState(3);
-  const [isSubmitting, setIsSubmitting] = useState(false); // New state for loading
+  const [isLoading, setIsLoading] = useState(false);
   const progressBarRef = useRef(null);
 
   const handleImageClick = () => {
@@ -108,41 +107,48 @@ function CommonLaw() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setIsSubmitting(true);
-
-    if (male && female === '') {
-      alert('Please enter name');
-    } else if (!isNaN(male && female)) {
-      alert('Please enter a valid name');
-    } else if (hasSpecialCharacters.test(male && female)) {
-      alert('Please enter a name without special characters');
+  
+    if (male === '' || female === '') {
+      alert('Please enter both names');
+      return;
+    } else if (!isNaN(male) || !isNaN(female)) {
+      alert('Please enter valid names');
+      return;
+    } else if (hasSpecialCharacters.test(male) || hasSpecialCharacters.test(female)) {
+      alert('Please enter names without special characters');
+      return;
     } else if (tirahan === '') {
       alert('Please enter tirahan');
+      return;
     } else if (yearTogether === '') {
       alert('Please enter year together');
+      return;
     } else {
-      const formData = {
-        certificateType: 'Common Law',
-        male,
-        female,
-        tirahan,
-        yearTogether,
-        email,
-        trackingCode,
-      };
-
-      try {
-        const response = await axios.post(`${API_BASE_URL}/api/commonLaw`, formData);
-        // alert(response.data);
-      } catch (error) {
-        console.error('Error submitting the form:', error);
-        alert('There was an error submitting the form.');
-      }
-      setIsSubmitting(false);
+      setIsLoading(true);
+    }
+  
+    const formData = {
+      certificateType: 'Common Law',
+      male,
+      female,
+      tirahan,
+      yearTogether,
+      email,
+      trackingCode,
+    };
+  
+    try {
+      const response = await axios.post(`${API_BASE_URL}/api/commonLaw`, formData);
+    } catch (error) {
+      console.error('Error submitting the form:', error);
+      alert('There was an error submitting the form.');
+    } finally {
+      setIsLoading(false);
       resetForm();
       setShowSubmitModal(true);
     }
   };
+  
 
   return (
     <section className='mt-24 mb-10'>
@@ -205,14 +211,10 @@ function CommonLaw() {
             </div>
 
             <div className="px-3 w-full">
-              <button className="bg-green-500 text-white w-full p-1 font-semibold hover:bg-green-400">Submit</button>
+              <button className={`bg-green-500 text-white w-full p-1 font-semibold hover:bg-green-400 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`} disabled={isLoading}>
+                {isLoading ? 'Submitting' : 'Submit'}
+              </button>
             </div>
-            {/* Loading animation */}
-            {isSubmitting && (
-              <div className="flex justify-center items-center mt-3">
-                <FaSpinner className="animate-spin text-blue-500" /> {/* Font Awesome spinner */}
-              </div>
-            )}
           </div>
         </form>
       </div>
@@ -227,12 +229,7 @@ function CommonLaw() {
       )}
 
       {showSubmitModal && (
-        <div className="fixed right-5 top-5 flex items-center justify-center z-50">
-          <div className="bg-green-100 p-5 rounded shadow-lg w-80">
-            <p className="text-center text-gray-600 mb-4">Form Submitted Successfully!</p>
-            <div ref={progressBarRef} className="h-1 bg-green-500"></div>
-          </div>
-        </div>
+        <SubmitModal progressBarRef={progressBarRef}/>
       )}
     </section>
   );
