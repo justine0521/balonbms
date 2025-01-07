@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import DefaultProfile from '../Images/defaultProfile.png';
-import Logo from '../Images/Logoo.png'
+import Logo from '../Images/Logo.png'
 import axios from 'axios';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
