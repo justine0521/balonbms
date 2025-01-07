@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import DefaultProfile from '../Images/defaultprofile.png';
+import DefaultProfile from '../Images/defaultProfile.png';
 import Logo from '../Images/Logoo.png'
 import axios from 'axios';
 
