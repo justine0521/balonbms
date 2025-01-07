@@ -34,8 +34,8 @@ function About() {
                 <div className="relative w-full h-72 bg-cover bg-center">
                     <div className="absolute inset-0 flex items-center justify-center">
                         <div className="text-center text-white px-10 mt-48 lg:mt-0">
-                            <h1 className="text-5xl font-bold mb-4 text-green-500">About Barangay Balon Anito</h1>
-                            <p className="text-2xl text-green-500">Welcome to Barangay Balon Anito, a vibrant and inclusive community.</p>
+                            <h1 className="text-5xl font-bold mb-4 text-green-700">About Barangay Balon Anito</h1>
+                            <p className="text-2xl text-green-700">Welcome to Barangay Balon Anito, a vibrant and inclusive community.</p>
                         </div>
                     </div>
                 </div>
@@ -70,17 +70,17 @@ function About() {
                         </Slider>
                     </div>
 
-                    <div className='w-full lg:w-1/2 lg:mt-5 ml-0 lg:-ml-10 mt-7 border-r-2 margin-right border-green-500 bg-white p-3 z-10 shadow-xl drop-shadow-xl'>
+                    <div className='w-full lg:w-1/2 lg:mt-5 ml-0 lg:-ml-10 mt-7 border-r-2 margin-right border-green-700 bg-white p-3 z-10 shadow-xl drop-shadow-xl'>
                         <div className='flex gap-2'>
-                            <button className={`${ActiveAboutTab === 'Mission' ? 'bg-green-500 text-white' : 'hover:text-green-500 hover:border-b-green-500 border-b-2'} p-2 mb-5`} onClick={() => setActiveAboutTab('Mission')}>
+                            <button className={`${ActiveAboutTab === 'Mission' ? 'bg-green-700 text-white' : 'hover:text-green-700 hover:border-b-green-700 border-b-2'} p-2 mb-5`} onClick={() => setActiveAboutTab('Mission')}>
                                 Mission
                             </button>
 
-                            <button className={`${ActiveAboutTab === 'Vision' ? 'bg-green-500 text-white' : 'hover:text-green-500 hover:border-b-green-500 border-b-2'} p-2 mb-5`} onClick={() => setActiveAboutTab('Vision')}>
+                            <button className={`${ActiveAboutTab === 'Vision' ? 'bg-green-700 text-white' : 'hover:text-green-700 hover:border-b-green-700 border-b-2'} p-2 mb-5`} onClick={() => setActiveAboutTab('Vision')}>
                                 Vision
                             </button>
 
-                            <button className={`${ActiveAboutTab === 'Goal' ? 'bg-green-500 text-white' : 'hover:text-green-500 hover:border-b-green-500 border-b-2'} p-2 mb-5`} onClick={() => setActiveAboutTab('Goal')}>
+                            <button className={`${ActiveAboutTab === 'Goal' ? 'bg-green-700 text-white' : 'hover:text-green-700 hover:border-b-green-700 border-b-2'} p-2 mb-5`} onClick={() => setActiveAboutTab('Goal')}>
                                 Goal
                             </button>
                         </div>
@@ -108,29 +108,29 @@ function About() {
                 </div>
             </div>
 
-            <div className="flex flex-col mx-0 lg:mx-10 wrap mt-20 mb-0 md:flex-row border-b-2 border-green-500">
-                <HistorySection/>
+            <div className="flex flex-col mx-0 lg:mx-10 wrap mt-20 mb-0 md:flex-row border-b-2 border-green-700">
+                <HistorySection />
             </div>
-            
+
             <div className="relative w-full h-72 bg-cover bg-center mb-20">
                 <div className="absolute inset-0 flex items-center justify-center">
                     <div className="text-center text-white px-10 pt-10 mt-48 lg:mt-0">
-                        <h1 className="text-2xl font-bold mb-4 text-green-500">Accomplishments</h1>
+                        <h1 className="text-2xl font-bold mb-4 text-green-700">Accomplishments</h1>
                         <p className="text-lg text-black">
-                        Barangay Balon Anito has been recognized for numerous achievements in recent years,
-                        demonstrating its commitment to serving the community. Some of the notable accomplishments
-                        include:</p>
+                            Barangay Balon Anito has been recognized for numerous achievements in recent years,
+                            demonstrating its commitment to serving the community. Some of the notable accomplishments
+                            include:</p>
                     </div>
                 </div>
             </div>
             <div className="flex flex-col mx-0 lg:mx-10 wrap mt-0 md:flex-row mb-10">
-                <AccomplishmentSection/>
+                <AccomplishmentSection />
             </div>
-            
+
         </section>
 
 
-        
+
     );
 }
 

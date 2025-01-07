@@ -36,7 +36,7 @@ function Footer() {
   }, [])
 
   return (
-    <footer className="bg-green-500">
+    <footer className="bg-green-700">
       <div className="footer max-w-screen-xl mx-auto p-10 text-white grid gap-8 lg:grid-cols-4 sm:grid-cols-1">
         <aside>
           <div className="flex flex-wrap items-center gap-2">
@@ -50,6 +50,17 @@ function Footer() {
             Maayos na Serbisyo Publiko, Susi sa Progresibong Balon Anito
           </p>
         </aside>
+
+        <nav className="lg:mx-auto">
+          <h6 className="text-xl uppercase font-bold text-green-100">Quick Links</h6>
+          <NavLink to={"/"} className="link link-hover">Home</NavLink>
+          <NavLink to={"/pages/about"} className="link link-hover">About</NavLink>
+          <NavLink to={"/pages/service"} className="link link-hover">Services</NavLink>
+          <NavLink to={"/pages/news"} className="link link-hover">News</NavLink>
+          <NavLink to={"/pages/faq"} className="link link-hover">FAQ</NavLink>
+
+          {/* <NavLink to={"/pages/track-request"} className="link link-hover">Track Request</NavLink> */}
+        </nav>
 
         <nav className="lg:mx-auto">
           <h6 className="text-xl uppercase font-bold text-green-100">Services</h6>
@@ -72,17 +83,6 @@ function Footer() {
         </nav>
 
         <nav className="lg:mx-auto">
-          <h6 className="text-xl uppercase font-bold text-green-100">Quick Links</h6>
-          <NavLink to={"/"} className="link link-hover">Home</NavLink>
-          <NavLink to={"/pages/about"} className="link link-hover">About</NavLink>
-          <NavLink to={"/pages/service"} className="link link-hover">Services</NavLink>
-          <NavLink to={"/pages/news"} className="link link-hover">News</NavLink>
-          <NavLink to={"/pages/faq"} className="link link-hover">FAQ</NavLink>
-
-          {/* <NavLink to={"/pages/track-request"} className="link link-hover">Track Request</NavLink> */}
-        </nav>
-
-        <nav className="lg:mx-auto">
           <h6 className="text-xl uppercase font-bold text-green-100">Contact Us</h6>
           <li className="flex items-center gap-2">
             <FaPhoneAlt className="text-white text-xl" />
@@ -99,7 +99,7 @@ function Footer() {
         </nav>
       </div>
 
-      <div className="border-t border-white bg-green-500 p-8 text-center">
+      <div className="border-t border-white bg-green-700 p-8 text-center">
         <p className="text-white"><strong>&copy;</strong> {new Date().getFullYear()} <strong className="text-white">Balon Anito.</strong> All rights reserved.</p>
       </div>
     </footer>

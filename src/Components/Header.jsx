@@ -68,22 +68,22 @@ function Header() {
       <div className="flex justify-between items-center py-3">
         <div className="flex items-center justify-center gap-x-1">
           <img src={barangayLogo || '/default-logo.png'} alt="Logo" className="h-10" />
-          <p className="text-xl text-green-500">{barangayName || 'Barangay Name'}</p>
+          <p className="text-xl text-green-700">{barangayName || 'Barangay Name'}</p>
         </div>
 
         {/* Desktop Navbar */}
         <Navbar containerStyles="hidden md:flex gap-x-3 xl:gap-x-10 medium-15" />
 
         {/* Mobile Navbar */}
-        <div ref={navbarRef} className={`${menuOpened ? 'flex items-center text-center flex-col gap-y-5 fixed top-20 right-3 p-5 bg-white rounded-xl shadow-xl w-60 medium-16 transition-all duration-300' : 'flex items-center text-center flex-col gap-y-5 fixed top-20 p-5 bg-white rounded-3xl shadow-md w-64 medium-16 transition-all duration-300 -right-[100%]' }`}>
+        <div ref={navbarRef} className={`${menuOpened ? 'flex items-center text-center flex-col gap-y-5 fixed top-20 right-3 p-5 bg-white rounded-xl shadow-xl w-60 medium-16 transition-all duration-300' : 'flex items-center text-center flex-col gap-y-5 fixed top-20 p-5 bg-white rounded-3xl shadow-md w-64 medium-16 transition-all duration-300 -right-[100%]'}`}>
           <Navbar containerStyles="flex flex-col gap-y-5" />
         </div>
 
         {/* Menu Buttons */}
         {!menuOpened ? (
-          <MdMenu onClick={toggleMenu} aria-label="Open menu" className="md:hidden cursor-pointer hover:text-green-500 hover:ring-orange-400 mr-2 p-1 h-8 w-8 rounded-full" />
+          <MdMenu onClick={toggleMenu} aria-label="Open menu" className="md:hidden cursor-pointer hover:text-green-700 hover:ring-orange-400 mr-2 p-1 h-8 w-8 rounded-full" />
         ) : (
-          <MdClose onClick={toggleMenu} aria-label="Close menu" className="md:hidden cursor-pointer hover:text-green-500 hover:ring-orange-400 mr-2 p-1 h-8 w-8 rounded-full" />
+          <MdClose onClick={toggleMenu} aria-label="Close menu" className="md:hidden cursor-pointer hover:text-green-700 hover:ring-orange-400 mr-2 p-1 h-8 w-8 rounded-full" />
         )}
       </div>
     </header>

@@ -10,8 +10,8 @@ const Faq = () => {
     };
     return (
         <div className='max-w-5xl mx-auto p-6 mt-5'>
-            <p className='mt-16 text-l text-green-500 text-center'>Barangay Balon Common FAQ'S</p>
-            <p className='text-5xl mt-2 text-green-500 font-semibold text-center'>Frequently Asked Question</p>
+            <p className='mt-16 text-l text-green-700 text-center'>Barangay Balon Common FAQ'S</p>
+            <p className='text-5xl mt-2 text-green-700 font-semibold text-center'>Frequently Asked Question</p>
 
             <div className='mt-12 flex flex-col md:flex-row gap-8'>
                 <div className='w-full md:w-1/2'>

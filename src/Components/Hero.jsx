@@ -38,18 +38,18 @@ function Hero() {
 
   return (
     <section className='relative flex justify-center items-center min-h-screen bg-white px-6'>
-      <div className='absolute inset-0 bg-green-500 clip-slant'></div>
+      <div className='absolute inset-0 bg-green-700 clip-slant'></div>
 
       <div className='relative flex flex-col md:flex-row-reverse justify-between items-center max-w-screen-xl mx-auto z-10'>
 
         <div className='flex flex-col justify-center items-center md:items-start text-center md:text-left w-full md:w-auto order-1 md:order-2 mt-36 md:mt-12 lg:mt-20'>
           <p className='text-4xl font-semibold text-white'>Dedicated to Serving You</p>
           <p className='text-6xl font-semibold uppercase text-white mt-4'>BARANGAY <br />{barangayName}</p>
-          <p className='mt-5 text-white text-xl'>Reliable Public Service, Strengthening Our Community's Foundation</p>
+          <p className='mt-5 text-white text-xl'>Maayos na Serbisyo Publiko, Susi sa Progresibong <br /> Balon Anito</p>
 
           <div className='mt-5'>
             <HashLink smooth to={`#captain`}>
-              <button className='bg-white text-green-500 px-5 py-2 rounded-lg hover:bg-green-100'>Learn More</button>
+              <button className='bg-white text-green-500 px-5 py-2 rounded-lg hover:bg-green-500 hover:text-white'>Learn More</button>
             </HashLink>
 
             <HashLink to={'/pages/service'}>

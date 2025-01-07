@@ -4,12 +4,12 @@ import { useContext, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 const Navbar = ({ containerStyles }) => {
-  
+
   return (
     <nav className={containerStyles}>
       <NavLink to={'/'}>
         {({ isActive }) => (
-          <button className={`${isActive ? 'text-green-400 text-sm  flex-1 border-b-2 border-b-green-400' : 'hover:text-green-500'} font-medium p-2`}>
+          <button className={`${isActive ? 'text-green-700 text-sm  flex-1 border-b-2 border-b-green-700' : 'hover:text-green-500'} font-medium p-2`}>
             Home
           </button>
         )}
@@ -17,7 +17,7 @@ const Navbar = ({ containerStyles }) => {
 
       <NavLink to={'/pages/about'}>
         {({ isActive }) => (
-          <button className={`${isActive ? 'text-green-400 text-sm flex-1 border-b-2 border-b-green-400' : 'hover:text-green-500'} font-medium p-2`}>
+          <button className={`${isActive ? 'text-green-700 text-sm flex-1 border-b-2 border-b-green-700' : 'hover:text-green-500'} font-medium p-2`}>
             About
           </button>
         )}
@@ -25,7 +25,7 @@ const Navbar = ({ containerStyles }) => {
 
       <NavLink to={'/pages/service'}>
         {({ isActive }) => (
-          <button className={`${isActive ? 'text-green-400 text-sm flex-1 border-b-2 border-b-green-400' : 'hover:text-green-500'} font-medium p-2`}>
+          <button className={`${isActive ? 'text-green-700 text-sm flex-1 border-b-2 border-b-green-700' : 'hover:text-green-500'} font-medium p-2`}>
             Services
           </button>
         )}
@@ -33,7 +33,7 @@ const Navbar = ({ containerStyles }) => {
 
       <NavLink to={'/pages/news'}>
         {({ isActive }) => (
-          <button className={`${isActive ? 'text-green-400 text-sm flex-1 border-b-2 border-b-green-400' : 'hover:text-green-500'} font-medium p-2`}>
+          <button className={`${isActive ? 'text-green-700 text-sm flex-1 border-b-2 border-b-green-700' : 'hover:text-green-500'} font-medium p-2`}>
             News
           </button>
         )}
@@ -41,7 +41,7 @@ const Navbar = ({ containerStyles }) => {
 
       <NavLink to={'/pages/faq'}>
         {({ isActive }) => (
-          <button className={`${isActive ? 'text-green-400 text-sm flex-1 border-b-2 border-b-green-400' : 'hover:text-green-500'} font-medium p-2`}>
+          <button className={`${isActive ? 'text-green-700 text-sm flex-1 border-b-2 border-b-green-700' : 'hover:text-green-500'} font-medium p-2`}>
             FAQ's
           </button>
         )}

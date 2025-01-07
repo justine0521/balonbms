@@ -93,7 +93,7 @@ function Announcement() {
           <span></span>
         </div>
 
-        <p className='font-semibold text-green-500'>Fetching Data...</p>
+        <p className='font-semibold text-green-700'>Fetching Data...</p>
       </div>
     );
   }
@@ -109,7 +109,7 @@ function Announcement() {
 
       {!isAnnouncement && (
         <div className='h-96 w-full flex justify-center items-center'>
-          <h1 className='text-5xl font-semibold text-green-500'>There is no Announcement</h1>
+          <h1 className='text-5xl font-semibold text-green-700'>There is no Announcement</h1>
         </div>
       )}
 
@@ -127,7 +127,7 @@ function Announcement() {
               />
               <div className='flex flex-col justify-between p-4 flex-1'>
                 <div>
-                  <h2 className='text-md font-semibold text-green-500'>{announcement.title}</h2>
+                  <h2 className='text-md font-semibold text-green-700'>{announcement.title}</h2>
                   <p className='text-xs text-gray-400 mb-2'>Posted on: {format(new Date(announcement.createdAt), 'Pp')}</p>
                   <hr />
                 </div>
@@ -142,7 +142,7 @@ function Announcement() {
                       setSelectedAnnouncement(announcement);
                       setIsModalOpen(true);
                     }}
-                    className='text-sm text-green-500 hover:underline mt-2 self-start'
+                    className='text-sm text-green-700 hover:underline mt-2 self-start'
                   >
                     Read More
                   </button>
@@ -161,7 +161,7 @@ function Announcement() {
 
           <span className="px-4 py-2 mx-2">Page {currentPage} of {totalPages}</span>
 
-          <button onClick={handleNextPage} disabled={currentPage === totalPages} className={`px-4 py-2 mx-2 rounded ${currentPage === totalPages ? 'bg-gray-300 cursor-not-allowed' : 'bg-green-500 text-white hover:bg-green-600'}`} >
+          <button onClick={handleNextPage} disabled={currentPage === totalPages} className={`px-4 py-2 mx-2 rounded ${currentPage === totalPages ? 'bg-gray-300 cursor-not-allowed' : 'bg-green-700 text-white hover:bg-green-600'}`} >
             Next
           </button>
         </div>
