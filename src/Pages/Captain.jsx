@@ -87,7 +87,7 @@ const Captain = () => {
         </div>
       </div>
       <div className="lg:w-2/3 w-full mt-8 lg:mt-0 lg:pr-8 relative z-10 lg:ml-[-1rem]">
-        <h3 className="text-4xl font-bold mb-4 text-green-700"> Meet the Brgy.Captain </h3>
+        <h3 className="text-3xl font-bold mb-4 text-green-700"> Meet the Brgy.Captain </h3>
         <h2 className="text-2xl font-bold">{captain.fullname}</h2>
         <p className="text-xl italic mt-4">
           "A true leader does not create separation, A true leader brings people together." - Tendai Ruben Mbofana
