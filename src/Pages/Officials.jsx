@@ -1,150 +1,102 @@
 import React, { useEffect, useState } from 'react';
-import Slider from 'react-slick';
+import DefaultProfile from '../Images/defaultProfile.png';
+import Logo from '../Images/Logo.png'
 import axios from 'axios';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-// Custom Previous Arrow Component
-const CustomPrevArrow = (props) => {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={`${className} text-gray-400`} 
-      style={{ ...style, display: 'block' }}
-      onClick={onClick}
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="currentColor"
-        className="w-6 h-6"
-        viewBox="0 0 24 24"
-      >
-        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
-      </svg>
-    </div>
-  );
-};
-
-// Custom Next Arrow Component
-const CustomNextArrow = (props) => {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={`${className} text-gray-400`} // Tailwind class for light gray color
-      style={{ ...style, display: 'block' }}
-      onClick={onClick}
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="currentColor"
-        className="w-6 h-6"
-        viewBox="0 0 24 24"
-      >
-        <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L12.17 12z" />
-      </svg>
-    </div>
-  );
-};
-
-const settings = {
-  arrows: false,
-  dots: false,
-  infinite: true,
-  speed: 800,
-  swipe: true,
-  swipeToSlide: true,
-  slidesToShow: 3,
-  slidesToScroll: 1,
-  autoplay: true,
-  autoplaySpeed: 3000,
-  cssEase: "ease-in-out",
-  pauseOnHover: true,
-  nextArrow: <CustomNextArrow />,
-  prevArrow: <CustomPrevArrow />,
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 2,
-      }
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 1,
-      }
-    }
-  ]
-};
-
 const Officials = () => {
   const [officials, setOfficials] = useState([]);
-  const [loading, setLoading] = useState(true); // Added loading state
-  const [error, setError] = useState(null); // Added error state
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchOfficials = async () => {
-      setLoading(true); // Set loading to true when fetching starts
+      setLoading(true);
       try {
         const response = await axios.get(`${API_BASE_URL}/api/officials`);
         setOfficials(response.data);
       } catch (err) {
-        setError(err.message); // Set error message if the request fails
+        setError(err.message);
       } finally {
-        setLoading(false); // Set loading to false once fetching is complete
+        setLoading(false);
       }
     };
 
     fetchOfficials();
   }, []);
 
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
+
+  const punongBarangay = officials.find((official) => official.position === 'Punong Barangay');
+  const secretary = officials.find((official) => official.position === 'Barangay Secretary')
+  const treasurer = officials.find((official) => official.position === 'Barangay Treasurer')
+  const kagawad = officials.filter((official) => official.position === 'Barangay Kagawad');
+  const chairperson = officials.find((official) => official.position === 'SK Chairperson');
+
   return (
     <section className="flex flex-col items-center mb-5 max-w-screen-xl mx-auto">
       <div className="relative w-full bg-cover bg-center">
         <div className="relative inset-0 flex items-center justify-center">
           <div className="text-center text-black px-10 pt-10">
-            <p className="text-2xl text-green-500">Balon Anito</p>
             <h1 className="text-5xl font-bold mb-4 text-green-500">Our Officials</h1>
           </div>
         </div>
       </div>
 
-      <div className="w-full px-4 sm:px-8 md:px-16 lg:px-24 pb-12">
-        {loading ? (
-          <div className="flex flex-col justify-center items-center">
-          <div className="loading">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
+      <div className="h-fit px-4 pb-12 w-[90%] relative">
+
+        {punongBarangay && (
+          <div className="text-center mb-10 z-10">
+            <img  src={punongBarangay.imageUrl || DefaultProfile } alt={punongBarangay.fullname} className="w-24 h-24 mx-auto rounded border border-gray-400"/>
+            <p className="font-medium">{punongBarangay.fullname}</p>
+            <p className="text-gray-600 text-sm">{punongBarangay.position}</p>
           </div>
-  
-          <p className='font-semibold text-green-500'>Loading...</p>
-        </div>
-        ) : error ? (
-          <div className="text-center text-red-500">Error: {error}</div>
-        ) : (
-          <Slider {...settings}>
-            {officials.map((data) => (
-              <div key={data._id} className="justify-center">
-                <div className="bg-white shadow-2xl p-10 text-center">
-                  <div className="overflow-hidden rounded-full w-40 h-40 mx-auto mb-10">
-                    <img src={data.imageUrl} alt={data.fullname} className="w-full h-full object-cover" />
-                  </div>
-                  <div className="space-y-2">
-                    <p className="font-bold">{data.fullname}</p>
-                    <p className="text-sm text-blue-500">{data.position}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </Slider>
         )}
+
+        <div className='flex flex-wrap justify-around items-center mb-10 gap-10'>
+          {secretary && (
+            <div>
+              <img  src={secretary.imageUrl || DefaultProfile } alt={secretary.fullname} className="w-24 h-24 mx-auto rounded border border-gray-400"/>
+              <p className="font-medium">{secretary.fullname}</p>
+              <p className="text-gray-600 text-sm text-center">{secretary.position}</p>
+            </div>
+          )}
+
+          {treasurer && (
+            <div>
+              <img src={treasurer.imageUrl || DefaultProfile } alt={treasurer.fullname} className="w-24 h-24 mx-auto rounded border border-gray-400"/>
+              <p className="font-medium">{treasurer.fullname}</p>
+              <p className="text-gray-600 text-sm text-center">{treasurer.position}</p>
+            </div>
+          )}
+        </div>
+
+        <div className="flex flex-wrap justify-evenly text-center gap-10 mt-10">
+          {kagawad.map((official) => (
+            <div key={official.id} className="text-center">
+              <img src={official.imageUrl || DefaultProfile} alt={official.fullname} className="w-24 h-24 mx-auto rounded border border-gray-400"/>
+              <p className="font-medium">{official.fullname}</p>
+              <p className="text-gray-600 text-sm">{official.position}</p>
+            </div>
+          ))}
+
+          {chairperson && (
+            <div className="text-center">
+              <img src={chairperson.imageUrl || DefaultProfile} alt={chairperson.fullname} className="w-24 h-24 mx-auto rounded border border-gray-400" />
+              <p className="font-medium">{chairperson.fullname}</p>
+              <p className="text-gray-600 text-sm">{chairperson.position}</p>
+            </div>
+          )}
+
+          {/* <div className='flex items-center justify-center absolute top-0 h-full'>
+            <img src={Logo} alt="" className='w-full h-full opacity-20'/>
+          </div> */}
+        </div>
       </div>
     </section>
   );
 };
 
 export default Officials;
-
