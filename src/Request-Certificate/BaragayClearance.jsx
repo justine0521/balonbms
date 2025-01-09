@@ -194,7 +194,7 @@ function BarangayClearance() {
       });
 
       if (checkResponse.data.isBlocked) {
-        alert('Sorry, you are not allowed to submit this form as you are in the blocklist. Please contact the barangay office for more information.');
+        // alert('Sorry, you are not allowed to submit this form as you are in the blocklist. Please contact the barangay office for more information.');
         setShowSettlementModal(true);
         return;
       }
