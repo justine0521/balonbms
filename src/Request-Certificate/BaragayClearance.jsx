@@ -6,6 +6,7 @@ import axios from 'axios';
 
 import { MdOutlineContentCopy } from "react-icons/md";
 import SubmitModal from '../Modal/SubmitModal';
+import SettlementModal from '../Modal/SettlementModal';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -24,6 +25,7 @@ function BarangayClearance() {
   const [trackingCode, setTrackingCode] = useState('');
   const [isImageEnlarged, setIsImageEnlarged] = useState(false);
   const [showSubmitModal, setShowSubmitModal] = useState(false);
+  const [showSettlementModal, setShowSettlementModal] = useState(false);
   const [showCopyTrackingModal, setShowCopyTrackingModal] = useState(false);
   const [timer, setTimer] = useState(3);
   const [isLoading, setIsLoading] = useState(false);
@@ -139,73 +141,95 @@ function BarangayClearance() {
     setTrackingCode(newTrackingCode);
   };
 
+  const closeSettlementModal = () => {
+    setShowSettlementModal(false);
+  };
+
+
   const hasSpecialCharacters = /[!@#$%^&*(),.?":{}|<>]/;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    // Validate form fields first
     if (fullName === '') {
       alert('Please enter your name');
       return;
     } else if (!isNaN(fullName)) {
       alert('Please enter a valid name');
-      return; 
+      return;
     } else if (address === '') {
       alert('Please enter your address');
-      return; 
+      return;
     } else if (gender === '') {
       alert('Please enter your gender');
       return;
     } else if (age === '') {
       alert('Please enter your age');
-      return; 
+      return;
     } else if (birthday === '') {
       alert('Please enter your birthday');
-      return; 
+      return;
     } else if (birthPlace === '') {
       alert('Please enter your birth place');
       return;
     } else if (civilStatus === '') {
       alert('Please enter your civil status');
-      return; 
+      return;
     } else if (bloodType === '') {
       alert('Please enter your blood type');
       return;
     } else if (purpose === '') {
       alert('Please enter your purpose');
-      return; 
-    } else {
-      setIsLoading(true);
+      return;
     }
-  
-    const formData = {
-      certificateType: 'Barangay Clearance',
-      fullName,
-      address,
-      gender,
-      age,
-      birthday,
-      birthPlace,
-      civilStatus,
-      bloodType,
-      email,
-      purpose,
-      trackingCode,
-    };
-  
+
     try {
+      // Check if user is blocklisted before proceeding
+      const checkResponse = await axios.get(`${API_BASE_URL}/api/checkBlocklist`, {
+        params: {
+          fullName: fullName,
+          birthday: birthday
+        }
+      });
+
+      if (checkResponse.data.isBlocked) {
+        alert('Sorry, you are not allowed to submit this form as you are in the blocklist. Please contact the barangay office for more information.');
+        setShowSettlementModal(true);
+        return;
+      }
+
+      // If not blocklisted, proceed with form submission
+      setIsLoading(true);
+
+      const formData = {
+        certificateType: 'Barangay Clearance',
+        fullName,
+        address,
+        gender,
+        age,
+        birthday,
+        birthPlace,
+        civilStatus,
+        bloodType,
+        email,
+        purpose,
+        trackingCode,
+      };
+
       const response = await axios.post(`${API_BASE_URL}/api/barangayClearance`, formData);
       console.log(response.data);
-    } catch (error) {
-      console.error('Error submitting the form:', error);
-      alert('There was an error submitting the form.');
-    } finally {
-      setIsLoading(false);
       resetForm();
       setShowSubmitModal(true);
+
+    } catch (error) {
+      console.error('Error:', error);
+      alert(error.response?.data || 'There was an error processing your request.');
+    } finally {
+      setIsLoading(false);
     }
   };
-  
+
   return (
     <section className='mt-24 mb-10'>
       <div className='px-5 h-fit flex justify-center flex-wrap gap-10'>
@@ -272,7 +296,7 @@ function BarangayClearance() {
                 <label htmlFor="" className='text-gray-700 text-sm'>Birthday:</label>
                 <input type="date" className="p-2 border border-black outline-green-500 w-full" value={birthday} onChange={handleBirthday} />
               </div>
-            
+
               <div className="w-full">
                 <label htmlFor="" className='text-gray-700 text-sm'>Birth Place:</label>
                 <input type="text" placeholder="Ex. Balanga, Bataan" className="p-2 border border-black outline-green-500 w-full" value={birthPlace} onChange={handleBirthPlace} />
@@ -339,7 +363,12 @@ function BarangayClearance() {
       )} */}
 
       {showSubmitModal && (
-        <SubmitModal progressBarRef={progressBarRef}/>
+        <SubmitModal progressBarRef={progressBarRef} />
+      )}
+      {showSettlementModal && (
+        <SettlementModal
+          close={closeSettlementModal}
+        />
       )}
     </section>
   );
