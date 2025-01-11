@@ -34,7 +34,15 @@ const Navbar = ({ containerStyles }) => {
       <NavLink to={'/pages/news'}>
         {({ isActive }) => (
           <button className={`${isActive ? 'text-green-700 text-sm flex-1 border-b-2 border-b-green-700' : 'hover:text-green-500'} font-medium p-2`}>
-            Announcement
+            Announcements
+          </button>
+        )}
+      </NavLink>
+
+      <NavLink to={'/pages/accomplishment'}>
+        {({ isActive }) => (
+          <button className={`${isActive ? 'text-green-700 text-sm flex-1 border-b-2 border-b-green-700' : 'hover:text-green-500'} font-medium p-2`}>
+            Accomplishments
           </button>
         )}
       </NavLink>

@@ -33,7 +33,6 @@ const Service = () => {
         fetchBarangayInfo();
     }, []);
 
-    // Tab content mapping
     const renderForm = () => {
         switch (activeTab) {
             case "BarangayClearance":
@@ -59,46 +58,62 @@ const Service = () => {
         }
     };
 
+    const tabButtons = [
+        { id: "BarangayClearance", label: "Barangay Clearance" },
+        { id: "BusinessClearance", label: "Business Clearance" },
+        { id: "CertificateForSoloParent", label: "Solo Parent" },
+        { id: "CertificateOfIndigency", label: "Indigency" },
+        { id: "CertificateOfResidency", label: "Residency" },
+        { id: "CommonLaw", label: "Common Law" },
+        { id: "Guardianship", label: "Guardianship" },
+        { id: "JobSeeker", label: "Job Seeker" },
+        { id: "TravelPermit", label: "Travel Permit" },
+    ];
+
     return (
-        <section className="w-full flex flex-col justify-center bg-slate-50">
-            <div className="max-w-screen-2xl mx-auto mt-8">
-                <div className="text-center">
-                    <p className="mt-16 text-xl text-green-700">Services</p>
-                    <p className="py-5 mb-10 px-10 md:px-32 text-4xl font-bold text-green-700">
-                        We now offer online certificates. <br /> You can now easily request
-                        a certificate online, making the process faster and more convenient.
-                    </p>
+        <section className="min-h-screen w-full bg-slate-50">
+            <div className="w-full">
+                {/* Header Section */}
+                <div className="w-full bg-slate-50 py-8 md:py-16">
+                    <div className="text-center px-4">
+                        <p className="text-xl text-green-700 mt-24">Services</p>
+                        <p className="mt-4 text-2xl md:text-4xl font-bold text-green-700 px-0 lg:px-24">
+                            We now offer online certificates. <br className="hidden md:block" />
+                            You can now easily request a certificate online, making the process faster and more convenient.
+                        </p>
+                    </div>
                 </div>
 
-                {/* Tab Buttons */}
-                <div className="flex flex-wrap justify-center gap-4 mb-8">
-                    {[
-                        { id: "BarangayClearance", label: "Barangay Clearance" },
-                        { id: "BusinessClearance", label: "Business Clearance" },
-                        { id: "CertificateForSoloParent", label: "Solo Parent" },
-                        { id: "CertificateOfIndigency", label: "Indigency" },
-                        { id: "CertificateOfResidency", label: "Residency" },
-                        { id: "CommonLaw", label: "Common Law" },
-                        { id: "Guardianship", label: "Guardianship" },
-                        { id: "JobSeeker", label: "Job Seeker" },
-                        { id: "TravelPermit", label: "Travel Permit" },
-                    ].map((tab) => (
-                        <button
-                            key={tab.id}
-                            onClick={() => setActiveTab(tab.id)}
-                            className={`px-4 py-2 rounded-md text-sm font-semibold transition ${activeTab === tab.id
-                                ? "bg-green-700 text-white"
-                                : "bg-white text-green-700 border border-green-700"
-                                }`}
-                        >
-                            {tab.label}
-                        </button>
-                    ))}
+
+                {/* Tab Buttons Section - Full Width Background */}
+                <div className="w-full py-8">
+                    <div className="max-w-7xl mx-auto px-4">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+                            {tabButtons.map((tab) => (
+                                <button
+                                    key={tab.id}
+                                    onClick={() => setActiveTab(tab.id)}
+                                    className={`w-full px-3 py-3 md:py-4 rounded-lg text-sm md:text-base font-semibold 
+                                        transition-all duration-200 hover:shadow-md
+                                        ${activeTab === tab.id
+                                            ? "bg-green-700 text-white shadow-lg transform scale-[1.02]"
+                                            : "bg-white text-green-700 border-2 border-green-700 hover:bg-green-50"
+                                        }`}
+                                >
+                                    {tab.label}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
                 </div>
 
-                {/* Render Active Tab Content */}
-                <div className="bg-white p-6 rounded-md shadow-md">
-                    {renderForm()}
+                {/* Form Section */}
+                <div className="w-full bg-slate-50 py-8">
+                    <div className="max-w-7xl mx-auto px-4">
+                        <div className="bg-white p-4 md:p-6 rounded-lg shadow-md">
+                            {renderForm()}
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

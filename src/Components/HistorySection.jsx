@@ -8,7 +8,7 @@ const HistorySection = () => {
             <div className="bg-white p-4 lg:mr-10 lg:flex lg:items-center lg:gap-10">
 
                 {/* FIRST HISTORY SECTION */}
-                <div className="w-full lg:w-1/2 flex flex-col gap-8">
+                <div className="w-full mt-32 lg:mt-0 lg:w-1/2 flex flex-col gap-8">
                     <h1 className="text-green-700 text-2xl font-semibold">History of Barangay Balon Anito</h1>
                     <p className="text-sm">
                         Barangay Balon Anito has a rich and fascinating history that stretches back over several centuries. The name “Balon Anito” is deeply rooted in local folklore. The word "Balon" refers to a spring or a well, a vital resource for early settlers, while "Anito" is a term that refers to the ancestral spirits revered by the community. This sacred spring, according to local tradition, was the gathering place where the ancestors would honor these spirits, seeking their wisdom, protection, and blessings for prosperity.
@@ -44,7 +44,7 @@ const HistorySection = () => {
                 </div>
 
                 <div className="w-full lg:w-1/2 flex flex-col gap-8">
-                    <h1 className="text-green-700 text-2xl font-semibold">Sacred Spring and its Significance</h1>
+                    <h1 className="text-green-700 text-2xl font-semibold mt-8 lg:mt-0">Sacred Spring and its Significance</h1>
                     <p className="text-sm">
                         The sacred spring, which is the origin of the name "Balon," has long been an essential part of the barangay’s identity. The spring was once a source of life for the early settlers who relied on it for water. It was not only a physical resource but also held a spiritual significance. People would visit the spring to honor the Anito spirits, believing that their offerings would ensure the community’s safety and prosperity. This tradition continues to be a cornerstone of the barangay's cultural practices today.
                     </p>

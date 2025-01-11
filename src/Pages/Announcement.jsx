@@ -117,7 +117,7 @@ function Announcement() {
       <div className='relative h-96 w-full bg-cover bg-center' style={{ backgroundImage: `url(${Picture})` }}>
         <div className='absolute inset-0 bg-black bg-opacity-50'></div>
         <div className="relative flex justify-center items-center h-full z-10 p-4 text-white">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mt-20">ANNOUNCEMENT</h1>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mt-20">ANNOUNCEMENTS</h1>
         </div>
       </div>
 
@@ -131,8 +131,8 @@ function Announcement() {
         <div>
           <div className="flex justify-center items-center my-6 w-full px-6">
             <div className="flex items-center border border-gray-300 rounded-full overflow-hidden w-full max-w-lg">
-              <input type="text" value={searchQuery} onChange={handleSearch} placeholder="Search announcements..." className="flex-grow px-4 py-2 text-sm outline-none"/>
-              
+              <input type="text" value={searchQuery} onChange={handleSearch} placeholder="Search announcements..." className="flex-grow px-4 py-2 text-sm outline-none" />
+
               <button className="px-4 py-2 text-gray-600">
                 <FaSearch />
               </button>
@@ -142,7 +142,7 @@ function Announcement() {
           <div className='flex flex-col flex-wrap justify-center items-center gap-6 p-6 w-full max-w-screen-2xl mx-auto'>
             {currentAnnouncements.map((announcement, index) => (
               <div key={index} className='flex flex-col sm:flex-row w-[70%] h-fit bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105'>
-                <img src={announcement.imageUrl || DefaultPicture} alt={announcement.title} className='w-full sm:w-52 h-52 sm:h-auto object-fit'/>
+                <img src={announcement.imageUrl || DefaultPicture} alt={announcement.title} className='w-full sm:w-52 h-52 sm:h-auto object-fit' />
                 <div className='flex flex-col justify-between p-4 flex-1'>
                   <div>
                     <h2 className='text-md font-semibold text-green-700'>{announcement.title}</h2>
@@ -165,7 +165,7 @@ function Announcement() {
 
       {totalPages > 1 && (
         <div className="flex justify-end items-center gap-4 my-6 w-full px-5">
-          <button onClick={handlePreviousPage} disabled={currentPage === 1} className={`flex items-center gap-2 px-5 py-2 rounded-full border text-sm font-medium transition-colors duration-200 ${ currentPage === 1 ? 'bg-gray-200 text-gray-400 cursor-not-allowed border-gray-300' : 'bg-green-700 text-white hover:bg-green-800 border-green-700' }`}>
+          <button onClick={handlePreviousPage} disabled={currentPage === 1} className={`flex items-center gap-2 px-5 py-2 rounded-full border text-sm font-medium transition-colors duration-200 ${currentPage === 1 ? 'bg-gray-200 text-gray-400 cursor-not-allowed border-gray-300' : 'bg-green-700 text-white hover:bg-green-800 border-green-700'}`}>
             <FaChevronLeft /> Previous
           </button>
 
@@ -176,7 +176,7 @@ function Announcement() {
             <span className="font-semibold text-gray-800">{totalPages}</span>
           </div>
 
-          <button onClick={handleNextPage} disabled={currentPage === totalPages} className={`flex items-center gap-2 px-5 py-2 rounded-full border text-sm font-medium transition-colors duration-200 ${ currentPage === totalPages ? 'bg-gray-200 text-gray-400 cursor-not-allowed border-gray-300' : 'bg-green-700 text-white hover:bg-green-800 border-green-700' }`}>
+          <button onClick={handleNextPage} disabled={currentPage === totalPages} className={`flex items-center gap-2 px-5 py-2 rounded-full border text-sm font-medium transition-colors duration-200 ${currentPage === totalPages ? 'bg-gray-200 text-gray-400 cursor-not-allowed border-gray-300' : 'bg-green-700 text-white hover:bg-green-800 border-green-700'}`}>
             Next <FaChevronRight />
           </button>
         </div>
