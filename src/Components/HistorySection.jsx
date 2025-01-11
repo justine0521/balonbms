@@ -54,7 +54,7 @@ const HistorySection = () => {
                     <div className="inline-block">
                         <a href='https://www.philatlas.com/luzon/r03/bataan/mariveles/balon-anito.html?' target='blank'>
                             <button className="mt-2 bg-green-700 text-white px-4 py-2 rounded hover:bg-green-700 transition duration-200 w-auto">
-                                Learn More
+                                Visit PhilAtlas for Detailed Information
                             </button>
                         </a>
                     </div>
