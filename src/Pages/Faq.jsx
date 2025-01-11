@@ -1,17 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MdOutlineArrowDropDown } from "react-icons/md";
 import faq_image from '../Images/annie_faq.png';
+import { FaChevronLeft, FaChevronRight, FaSearch } from "react-icons/fa";
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Faq = () => {
     const [activeIndex, setActiveIndex] = useState(null);
+    const [faqs, setFaqs] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 5;
 
     const toggleAccordion = (index) => {
         setActiveIndex(activeIndex === index ? null : index);
     };
+
+    useEffect(() => {
+        const fetchFaqs = async () => {
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/faqs`);
+                if (response.ok) {
+                    const data = await response.json();
+                    setFaqs(data);
+                } else {
+                    console.error('Failed to fetch FAQs');
+                }
+            } catch (error) {
+                console.error('Error fetching FAQs:', error);
+            }
+        };
+
+        fetchFaqs();
+    }, []);
+
+    const totalPages = Math.ceil(faqs.length / itemsPerPage);
+    const paginatedFaqs = faqs.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+    const handleNext = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage((prev) => prev + 1);
+        }
+    };
+
+    const handlePrevious = () => {
+        if (currentPage > 1) {
+            setCurrentPage((prev) => prev - 1);
+        }
+    };
+
     return (
         <div className='max-w-5xl mx-auto p-6 mt-5'>
             <p className='mt-16 text-l text-green-700 text-center'>Barangay Balon Common FAQ'S</p>
-            <p className='text-5xl mt-2 text-green-700 font-semibold text-center'>Frequently Asked Question</p>
+            <p className='text-5xl mt-2 text-green-700 font-semibold text-center'>Frequently Asked Questions</p>
 
             <div className='mt-12 flex flex-col md:flex-row gap-8'>
                 <div className='w-full md:w-1/2'>
@@ -20,87 +60,42 @@ const Faq = () => {
 
                 <div className='w-full md:w-1/2'>
                     <div className='faq-container'>
-                        <hr className='-mt-2 border-t border-gray-300' />
-                        <div className='faq-box mb-6 '>
-                            <h3
-                                className={`flex items-center text-2xl font-semibold text-gray-800 cursor-pointer ${activeIndex === 0 ? 'active' : ''}`}
-                                onClick={() => toggleAccordion(0)}
-                            >
-                                Paano ako makakapag-request ng Certificate?
-                                <MdOutlineArrowDropDown className={`ml-1 flex-shrink-0 transition-transform duration-300 ${activeIndex === 0 ? 'rotate-180' : ''}`} />
-                            </h3>
-                            {activeIndex === 0 && (
-                                <p className='text-gray-600 mt-2'>
-                                    Puwede kang mag-request ng certification sa aming website. Pindutin lamang ang "Services" sa navigation bar ng website, piliin kung anong uri ng certificate ang iyong kailangan, punan ang kinakailangang impormasyon, at i-submit ang iyong request.
-                                </p>
-                            )}
-                        </div>
+                        {paginatedFaqs.map((faq, index) => (
+                            <div key={index} className='faq-box mb-6'>
+                                <hr className='-mt-2 border-t border-gray-300' />
+                                
+                                <h3 className={`flex items-center text-2xl font-semibold text-gray-800 cursor-pointer ${ activeIndex === index ? 'active' : '' }`} onClick={() => toggleAccordion(index)}>
+                                    <p>{faq.question}</p>
 
-                        <hr className='-mt-2 border-t border-gray-300' />
-                        <div className='faq-box mb-6'>
-                            <h3
-                                className={`flex items-center text-2xl font-semibold text-gray-800 cursor-pointer ${activeIndex === 1 ? 'active' : ''}`}
-                                onClick={() => toggleAccordion(1)}
-                            >
-                                Ano-anong uri ng mga certification ang pwedeng i-request sa website na ito?
-                                <MdOutlineArrowDropDown className={`ml-1 flex-shrink-0 transition-transform duration-300 ${activeIndex === 1 ? 'rotate-180' : ''}`} />
-                            </h3>
-                            {activeIndex === 1 && (
-                                <p className='text-gray-600 mt-2'>
-                                    Ang mga residente ay maaaring mag-request ng Barangay Clearance, Certificate of Residency, Indigency Certificate, at iba pang certification na inaalok ng barangay. Pindutin lamang ang "Services" sa navigation bar oh sa loob ng menubar ng website.
-                                </p>
-                            )}
-                        </div>
+                                    <MdOutlineArrowDropDown className={`ml-1 flex-shrink-0 transition-transform duration-300 ${ activeIndex === index ? 'rotate-180' : '' }`}/>
+                                </h3>
 
-                        <hr className='-mt-2 border-t border-gray-300' />
-                        <div className='faq-box mb-6'>
-                            <h3
-                                className={`flex items-center text-2xl font-semibold text-gray-800 cursor-pointer ${activeIndex === 2 ? 'active' : ''}`}
-                                onClick={() => toggleAccordion(2)}
-                            >
-                                May bayad ba ang pag-request ng certificate?
-                                <MdOutlineArrowDropDown className={`ml-1 flex-shrink-0 transition-transform duration-300 ${activeIndex === 2 ? 'rotate-180' : ''}`} />
-                            </h3>
-                            {activeIndex === 2 && (
-                                <p className='text-gray-600 mt-2'>
-                                    Opo, mayroong kaukulang bayad para sa bawat certification. Makikita mo ito bago ka magsubmit ng iyong request.
-                                </p>
-                            )}
-                        </div>
-
-                        <hr className='-mt-2 border-t border-gray-300' />
-                        <div className='faq-box mb-6'>
-                            <h3
-                                className={`flex items-center text-2xl font-semibold text-gray-800 cursor-pointer ${activeIndex === 3 ? 'active' : ''}`}
-                                onClick={() => toggleAccordion(3)}
-                            >
-                                Paano ko mababayaran ang aking request?
-                                <MdOutlineArrowDropDown className={`ml-1 flex-shrink-0 transition-transform duration-300 ${activeIndex === 3 ? 'rotate-180' : ''}`} />
-                            </h3>
-                            {activeIndex === 3 && (
-                                <p className='text-gray-600 mt-2'>
-                                    Para sa proseso ng pagbabayad ng inyong request, inaanyayahan namin kayong bumisita sa Barangay Hall. Dito, maaaring pag-usapan ang kabuuang halaga ng bayad kasama ang mga opisyal ng barangay upang matiyak na maayos at transparent ang transaksyon.
-                                </p>
-                            )}
-                        </div>
-
-                        <hr className='-mt-2 border-t border-gray-300' />
-                        <div className='faq-box mb-6'>
-                            <h3
-                                className={`flex items-center text-2xl font-semibold text-gray-800 cursor-pointer ${activeIndex === 4 ? 'active' : ''}`}
-                                onClick={() => toggleAccordion(4)}
-                            >
-                                Ano ang gagawin ko kung sakaling may problema sa aking request?
-                                <MdOutlineArrowDropDown className={`ml-1 flex-shrink-0 transition-transform duration-300 ${activeIndex === 4 ? 'rotate-180' : ''}`} />
-                            </h3>
-                            {activeIndex === 4 && (
-                                <p className='text-gray-600 mt-2'>
-                                    Kung may anumang problema o katanungan, puwede kang magtanong muna sa aming chatbot na matatagpuan sa website. Kung hindi pa rin maresolba ang iyong concern, maaari kang makipag-ugnayan sa barangay office gamit ang contact details na nasa website.
-                                </p>
-                            )}
-                        </div>
+                                {activeIndex === index && (
+                                    <p className='text-gray-600 mt-2'>{faq.answer}</p>
+                                )}
+                            </div>
+                        ))}
                         <hr className='-mt-2 border-t border-gray-300' />
                     </div>
+
+                    {faqs.length > itemsPerPage && (
+                        <div className="flex justify-center items-center gap-4 my-6 w-full px-5">
+                            <button onClick={handlePrevious} disabled={currentPage === 1} className={`flex items-center gap-2 px-5 py-2 rounded-full border text-sm font-medium transition-colors duration-200 ${ currentPage === 1 ? 'bg-gray-200 text-gray-400 cursor-not-allowed border-gray-300' : 'bg-green-700 text-white hover:bg-green-800 border-green-00' }`}>
+                                <FaChevronLeft /> Previous
+                            </button>
+                        
+                            <div className="flex items-center gap-2 text-sm">
+                                <span className="text-gray-500">Page</span>
+                                <span className="font-semibold text-gray-800">{currentPage}</span>
+                                <span className="text-gray-500">of</span>
+                                <span className="font-semibold text-gray-800">{totalPages}</span>
+                            </div>
+                        
+                            <button onClick={handleNext} disabled={currentPage === totalPages} className={`flex items-center gap-2 px-5 py-2 rounded-full border text-sm font-medium transition-colors duration-200 ${ currentPage === totalPages ? 'bg-gray-200 text-gray-400 cursor-not-allowed border-gray-300' : 'bg-green-700 text-white hover:bg-green-800 border-green-700' }`}>
+                                Next <FaChevronRight />
+                            </button>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
