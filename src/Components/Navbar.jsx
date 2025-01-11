@@ -15,14 +15,6 @@ const Navbar = ({ containerStyles }) => {
         )}
       </NavLink>
 
-      <NavLink to={'/pages/about'}>
-        {({ isActive }) => (
-          <button className={`${isActive ? 'text-green-700 text-sm flex-1 border-b-2 border-b-green-700' : 'hover:text-green-500'} font-medium p-2`}>
-            About
-          </button>
-        )}
-      </NavLink>
-
       <NavLink to={'/pages/service'}>
         {({ isActive }) => (
           <button className={`${isActive ? 'text-green-700 text-sm flex-1 border-b-2 border-b-green-700' : 'hover:text-green-500'} font-medium p-2`}>
@@ -31,10 +23,18 @@ const Navbar = ({ containerStyles }) => {
         )}
       </NavLink>
 
+      <NavLink to={'/pages/about'}>
+        {({ isActive }) => (
+          <button className={`${isActive ? 'text-green-700 text-sm flex-1 border-b-2 border-b-green-700' : 'hover:text-green-500'} font-medium p-2`}>
+            History
+          </button>
+        )}
+      </NavLink>
+
       <NavLink to={'/pages/news'}>
         {({ isActive }) => (
           <button className={`${isActive ? 'text-green-700 text-sm flex-1 border-b-2 border-b-green-700' : 'hover:text-green-500'} font-medium p-2`}>
-            News
+            Announcement
           </button>
         )}
       </NavLink>
