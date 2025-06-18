@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import BarangayClearance from '../Images/Certificate-Picture/commonLaw-1.png'
+import BarangayClearance from '../Images/Certificate-Image/CommonLaw-1.png'
 import '../App.css';
 import axios from 'axios';
 import SubmitModal from '../Modal/SubmitModal';
+import Swal from 'sweetalert2';
 
 import { MdOutlineContentCopy } from "react-icons/md";
 
@@ -109,19 +110,49 @@ function CommonLaw() {
     event.preventDefault();
   
     if (male === '' || female === '') {
-      alert('Please enter both names');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter both names",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (!isNaN(male) || !isNaN(female)) {
-      alert('Please enter valid names');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter valid names",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (hasSpecialCharacters.test(male) || hasSpecialCharacters.test(female)) {
-      alert('Please enter names without special characters');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter names without special characters",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (tirahan === '') {
-      alert('Please enter tirahan');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter tirahan",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (yearTogether === '') {
-      alert('Please enter year together');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter year together",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else {
       setIsLoading(true);

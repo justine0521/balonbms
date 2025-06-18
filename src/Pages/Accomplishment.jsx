@@ -8,10 +8,8 @@ const Accomplishment = () => {
                 <div className="absolute inset-0 flex items-center justify-center mt-24 lg:mt-28">
                     <div className="text-center px-4">
                         <p className="text-xl mb-4 text-green-700 mt-24">Accomplishments</p>
-                        <p className="mt-4 text-2xl md:text-4xl font-bold text-green-700 px-0 lg:px-24">
-                            Barangay Balon Anito has been recognized for numerous achievements in recent years,
-                            demonstrating its commitment to serving the community. Some of the notable accomplishments
-                            include:</p>
+                        <p className="mt-4 text-2xl md:text-4xl font-semibold text-green-700 px-0 lg:px-24">
+                            Barangay Balon Anito has been recognized for numerous achievements in recent years,Some of the notable accomplishments include:</p>
                     </div>
                 </div>
             </div>

@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import BarangayClearance from '../Images/Certificate-Picture/guardianship-1.png'
+import BarangayClearance from '../Images/Certificate-Image/Guardianship-1.png'
 import '../App.css';
 import axios from 'axios';
 import SubmitModal from '../Modal/SubmitModal';
+import Swal from 'sweetalert2';
 
 import { MdOutlineContentCopy } from "react-icons/md";
 
@@ -116,25 +117,67 @@ function Guardianship() {
     event.preventDefault();
   
     if (guardian === '') {
-      alert('Please enter name of guardian');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter name of guardian",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (!isNaN(guardian)) {
-      alert('Please enter a valid name');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter a valid name",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (hasSpecialCharacters.test(guardian)) {
-      alert('Please enter a guardian name without special characters');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter a guardian name without special characters",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (address === '') {
-      alert('Please enter your address');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter your address",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (child === '') {
-      alert('Please name of your child');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please name of your child",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (birthdayOfChild === '') {
-      alert('Please enter the birthday of your child');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter the birthday of your child",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (placeOfBirth === '') {
-      alert('Please enter place of birth of child');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter place of birth of child",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else {
       setIsLoading(true);

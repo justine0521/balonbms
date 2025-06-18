@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import Hero from "../Components/Hero";
+import Hero from "../Components/Hero2";
 import About from "../Pages/About";
 import Location from "./Location";
 import TrackRequest from "./TrackRequest";

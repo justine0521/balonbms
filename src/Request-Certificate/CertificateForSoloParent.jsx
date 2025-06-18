@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import BarangayClearance from '../Images/Certificate-Picture/soloParent-1.png'
+import BarangayClearance from '../Images/Certificate-Image/SoloParent-1.png'
 import '../App.css';
 import axios from 'axios';
 import SubmitModal from '../Modal/SubmitModal';
+import Swal from 'sweetalert2';
 
 import { MdOutlineContentCopy } from "react-icons/md";
 
@@ -108,22 +109,58 @@ function CertificateForSoloParent() {
     event.preventDefault();
   
     if (parent === '') {
-      alert('Please enter name of parent');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter name of parent",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (!isNaN(parent)) {
-      alert('Please enter a valid name');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter a valid name",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (hasSpecialCharacters.test(parent)) {
-      alert('Please enter a name without special characters');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter a name without special characters",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (address === '') {
-      alert('Please enter your address');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter your address",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (child === '') {
-      alert('Please enter name of your child');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter name of your child",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (dateOfBirth === '') {
-      alert('Please enter date of birth of your child');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter date of birth of your child",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else {
       setIsLoading(true);

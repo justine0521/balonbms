@@ -37,10 +37,10 @@ function Footer() {
 
   return (
     <footer className="bg-green-700">
-      <div className="footer max-w-screen-xl mx-auto p-10 text-white grid gap-8 lg:grid-cols-4 sm:grid-cols-1">
+      <div className="footer max-w-screen-xl mx-auto py-10 md:px-10 px-5 text-white grid gap-8 lg:grid-cols-4 sm:grid-cols-1">
         <aside>
           <div className="flex flex-wrap items-center gap-2">
-            <img src={barangayLogo} alt="Balon Anito Logo" className="h-24" />
+            <img src={barangayLogo} alt="Balon Anito Logo" className="md:h-24 h-16" />
             <div className="text-xl text-white">
               <p>Barangay</p>
               <p>{barangayName}</p>

@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import BarangayClearance from '../Images/Certificate-Picture/residency-1.png'
+import BarangayClearance from '../Images/Certificate-Image/Residency-1.png'
 import '../App.css';
 import axios from 'axios';
 import { MdOutlineContentCopy } from "react-icons/md";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import SubmitModal from '../Modal/SubmitModal';
+import Swal from 'sweetalert2';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -110,19 +111,49 @@ function CertificateOfResidency() {
     event.preventDefault();
   
     if (fullName === '') {
-      alert('Please enter your full name');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter your full name",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (!isNaN(fullName)) {
-      alert('Please enter a valid name');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter a valid name",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (hasSpecialCharacters.test(fullName)) {
-      alert('Please enter a name without special characters');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter a name without special characters",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (address === '') {
-      alert('Please enter your address');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter your address",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (civilStatus === '') {
-      alert('Please enter your civil status');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter your civil status",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else {
       setIsLoading(true);

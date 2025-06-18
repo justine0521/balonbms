@@ -45,7 +45,7 @@ function Hero() {
         <div className='flex flex-col justify-center items-center md:items-start text-center md:text-left w-full md:w-auto order-1 md:order-2 mt-36 md:mt-12 lg:mt-20'>
           <p className='text-4xl font-semibold text-white'>Dedicated to Serving You</p>
           <p className='text-6xl font-semibold uppercase text-white mt-4'>BARANGAY <br />{barangayName}</p>
-          <p className='mt-5 text-white text-xl'>Maayos na Serbisyo Publiko, Susi sa Progresibong <br /> Balon Anito</p>
+          <p className='mt-5 text-white text-xl w-[90%]'>Maayos na Serbisyo Publiko, Susi sa Progresibong Balon Anito</p>
 
           <div className='mt-5'>
             <HashLink smooth to={`#captain`}>

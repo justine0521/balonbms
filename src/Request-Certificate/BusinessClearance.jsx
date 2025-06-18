@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import BarangayClearance from '../Images/Certificate-Picture/Business Clearance-1.png';
+import BarangayClearance from '../Images/Certificate-Image/BusinessClearance-1.png';
 import '../App.css';
 import SubmitModal from '../Modal/SubmitModal';
+import Swal from 'sweetalert2';
 
 import { MdOutlineContentCopy } from "react-icons/md";
 
@@ -109,22 +110,58 @@ function BusinessClearance() {
     event.preventDefault();
   
     if (owner === '') {
-      alert('Please enter owner name');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter the owner name",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (!isNaN(owner)) {
-      alert('Please enter a valid name');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter a valid name",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (hasSpecialCharacters.test(owner)) {
-      alert('Please enter a name without special characters');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter a name without special characters",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (business === '') {
-      alert('Please enter your business');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter your business",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (natureOfBusiness === '') {
-      alert('Please enter your nature of business');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter your nature of business",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (address === '') {
-      alert('Please enter your address of business');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter your address of business",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else {
       setIsLoading(true);

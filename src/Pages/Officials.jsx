@@ -37,8 +37,8 @@ const Officials = () => {
 
   return (
     <section className="flex flex-col items-center mb-5 max-w-screen-xl mx-auto px-4 py-20">
-      <div className="text-center text-black py-10">
-        <h1 className="text-5xl font-bold text-green-700">Meet Our Barangay Officials</h1>
+      <div className="text-center text-black pb-10">
+        <h1 className="md:text-5xl text-4xl font-bold text-green-700">Meet Our Barangay Officials</h1>
         <p className="text-xl text-gray-600 mt-4">Dedicated individuals leading our community with passion and service.</p>
       </div>
 

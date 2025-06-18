@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FaSpinner } from 'react-icons/fa'; // Import the Font Awesome spinner icon
-import BrgyClearance from '../Images/Certificate-Picture/barangayClearance-1.png'
+import { FaSpinner } from 'react-icons/fa';
+import BrgyClearance from '../Images/Certificate-Image/BarangayClearance-1.png'
 import '../App.css';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 import { MdOutlineContentCopy } from "react-icons/md";
 import SubmitModal from '../Modal/SubmitModal';
@@ -153,34 +154,94 @@ function BarangayClearance() {
 
     // Validate form fields first
     if (fullName === '') {
-      alert('Please enter your name');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter your name first",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (!isNaN(fullName)) {
-      alert('Please enter a valid name');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter a valid name",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (address === '') {
-      alert('Please enter your address');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter your address",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (gender === '') {
-      alert('Please enter your gender');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter your gender",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (age === '') {
-      alert('Please enter your age');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter your age",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (birthday === '') {
-      alert('Please enter your birthday');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter your birthday",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (birthPlace === '') {
-      alert('Please enter your birth place');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter your birth place",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (civilStatus === '') {
-      alert('Please enter your civil status');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter your civil status",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (bloodType === '') {
-      alert('Please enter your blood type');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter your blood type",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (purpose === '') {
-      alert('Please enter your purpose');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter your purpose",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     }
 

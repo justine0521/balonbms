@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import BarangayClearance from '../Images/Certificate-Picture/Certificate of No Property-1.png'
+import BarangayClearance from '../Images/Certificate-Image/TravelPermit-1.png'
 import '../App.css';
 import axios from 'axios';
 import SubmitModal from '../Modal/SubmitModal';
+import Swal from 'sweetalert2';
 
 import { MdOutlineContentCopy } from "react-icons/md";
 
@@ -144,34 +145,76 @@ function TravelPermit() {
     event.preventDefault();
   
     if (owner === '') {
-      alert('Please enter pangalan ng may ari');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter pangalan ng may ari",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (!isNaN(owner)) {
-      alert('Please enter a valid name');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter a valid name",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
-    } else if (plateNumber === '') {
-      alert('Please enter your plate number');
-      return;
-    } else if (scrap === '') {
-      alert('Please enter anong scrap ang ita-travel');
+    } if (plateNumber === '') {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter your plate number",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (address === '') {
-      alert('Please enter your address');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter your address",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (driver === '') {
-      alert('Please enter name of your driver');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter name of your driver",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (driverLicense === '') {
-      alert('Please enter your driver license');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter your driver license",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (whenToTravel === '') {
-      alert('Please enter kung kailan ita-travel');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter kung kailan ita-travel",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (whereToTravel === '') {
-      alert('Please enter kung saan dadalhin');
-      return;
-    } else if (email === '') {
-      alert('Please enter your email address');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter kung saan dadalhin",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else {
       setIsLoading(true);

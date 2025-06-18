@@ -77,8 +77,7 @@ const Service = () => {
                 <div className="w-full bg-slate-50 pb-8 md:py-16">
                     <div className="text-center px-4">
                         <p className="text-xl text-green-700 pt-24">Services</p>
-                        <p className="mt-4 text-2xl md:text-4xl font-bold text-green-700 px-0 lg:px-24">
-                            We now offer online certificates. <br className="hidden md:block" />
+                        <p className="mt-4 text-2xl md:text-4xl font-semibold text-green-700 px-0 lg:px-24">
                             You can now easily request a certificate online, making the process faster and more convenient.
                         </p>
                     </div>

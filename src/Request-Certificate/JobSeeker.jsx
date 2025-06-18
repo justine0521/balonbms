@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import BarangayClearance from '../Images/Certificate-Picture/Certificate for New Resident-1.png'
+import BarangayClearance from '../Images/Certificate-Image/JobSeeker-1.png'
 import '../App.css';
 import axios from 'axios';
 import SubmitModal from '../Modal/SubmitModal';
+import Swal from 'sweetalert2';
 
 import { MdOutlineContentCopy } from "react-icons/md";
 import { add } from 'date-fns';
@@ -147,40 +148,112 @@ function FirtsTimeJobSeeker() {
     const dateRequest = new Date().toISOString();
   
     if (fullName === '') {
-      alert('Please enter your name');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter your name",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (!isNaN(fullName)) {
-      alert('Please enter a valid name');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter a valid name",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (isNaN(contactNumber)) {
-      alert('Please enter a valid contact number');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter a valid contact number",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (contactNumber.length <= 10 || contactNumber.length > 12) {
-      alert('Please enter exactly 11 digits for your contact number');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter exactly 11 digits for your contact number",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (hasSpecialCharacters.test(fullName)) {
-      alert('Please enter a name without special characters');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter a name without special characters",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (address === '') {
-      alert('Please enter your address');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter your address",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (birthday === '') {
-      alert('Please enter your birthday');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter your birthday",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (age === '') {
-      alert('Please enter your age');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter your age",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (gender === '') {
-      alert('Please enter your gender');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter your gender",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (civilStatus === '') {
-      alert('Please enter your civil status');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter your civil status",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (education === '') {
-      alert('Please enter your education');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter your education",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else if (course === '') {
-      alert('Please enter your course');
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please enter your course",
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     } else {
       setIsLoading(true);

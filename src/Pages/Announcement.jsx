@@ -85,7 +85,7 @@ function Announcement() {
       announcement.description.toLowerCase().includes(query)
     );
     setFilteredAnnouncements(filtered);
-    setCurrentPage(1); // Reset to the first page after search
+    setCurrentPage(1); 
   };
 
   if (error) {
@@ -113,12 +113,16 @@ function Announcement() {
   }
 
   return (
-    <section className=''>
-      <div className='relative h-96 w-full bg-cover bg-center' style={{ backgroundImage: `url(${Picture})` }}>
-        <div className='absolute inset-0 bg-black bg-opacity-50'></div>
-        <div className="relative flex justify-center items-center h-full z-10 p-4 text-white">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mt-20">ANNOUNCEMENTS</h1>
-        </div>
+    <section className='min-h-screen'>
+      <div className="relative w-full flex flex-col justify-center items-center text-center pt-44 pb-10">
+        <h1 className="text-xl text-green-700">
+          Announcements
+        </h1>
+        
+        <p className="mt-4 text-green-700 font-semibold text-4xl max-w-4xl">
+          Stay updated with the latest news and important announcements from Barangay Balon Anito. 
+          
+        </p>
       </div>
 
       {!isAnnouncement && (

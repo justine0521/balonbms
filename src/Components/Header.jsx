@@ -66,7 +66,7 @@ function Header() {
   }, []);
 
   return (
-    <header className="bg-white fixed top-0 left-0 w-screen h-fit max-w-screen-xxl mx-auto px-10 z-50 border-b-2">
+    <header className="bg-white fixed top-0 left-0 w-screen h-fit max-w-screen-xxl mx-auto md:px-10 px-3 z-50 border-b-2">
       <div className="flex justify-between items-center py-3">
         <div className="flex items-center justify-center gap-x-1">
           <img src={barangayLogo || '/default-logo.png'} alt="Logo" className="h-10" />
